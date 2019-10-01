@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Header from './shared/header/header';
+import { NavLink, Route } from 'react-router-dom';
+import './App.css'
+import Home from './components/home/home';
+import Brand from './components/brand/brand';
+import Build from './components/build/build';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  render() {
+    return (
+      <div>
+        <Header />
+        <div className='body_content'>
+          <div className='sidebar sidebar_list'>
+            <ul>
+              <li><NavLink to={'/home'}>Home</NavLink ></li>
+              <li><NavLink to={'/build'}>Build</NavLink ></li>
+              <li><NavLink to={'/brand'}>Our Brand</NavLink ></li>
+            </ul>
+          </div>
+          <div className='content'>
+            <Route exact path='/home' component={Home} />
+            <Route  path='/build' component={Build} />
+            <Route  path='/brand' component={Brand} />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
