@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './shared/header/header';
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink, Route, Redirect } from 'react-router-dom';
 import './App.css'
 import Home from './components/home/home';
 import Brand from './components/brand/brand';
@@ -22,8 +22,11 @@ class App extends Component {
           </div>
           <div className='content'>
             <Route exact path='/home' component={Home} />
-            <Route  path='/build' component={Build} />
-            <Route  path='/brand' component={Brand} />
+            <Route path='/build' component={Build} />
+            <Route path='/brand' component={Brand} />
+            <Route path=''>
+              <Redirect to='/home' />
+            </Route>
           </div>
         </div>
       </div>
