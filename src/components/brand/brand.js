@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import MyBrandRouting from '../../routing/routeBrand'
 import { NavLink, Route } from 'react-router-dom';
 import First from './first/first';
 import Second from './second/second';
