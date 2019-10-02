@@ -38,6 +38,11 @@
 .right_nav li .dropdown{
   top: -2px;
 }
+.right_nav li .dropdown .dropdown-item:active,
+.right_nav li .dropdown .dropdown-item:focus{
+  background-color: transparent;
+  
+}
 .right_nav li .dropdown.userItem {
   top: 0px;
 }
