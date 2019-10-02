@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/Rainbow-2.0/static/css/main.1a21150d.chunk.css",
+    "main.js": "/Rainbow-2.0/static/js/main.d5921b36.chunk.js",
+    "main.js.map": "/Rainbow-2.0/static/js/main.d5921b36.chunk.js.map",
+    "runtime-main.js": "/Rainbow-2.0/static/js/runtime-main.ff2fc22e.js",
+    "runtime-main.js.map": "/Rainbow-2.0/static/js/runtime-main.ff2fc22e.js.map",
+    "static/css/2.0624914a.chunk.css": "/Rainbow-2.0/static/css/2.0624914a.chunk.css",
+    "static/js/2.abbe9e71.chunk.js": "/Rainbow-2.0/static/js/2.abbe9e71.chunk.js",
+    "static/js/2.abbe9e71.chunk.js.map": "/Rainbow-2.0/static/js/2.abbe9e71.chunk.js.map",
+    "index.html": "/Rainbow-2.0/index.html",
+    "precache-manifest.e6fc6e4a1d7dd0e04394c593046dde1d.js": "/Rainbow-2.0/precache-manifest.e6fc6e4a1d7dd0e04394c593046dde1d.js",
+    "service-worker.js": "/Rainbow-2.0/service-worker.js",
+    "static/css/2.0624914a.chunk.css.map": "/Rainbow-2.0/static/css/2.0624914a.chunk.css.map",
+    "static/css/main.1a21150d.chunk.css.map": "/Rainbow-2.0/static/css/main.1a21150d.chunk.css.map"
+  }
+}
