@@ -15,7 +15,6 @@ class App extends Component {
         <div className='body_content'>
           <div className='sidebar sidebar_list'>
             <ul>
-              <li><NavLink to={'/home'}>Home</NavLink ></li>
               <li><NavLink to={'/build'}>Build</NavLink ></li>
               <li><NavLink to={'/brand'}>Our Brand</NavLink ></li>
             </ul>

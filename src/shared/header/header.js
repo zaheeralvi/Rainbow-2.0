@@ -14,7 +14,11 @@ class Header extends Component {
     }
 
     currentKey(key) {
-        this.setState({ main: key })
+        if(key !==this.state.main){
+            this.setState({ main: key })
+        }else{
+            this.setState({ main: 0 })
+        }
     }
 
 
@@ -28,7 +32,7 @@ class Header extends Component {
                         </NavLink>
                     </div>
                     <div className='right_nav'>
-                        <ul>
+                        <ul className='mb-0'>
                             <li>
                                 <Dropdown>
                                     <Dropdown.Toggle id="dropdown-basic">
@@ -71,7 +75,6 @@ class Header extends Component {
                                 </div>
                                     : null
                                 }
-                                 <Dropdown.Item><NavLink to='/home' className='lvl2 custom_lvl'>Home</NavLink></Dropdown.Item>
                                  <Dropdown.Item><NavLink to='/build' className='lvl2 custom_lvl'>Build</NavLink></Dropdown.Item>
                                 <p className='lvl2 custom_lvl' onClick={() => this.currentKey(5)}>Our Brand</p>
                                 {this.state.main === 5 ? <div>
