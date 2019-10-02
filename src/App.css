@@ -2,9 +2,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family:  'Questrial', sans-serif !important;
 }
 body {
   overflow: hidden;
+  font-family:  'Questrial', sans-serif;
 }
 .body_content {
   display: flex;
