@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Rainbow-2.0/precache-manifest.e6fc6e4a1d7dd0e04394c593046dde1d.js"
+  "/Rainbow-2.0/precache-manifest.c4a84619ff7416d709e8d4a9e4b847b6.js"
 );
 
 self.addEventListener('message', (event) => {
