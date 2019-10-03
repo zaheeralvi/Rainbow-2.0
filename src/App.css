@@ -42,10 +42,10 @@ body {
   padding: 10px 20px 10px 10px;
   border-radius: 0;
 }
-.sidebar_list li a.active {
+.sidebar_list li a.active,.sidebar_list li a:hover {
   background-color: #8dc1c7;
 }
-.sidebar_list.second li a.active {
+.sidebar_list.second li a.active,.sidebar_list.second li a:hover {
   background-color: #b6cfd0;
 }
 

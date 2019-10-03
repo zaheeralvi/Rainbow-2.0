@@ -36,7 +36,7 @@
   display: none;
 }
 .right_nav li .dropdown{
-  top: -2px;
+  top: -1px;
 }
 .right_nav li .dropdown .dropdown-item:active,
 .right_nav li .dropdown .dropdown-item:focus{
