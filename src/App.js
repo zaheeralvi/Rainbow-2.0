@@ -6,6 +6,8 @@ import Home from './components/home/home';
 import Brand from './components/brand/brand';
 import Build from './components/build/build';
 import Setting from './components/user/setting/setting';
+import Signup from './authentication/register/signup/signup';
+import Signup2a from './authentication/register/signup-2a/signup-2a';
 
 class App extends Component {
 
@@ -25,6 +27,8 @@ class App extends Component {
             <Route path='/build' component={Build} />
             <Route path='/brand' component={Brand} />
             <Route path='/setting' component={Setting} />
+            <Route path='/user' component={Signup} />
+            <Route path='/user/1' component={Signup2a} />
             <Route path=''>
               <Redirect to='/home' />
             </Route>

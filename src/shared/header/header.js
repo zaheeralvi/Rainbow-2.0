@@ -70,7 +70,7 @@ class Header extends Component {
                                 }
                                 <p className='lvl1 custom_lvl' onClick={() => this.currentKey(2)}>Account</p>
                                 {this.state.main === 2 ? <div>
-                                     <Dropdown.Item><NavLink to='' className='lvl3 custom_lvl'>Setting</NavLink></Dropdown.Item>
+                                     <Dropdown.Item><NavLink to='/setting' className='lvl3 custom_lvl'>Setting</NavLink></Dropdown.Item>
                                      <Dropdown.Item><NavLink to='' className='lvl3 custom_lvl'>User</NavLink></Dropdown.Item>
                                 </div>
                                     : null
