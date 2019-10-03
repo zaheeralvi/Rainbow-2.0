@@ -5,6 +5,7 @@ import './App.css'
 import Home from './components/home/home';
 import Brand from './components/brand/brand';
 import Build from './components/build/build';
+import Setting from './components/user/setting/setting';
 
 class App extends Component {
 
@@ -23,6 +24,7 @@ class App extends Component {
             <Route exact path='/home' component={Home} />
             <Route path='/build' component={Build} />
             <Route path='/brand' component={Brand} />
+            <Route path='/setting' component={Setting} />
             <Route path=''>
               <Redirect to='/home' />
             </Route>
