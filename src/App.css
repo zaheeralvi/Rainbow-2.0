@@ -5,7 +5,7 @@
   font-family: "Questrial", sans-serif !important;
 }
 body {
-  overflow: hidden;
+  overflow-x: hidden;
   font-family: "Questrial", sans-serif;
 }
 h1 {
@@ -24,7 +24,7 @@ h4 {
   font-size: 16px !important;
   font-weight: 500 !important;
 }
-p,
+p.paragraph,
 h5 {
   font-size: 12px !important;
   font-weight: 500 !important;
