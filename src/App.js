@@ -11,6 +11,7 @@ import Signup2a from './authentication/register/signup-2a/signup-2a';
 import Sidebar from './shared/sidebar';
 import Signup2b from './authentication/register/signup-2b/signup-2b';
 import UserManagement from './components/user/management/user-management';
+import Profile from './components/user/profile/profile';
 
 class App extends Component {
 
@@ -26,6 +27,7 @@ class App extends Component {
           <Route path='/brand' component={Sidebar} />
           <Route path='/setting' component={Sidebar} />
           <Route path='/user' component={Sidebar} />
+          <Route path='/profile' component={Sidebar} />
           {/* mention the route where you want sidebar */}
 
           <div className='content'>
@@ -34,6 +36,7 @@ class App extends Component {
             <Route path='/brand' component={Brand} />
             <Route exact path='/setting' component={Setting} />
             <Route exact path='/user' component={UserManagement} />
+            <Route exact path='/profile' component={Profile} />
 
             <Route exact path='/signup' component={Signup} />
             <Route exact path='/signup/a' component={Signup2a} />
