@@ -13,8 +13,11 @@ class Brand extends Component {
         <div className='body_content'>
           <div className='sidebar sidebar_list second'>
             <ul>
-              <li><NavLink to={'/brand/first'}>First</NavLink ></li>
-              <li><NavLink to={'/brand/second'}>Second</NavLink ></li>
+              <li><NavLink to={'/brand/first'}>Company Info</NavLink ></li>
+              <li><NavLink to={'/brand/second'}>Our Foundation</NavLink ></li>
+              <li><NavLink to={'/brand/personality'}>Our Personality</NavLink ></li>
+              <li><NavLink to={'/brand/voice'}>Our Voice</NavLink ></li>
+              <li><NavLink to={'/brand/look'}>Our Look</NavLink ></li>
             </ul>
           </div>
           <div className='content'>

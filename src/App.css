@@ -34,6 +34,8 @@ h6 {
   font-size: 10px !important;
   font-weight: 500 !important;
 }
+.bold{font-weight: bold}
+.underline{text-decoration: underline}
 .primary {
   color: #0e707c !important;
 }
@@ -157,7 +159,7 @@ input.form-control:focus {
   background-color: #b6cfd0;
 }
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 800px) {
   .sidebar_list li a {
     font-size: 15px !important;
     padding: 10px !important;

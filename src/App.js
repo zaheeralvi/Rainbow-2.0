@@ -10,6 +10,7 @@ import Signup from './authentication/register/signup/signup';
 import Signup2a from './authentication/register/signup-2a/signup-2a';
 import Sidebar from './shared/sidebar';
 import Signup2b from './authentication/register/signup-2b/signup-2b';
+import UserManagement from './components/user/management/user-management';
 
 class App extends Component {
 
@@ -32,6 +33,8 @@ class App extends Component {
             <Route path='/build' component={Build} />
             <Route path='/brand' component={Brand} />
             <Route exact path='/setting' component={Setting} />
+            <Route exact path='/user' component={UserManagement} />
+
             <Route exact path='/signup' component={Signup} />
             <Route exact path='/signup/a' component={Signup2a} />
             <Route exact path='/signup/b' component={Signup2b} />
