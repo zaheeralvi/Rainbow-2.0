@@ -8,6 +8,7 @@ import Build from './components/build/build';
 import Setting from './components/user/setting/setting';
 import Signup from './authentication/register/signup/signup';
 import Signup2a from './authentication/register/signup-2a/signup-2a';
+import Sidebar from './shared/sidebar';
 
 class App extends Component {
 
@@ -16,17 +17,15 @@ class App extends Component {
       <div>
         <Header />
         <div className='body_content'>
-          <div className='sidebar sidebar_list'>
-            <ul>
-              <li><NavLink to={'/build'}>Build</NavLink ></li>
-              <li><NavLink to={'/brand'}>Our Brand</NavLink ></li>
-            </ul>
-          </div>
+          <Route exact path='/home' component={Sidebar} />
+          <Route path='/build' component={Sidebar} />
+          <Route path='/brand' component={Sidebar} />
+          <Route path='/setting' component={Sidebar} />
           <div className='content'>
             <Route exact path='/home' component={Home} />
-            {/* <Route path='/build' component={Build} />
+            <Route path='/build' component={Build} />
             <Route path='/brand' component={Brand} />
-            <Route path='/setting' component={Setting} /> */}
+            <Route path='/setting' component={Setting} />
             <Route path='/user' component={Signup} />
             <Route path='/user/1' component={Signup2a} />
             <Route path=''>
