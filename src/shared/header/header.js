@@ -83,9 +83,9 @@ class Header extends Component {
                                 {this.state.main === 5 ? <div>
                                      <Dropdown.Item><NavLink to='/brand/first' className='lvl3 custom_lvl'>Company Info</NavLink></Dropdown.Item>
                                      <Dropdown.Item><NavLink to='/brand/second' className='lvl3 custom_lvl'>Our Foundations</NavLink></Dropdown.Item>
-                                    {/*  <Dropdown.Item><NavLink to='' className='lvl3 custom_lvl'>Our Personality</NavLink></Dropdown.Item>
-                                     <Dropdown.Item><NavLink to='' className='lvl3 custom_lvl'>Our Voice</NavLink></Dropdown.Item>
-                                     <Dropdown.Item><NavLink to='' className='lvl3 custom_lvl'>Our Look</NavLink></Dropdown.Item> */}
+                                     <Dropdown.Item><NavLink to='/brand/personality' className='lvl3 custom_lvl'>Our Personality</NavLink></Dropdown.Item>
+                                     <Dropdown.Item><NavLink to='/brand/voice' className='lvl3 custom_lvl'>Our Voice</NavLink></Dropdown.Item>
+                                     <Dropdown.Item><NavLink to='/brand/look' className='lvl3 custom_lvl'>Our Look</NavLink></Dropdown.Item>
                                 </div>
                                     : null
                                 }
