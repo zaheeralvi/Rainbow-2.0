@@ -27,7 +27,7 @@ class Header extends Component {
             <div>
                 <Navbar collapseOnSelect expand="lg">
                     <div className='logo'>
-                        <NavLink to={'/home'}>
+                        <NavLink to={'/'}>
                             <img src='/images/logo.png' alt='logo' />
                         </NavLink>
                     </div>
@@ -41,6 +41,9 @@ class Header extends Component {
                                     <Dropdown.Menu>
                                         <Dropdown.Item><NavLink to='/setting'>Setting</NavLink></Dropdown.Item>
                                         <Dropdown.Item><NavLink to='/user'>User</NavLink></Dropdown.Item>
+                                        <Dropdown.Item><NavLink to='/signup'>Sign Up</NavLink></Dropdown.Item>
+                                        <Dropdown.Item><NavLink to='/signup/a'>Sign Up A</NavLink></Dropdown.Item>
+                                        <Dropdown.Item><NavLink to='/signup/b'>Sign Up B</NavLink></Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </li>

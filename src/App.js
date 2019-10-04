@@ -9,6 +9,7 @@ import Setting from './components/user/setting/setting';
 import Signup from './authentication/register/signup/signup';
 import Signup2a from './authentication/register/signup-2a/signup-2a';
 import Sidebar from './shared/sidebar';
+import Signup2b from './authentication/register/signup-2b/signup-2b';
 
 class App extends Component {
 
@@ -17,19 +18,25 @@ class App extends Component {
       <div>
         <Header />
         <div className='body_content'>
-          <Route exact path='/home' component={Sidebar} />
+
+          {/* mention the route where you want sidebar */}
+          <Route exact path='/' component={Sidebar} />
           <Route path='/build' component={Sidebar} />
           <Route path='/brand' component={Sidebar} />
           <Route path='/setting' component={Sidebar} />
+          <Route path='/user' component={Sidebar} />
+          {/* mention the route where you want sidebar */}
+
           <div className='content'>
-            <Route exact path='/home' component={Home} />
+            <Route exact path='/' component={Home} />
             <Route path='/build' component={Build} />
             <Route path='/brand' component={Brand} />
-            <Route path='/setting' component={Setting} />
-            <Route path='/user' component={Signup} />
-            <Route path='/user/1' component={Signup2a} />
+            <Route exact path='/setting' component={Setting} />
+            <Route exact path='/signup' component={Signup} />
+            <Route exact path='/signup/a' component={Signup2a} />
+            <Route exact path='/signup/b' component={Signup2b} />
             <Route path=''>
-              <Redirect to='/home' />
+              <Redirect to='/' />
             </Route>
           </div>
         </div>
