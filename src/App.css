@@ -49,8 +49,9 @@ h6 {
   background-color: #b6cfd0 !important;
 }
 .form .label {
-  color: #819eae;
+  color: #0e707c;
   font-weight: bold;
+  padding-left: 15px;
 }
 input.form-control,
 .dropdown-select input {

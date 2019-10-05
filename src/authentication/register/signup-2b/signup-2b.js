@@ -24,8 +24,8 @@ class Signup2b extends React.Component {
                         <div className='form-group'>
                             <button className='btn_green'>Sign Up</button>
                         </div>
-                        <NavLink to='' className='secondary'> &#60; Back</NavLink>
-                        <p className='secondary'>Already have an account? <NavLink className='secondary' to=''><strong><u>Log In </u></strong></NavLink></p>
+                        <NavLink to='' className='primary'> &#60; Back</NavLink>
+                        <p className='primary'>Already have an account? <NavLink className='primary' to=''><strong><u>Log In </u></strong></NavLink></p>
                     </div>
                 </div>
             </section>
