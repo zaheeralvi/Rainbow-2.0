@@ -25,7 +25,7 @@ class Setting extends React.Component {
                         <div className='form-group'>
                             <Form.Check type="checkbox" label="Deactivate Your Account" />
                         </div>
-                        <p className='secondary'>(By deactivating your account, your site will no longer be accessible. Your account can always be restored with no information loss by contact our Customer Success team at 1-800-800-8000 or via email at support@patter.com)</p>
+                        <p className='primary'>(By deactivating your account, your site will no longer be accessible. Your account can always be restored with no information loss by contact our Customer Success team at 1-800-800-8000 or via email at support@patter.com)</p>
                         <div className='form-group'>
                             <button className='btn_green'>Save</button>
                             <button className='btn_white'>Cancel</button>
