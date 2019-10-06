@@ -9,14 +9,23 @@ class Header extends Component {
         super(props);
         this.state = {
             main: 0,
+            login: true
         }
 
+        setInterval(() => {
+            let path = window.location.pathname;
+            if (path == '/signup' || path == '/signup/a' || path == '/signup/b') {
+                this.setState({ login: true })
+            } else {
+                this.setState({ login: false })
+            }
+        }, 1000);
     }
 
     currentKey(key) {
-        if(key !==this.state.main){
+        if (key !== this.state.main) {
             this.setState({ main: key })
-        }else{
+        } else {
             this.setState({ main: 0 })
         }
     }
@@ -32,33 +41,40 @@ class Header extends Component {
                         </NavLink>
                     </div>
                     <div className='right_nav'>
-                        <ul className='mb-0'>
-                            <li>
-                                <Dropdown>
-                                    <Dropdown.Toggle id="dropdown-basic">
-                                        Account
-                                    </Dropdown.Toggle>
-                                    <Dropdown.Menu>
-                                        <Dropdown.Item><NavLink to='/setting'>Setting</NavLink></Dropdown.Item>
-                                        <Dropdown.Item><NavLink to='/user'>User</NavLink></Dropdown.Item>
-                                        <Dropdown.Item><NavLink to='/signup'>Sign Up</NavLink></Dropdown.Item>
-                                        <Dropdown.Item><NavLink to='/signup/a'>Sign Up A</NavLink></Dropdown.Item>
-                                        <Dropdown.Item><NavLink to='/signup/b'>Sign Up B</NavLink></Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                            </li>
-                            <li className='m-0'>
-                                <Dropdown className='userItem'>
-                                    <Dropdown.Toggle id="dropdown-basic">
-                                        Aroun <img src='/images/user.png' alt='user' />
-                                    </Dropdown.Toggle>
-                                    <Dropdown.Menu>
-                                        <Dropdown.Item><NavLink to='/profile'>Profile</NavLink></Dropdown.Item>
-                                        <Dropdown.Item><NavLink to='/signout'>Sign Out</NavLink></Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                            </li>
-                        </ul>
+                        {
+                            !this.state.login ?
+                                <ul className='mb-0'>
+                                    <li>
+                                        <Dropdown>
+                                            <Dropdown.Toggle id="dropdown-basic">
+                                                Account
+                                        </Dropdown.Toggle>
+                                            <Dropdown.Menu>
+                                                <Dropdown.Item><NavLink to='/setting'>Setting</NavLink></Dropdown.Item>
+                                                <Dropdown.Item><NavLink to='/user'>User</NavLink></Dropdown.Item>
+                                                <Dropdown.Item><NavLink to='/signup'>Sign Up</NavLink></Dropdown.Item>
+                                                <Dropdown.Item><NavLink to='/signup/a'>Sign Up A</NavLink></Dropdown.Item>
+                                                <Dropdown.Item><NavLink to='/signup/b'>Sign Up B</NavLink></Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                    </li>
+                                    <li className='m-0'>
+                                        <Dropdown className='userItem'>
+                                            <Dropdown.Toggle id="dropdown-basic">
+                                                Aroun <img src='/images/user.png' alt='user' />
+                                            </Dropdown.Toggle>
+                                            <Dropdown.Menu>
+                                                <Dropdown.Item><NavLink to='/profile'>Profile</NavLink></Dropdown.Item>
+                                                <Dropdown.Item><NavLink to='/signout'>Sign Out</NavLink></Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                    </li>
+                                </ul>
+                                : 
+                                <ul className='mb-0 not_logged'>
+                                    <li>Log in <img src='/images/login-placeholder.png' alt='user' /></li>
+                                </ul>
+                        }
                     </div>
                     <div className='mobile_menu'>
                         <Dropdown>
@@ -66,26 +82,26 @@ class Header extends Component {
                             <Dropdown.Menu onChange={() => this.currentKey(0)}>
                                 <p className='lvl1 custom_lvl' onClick={() => this.currentKey(1)}>Aaron</p>
                                 {this.state.main === 1 ? <div>
-                                     <Dropdown.Item><NavLink to='' className='lvl3 custom_lvl'>Profile</NavLink></Dropdown.Item>
-                                     <Dropdown.Item><NavLink to='' className='lvl3 custom_lvl'>SIGN OUT</NavLink></Dropdown.Item>
+                                    <Dropdown.Item><NavLink to='' className='lvl3 custom_lvl'>Profile</NavLink></Dropdown.Item>
+                                    <Dropdown.Item><NavLink to='' className='lvl3 custom_lvl'>SIGN OUT</NavLink></Dropdown.Item>
                                 </div>
                                     : null
                                 }
                                 <p className='lvl1 custom_lvl' onClick={() => this.currentKey(2)}>Account</p>
                                 {this.state.main === 2 ? <div>
-                                     <Dropdown.Item><NavLink to='/setting' className='lvl3 custom_lvl'>Setting</NavLink></Dropdown.Item>
-                                     <Dropdown.Item><NavLink to='' className='lvl3 custom_lvl'>User</NavLink></Dropdown.Item>
+                                    <Dropdown.Item><NavLink to='/setting' className='lvl3 custom_lvl'>Setting</NavLink></Dropdown.Item>
+                                    <Dropdown.Item><NavLink to='' className='lvl3 custom_lvl'>User</NavLink></Dropdown.Item>
                                 </div>
                                     : null
                                 }
-                                 <Dropdown.Item><NavLink to='/build' className='lvl2 custom_lvl'>Build</NavLink></Dropdown.Item>
+                                <Dropdown.Item><NavLink to='/build' className='lvl2 custom_lvl'>Build</NavLink></Dropdown.Item>
                                 <p className='lvl2 custom_lvl' onClick={() => this.currentKey(5)}>Our Brand</p>
                                 {this.state.main === 5 ? <div>
-                                     <Dropdown.Item><NavLink to='/brand/first' className='lvl3 custom_lvl'>Company Info</NavLink></Dropdown.Item>
-                                     <Dropdown.Item><NavLink to='/brand/second' className='lvl3 custom_lvl'>Our Foundations</NavLink></Dropdown.Item>
-                                     <Dropdown.Item><NavLink to='/brand/personality' className='lvl3 custom_lvl'>Our Personality</NavLink></Dropdown.Item>
-                                     <Dropdown.Item><NavLink to='/brand/voice' className='lvl3 custom_lvl'>Our Voice</NavLink></Dropdown.Item>
-                                     <Dropdown.Item><NavLink to='/brand/look' className='lvl3 custom_lvl'>Our Look</NavLink></Dropdown.Item>
+                                    <Dropdown.Item><NavLink to='/brand/first' className='lvl3 custom_lvl'>Company Info</NavLink></Dropdown.Item>
+                                    <Dropdown.Item><NavLink to='/brand/second' className='lvl3 custom_lvl'>Our Foundations</NavLink></Dropdown.Item>
+                                    <Dropdown.Item><NavLink to='/brand/personality' className='lvl3 custom_lvl'>Our Personality</NavLink></Dropdown.Item>
+                                    <Dropdown.Item><NavLink to='/brand/voice' className='lvl3 custom_lvl'>Our Voice</NavLink></Dropdown.Item>
+                                    <Dropdown.Item><NavLink to='/brand/look' className='lvl3 custom_lvl'>Our Look</NavLink></Dropdown.Item>
                                 </div>
                                     : null
                                 }
