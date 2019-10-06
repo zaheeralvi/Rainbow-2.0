@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './shared/header/header';
-import { NavLink, Route, Redirect } from 'react-router-dom';
+import { NavLink, Route, Redirect, Switch } from 'react-router-dom';
 import './App.css'
 import Home from './components/home/home';
 import Brand from './components/brand/brand';
@@ -31,19 +31,21 @@ class App extends Component {
           {/* mention the route where you want sidebar */}
 
           <div className='content'>
-            <Route exact path='/' component={Home} />
-            <Route path='/build' component={Build} />
-            <Route path='/brand' component={Brand} />
-            <Route exact path='/setting' component={Setting} />
-            <Route exact path='/user' component={UserManagement} />
-            <Route exact path='/profile' component={Profile} />
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route path='/build' component={Build} />
+              <Route path='/brand' component={Brand} />
+              <Route exact path='/setting' component={Setting} />
+              <Route exact path='/user' component={UserManagement} />
+              <Route exact path='/profile' component={Profile} />
 
-            <Route exact path='/signup' component={Signup} />
-            <Route exact path='/signup/a' component={Signup2a} />
-            <Route exact path='/signup/b' component={Signup2b} />
-            <Route path=''>
-              <Redirect to='/' />
-            </Route>
+              <Route exact path='/signup' component={Signup} />
+              <Route exact path='/signup/a' component={Signup2a} />
+              <Route exact path='/signup/b' component={Signup2b} />
+              <Route path=''>
+                <Redirect to='/' />
+              </Route>
+            </Switch>
           </div>
         </div>
       </div>
