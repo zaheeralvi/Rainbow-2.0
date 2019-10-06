@@ -29,8 +29,8 @@ class Signup extends React.Component {
                         <div className='form-group'>
                             <button className='btn_green'>Next</button>
                         </div>
-                        <p className='secondary'>By siging up, you agree to Patter’s <NavLink className='secondary' to=''><u>Terms of Service and Privacy Policy.</u></NavLink></p>
-                        <p className='secondary'>Already have an account? <NavLink className='secondary' to=''><strong><u>Log In </u></strong></NavLink></p>
+                        <p className='primary'>By siging up, you agree to Patter’s <NavLink className='primary' to=''><u>Terms of Service and Privacy Policy.</u></NavLink></p>
+                        <p className='primary'>Already have an account? <NavLink className='primary' to=''><strong><u>Log In </u></strong></NavLink></p>
                     </div>
                 </div>
             </section>
