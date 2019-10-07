@@ -7,7 +7,7 @@ class UserManagement extends React.Component {
     render = () => {
         let options = [{ label: 'Full Access', value: 'full' }, { label: 'View Access', value: 'read' }]
         return (
-            <section className='pt-3 user_management'>
+            <section className='pt-3 user_management px-3'>
                 <div className='container'>
                     <h2 className='heading'>User Management</h2>
                     <h4 className='bold'>Add New User</h4>
@@ -24,7 +24,7 @@ class UserManagement extends React.Component {
                         </table>
                         <button className='btn_green'>Send</button>
                     </div>
-                    <div className='list mt-5 col-sm-10 col-xs-12 p-0'>
+                    <div className='list mt-5 col-sm-10 col-xs-12 px-0 pb-5'>
                         <h4 className='bold mb-3'>User Management</h4>
                         <table className='mb-4 table'>
                             <thead>
