@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './shared/header/header';
-import { NavLink, Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import './App.css'
 import Home from './components/home/home';
 import Brand from './components/brand/brand';
@@ -12,6 +12,7 @@ import Sidebar from './shared/sidebar';
 import Signup2b from './authentication/register/signup-2b/signup-2b';
 import UserManagement from './components/user/management/user-management';
 import Profile from './components/user/profile/profile';
+import Signin from './authentication/signin/signin';
 
 class App extends Component {
 
@@ -39,6 +40,7 @@ class App extends Component {
               <Route exact path='/user' component={UserManagement} />
               <Route exact path='/profile' component={Profile} />
 
+              <Route exact path='/login' component={Signin} />
               <Route exact path='/signup' component={Signup} />
               <Route exact path='/signup/a' component={Signup2a} />
               <Route exact path='/signup/b' component={Signup2b} />

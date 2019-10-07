@@ -14,12 +14,12 @@ class Header extends Component {
 
         setInterval(() => {
             let path = window.location.pathname;
-            if (path == '/signup' || path == '/signup/a' || path == '/signup/b') {
+            if (path === '/signup' || path === '/signup/a' || path === '/signup/b' || path === '/login') {
                 this.setState({ login: true })
             } else {
                 this.setState({ login: false })
             }
-        }, 1000);
+        }, 10);
     }
 
     currentKey(key) {
@@ -70,9 +70,9 @@ class Header extends Component {
                                         </Dropdown>
                                     </li>
                                 </ul>
-                                : 
-                                <ul className='mb-0 not_logged'>
-                                    <li>Log in <img src='/images/login-placeholder.png' alt='user' /></li>
+                                :
+                                <ul className='mb-0 not_logged logo'>
+                                    <li><NavLink to={'/login'}>Log in <img src='/images/login-placeholder.png' alt='user' /></NavLink></li>
                                 </ul>
                         }
                     </div>

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom'
+// import { NavLink } from 'react-router-dom'
 import { IoIosCamera } from "react-icons/io";
 import './profile.css';
 
 export default class Profile extends Component {
     render() {
         return (
-            <section className='setting_block pt-5 pl-5'>
+            <section className='setting_block pt-3'>
                 <div className='container'>
                     <h2 className='heading bold'>User Profile Setting</h2>
                     <div className='upload'>
