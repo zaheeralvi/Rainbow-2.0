@@ -154,6 +154,9 @@
 .right_nav .dropdown-item a:focus {
   text-decoration: none;
 }
+
+.not_logged a{text-decoration: none;color: #000;}
+.not_logged a:hover,.not_logged a:focus{color: #0e707c;text-decoration: none;}
 @media all and (max-width: 667px) {
   .navbar .right_nav {
     display: none;

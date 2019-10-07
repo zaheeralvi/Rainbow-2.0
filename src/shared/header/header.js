@@ -71,7 +71,7 @@ class Header extends Component {
                                     </li>
                                 </ul>
                                 :
-                                <ul className='mb-0 not_logged logo'>
+                                <ul className='mb-0 not_logged'>
                                     <li><NavLink to={'/login'}>Log in <img src='/images/login-placeholder.png' alt='user' /></NavLink></li>
                                 </ul>
                         }

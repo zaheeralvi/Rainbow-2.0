@@ -13,6 +13,7 @@ import Signup2b from './authentication/register/signup-2b/signup-2b';
 import UserManagement from './components/user/management/user-management';
 import Profile from './components/user/profile/profile';
 import Signin from './authentication/signin/signin';
+import ForgetPassword from './authentication/forget-password/forget-password';
 
 class App extends Component {
 
@@ -44,6 +45,7 @@ class App extends Component {
               <Route exact path='/signup' component={Signup} />
               <Route exact path='/signup/a' component={Signup2a} />
               <Route exact path='/signup/b' component={Signup2b} />
+              <Route exact path='/forget-password' component={ForgetPassword} />
               <Route path=''>
                 <Redirect to='/' />
               </Route>

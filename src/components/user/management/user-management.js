@@ -7,7 +7,7 @@ class UserManagement extends React.Component {
     render = () => {
         let options = [{ label: 'Full Access', value: 'full' }, { label: 'View Access', value: 'read' }]
         return (
-            <section className='pt-3'>
+            <section className='pt-3 user_management'>
                 <div className='container'>
                     <h2 className='heading'>User Management</h2>
                     <h4 className='bold'>Add New User</h4>
