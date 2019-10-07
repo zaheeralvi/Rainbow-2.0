@@ -16,7 +16,7 @@ class Signup2a extends React.Component {
                             <button className='btn_green'>Yes</button>
                             <button className='btn_white'>No</button>
                         </div>
-                        <p className='primary'>Already have an account? <NavLink className='primary' to=''><strong><u>Log In </u></strong></NavLink></p>
+                        <p className='primary'>Already have an account? <NavLink className='primary' to='/login'><strong><u>Log In </u></strong></NavLink></p>
                     </div>
                 </div>
             </section>
