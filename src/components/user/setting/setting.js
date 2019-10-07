@@ -7,7 +7,7 @@ class Setting extends React.Component {
     render() {
         let options = [{ label: 'label1', value: 'value1' }, { label: 'label2', value: 'value2' }]
         return (
-            <section className='setting_block pt-3'>
+            <section className='setting_block pt-3 px-3'>
                 <div className='container'>
                     <h2 className='heading'>Account Settings</h2>
                     <div className='form'>
