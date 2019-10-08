@@ -52,6 +52,7 @@ h6 {
 }
 .form .form-group{
   margin-bottom: 30px;
+  position: relative;
 }
 .form .label {
   color: #7b7b7b;
@@ -59,6 +60,7 @@ h6 {
   padding-left: 15px;
 }
 input.form-control,
+textarea,
 .dropdown-select input {
   border-color: #b6cfd0;
   border-radius: 0;
@@ -67,6 +69,20 @@ input.form-control,
   max-width: 300px;
   height: 30px;
   color: #000;
+}
+textarea.form-control{
+  resize: none;
+  height: 130px !important;
+  border-radius: 0;
+}
+textarea:hover,textarea:focus,textarea:active{
+  box-shadow: none !important;
+  border-color: #b6cfd0 !important;
+}
+.textarea_tooltip{
+  position: absolute;
+  top: -5px;
+  right: -20px;
 }
 .dropdown-select input {
   height: 27px !important;
@@ -95,7 +111,7 @@ input.form-control:focus {
   border-bottom: 5px solid #b6cfd0 !important;
   
 }
-.btn_green {
+a.btn_green ,.btn_green{
   background-color: #0e707c;
   color: #fff;
   height: 50px;
@@ -107,11 +123,13 @@ input.form-control:focus {
   box-shadow: none;
   text-transform: uppercase;
 }
-.btn_green:hover,
-.btn_green:focus,
-.btn_green:active {
+a.btn_green:hover ,.btn_green:hover,
+a.btn_green:focus,.btn_green:focus,
+a.btn_green:active,.btn_green:active {
   background-color: #5f989f;
   outline: none;
+  color: #fff;
+  text-decoration: none;
 }
 .btn_white {
   border: 2px solid #0e707c;
