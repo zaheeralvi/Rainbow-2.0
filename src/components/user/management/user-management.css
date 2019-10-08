@@ -13,3 +13,8 @@
   border: none;
   max-width: 100%;
 }
+.custom-control-input:checked~.custom-control-label::before{
+  color: #fff;
+  border-color: #b6cfd0 !important;
+  background-color: #b6cfd0 !important;
+}

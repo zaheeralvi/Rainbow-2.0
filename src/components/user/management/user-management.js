@@ -40,35 +40,55 @@ class UserManagement extends React.Component {
                                     <td>CEO</td>
                                     <td>Executive</td>
                                     <td><Select placeholder='Full Access' options={options} labelKey="label" valueKey="value" /></td>
-                                    <td className='text-center'> <Form.Check type="checkbox" label="" /></td>
+                                    <td className='text-center'>
+                                        <Form.Group className='mb-0' controlId="formBasicCheckbox">
+                                            <Form.Check type="checkbox" custom label="" />
+                                        </Form.Group>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>parry@patter.com</td>
                                     <td>CBO</td>
                                     <td>Engineering</td>
                                     <td><Select placeholder='Full Access' options={options} labelKey="label" valueKey="value" /></td>
-                                    <td className='text-center'> <Form.Check type="checkbox" label="" /></td>
+                                    <td className='text-center'>
+                                        <Form.Group className='mb-0' controlId="formBasicCheckbox0">
+                                            <Form.Check type="checkbox" custom label="" />
+                                        </Form.Group>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>theresa@patter.com</td>
                                     <td>CTO</td>
                                     <td>Operations</td>
                                     <td><Select placeholder='Full Access' options={options} labelKey="label" valueKey="value" /></td>
-                                    <td className='text-center'> <Form.Check type="checkbox" label="" /></td>
+                                    <td className='text-center'>
+                                        <Form.Group className='mb-0' controlId="formBasicCheckbox1">
+                                            <Form.Check type="checkbox" custom label="" />
+                                        </Form.Group>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>jorge@patter.com</td>
                                     <td>COO</td>
                                     <td>Brand Development</td>
                                     <td><Select placeholder='Full Access' options={options} labelKey="label" valueKey="value" /></td>
-                                    <td className='text-center'> <Form.Check type="checkbox" label="" /></td>
+                                    <td className='text-center'>
+                                        <Form.Group className='mb-0' controlId="formBasicCheckbox2">
+                                            <Form.Check type="checkbox" custom label="" />
+                                        </Form.Group>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>german@patter.com</td>
                                     <td>Director, Customer Success</td>
                                     <td>Operations</td>
                                     <td><Select placeholder='Full Access' options={options} labelKey="label" valueKey="value" /></td>
-                                    <td className='text-center'> <Form.Check type="checkbox" label="" /></td>
+                                    <td className='text-center'>
+                                        <Form.Group className='mb-0' controlId="formBasicCheckbox3">
+                                            <Form.Check type="checkbox" custom label="" />
+                                        </Form.Group>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

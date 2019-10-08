@@ -86,9 +86,14 @@ input.form-control:focus {
   border-left: none !important;
   background: none !important;
 }
-.dropdown-select .dropdown-select__container .dropdown-select__arrow .dropdown-select__arrow-icon {
+.dropdown-select .dropdown-select__container .dropdown-select__arrow .arrow-down {
   top: 10px !important;
   border-top: 5px solid #b6cfd0 !important;
+}
+.dropdown-select .dropdown-select__container .dropdown-select__arrow .arrow-up {
+  top: 10px !important;
+  border-bottom: 5px solid #b6cfd0 !important;
+  
 }
 .btn_green {
   background-color: #0e707c;
