@@ -10,6 +10,8 @@ import voice from './voice/voice';
 import mission from './foundation/mission/mission';
 import origin from './foundation/origin/origin';
 import elevator from './foundation/elevator/elevator';
+import organizational from './organizational/organizational';
+import character from './personality/character/character';
 
 class Build extends Component {
 
@@ -38,13 +40,19 @@ class Build extends Component {
             <div className='col-sm-7 col-xs-12 p-0 my-5'>
               <Switch>
                 <Route path='/build/introduction' component={introduction} />
+
                 <Route exact path='/build/foundation' component={foundation} />
-                <Route exact path='/build/foundation/mission' component={mission} />
-                <Route path='/build/personality' component={personality} />
-                <Route path='/build/voice' component={voice} />
-                <Route path='/build/look' component={voice} />
+                <Route path='/build/foundation/mission' component={mission} />
                 <Route path='/build/foundation/origin' component={origin} />
                 <Route path='/build/foundation/elevator' component={elevator} />
+                <Route path='/build/foundation/organizational' component={organizational} />
+
+
+                <Route exact path='/build/personality' component={personality} />
+                <Route path='/build/personality/character' component={character} />
+
+                <Route path='/build/voice' component={voice} />
+                <Route path='/build/look' component={voice} />
                 <Route path='/build'>
                   <Redirect to='/build/introduction' />
                 </Route>
