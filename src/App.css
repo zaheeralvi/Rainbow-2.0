@@ -84,6 +84,10 @@ textarea:hover,textarea:focus,textarea:active{
   top: -5px;
   right: -20px;
 }
+.textarea_tooltip.input{
+  top: 0;
+  right: -10px;
+}
 .dropdown-select input {
   height: 27px !important;
   background: transparent;
@@ -122,6 +126,16 @@ a.btn_green ,.btn_green{
   font-size: 18px;
   box-shadow: none;
   text-transform: uppercase;
+  display: inline-block;
+  text-align: center;
+}
+.back_btn{
+  margin-top: 12px;
+}
+.btn_green.btn_upload{
+  height: 35px;
+  min-width: 135px;
+  padding: 5px 20px;
 }
 a.btn_green:hover ,.btn_green:hover,
 a.btn_green:focus,.btn_green:focus,

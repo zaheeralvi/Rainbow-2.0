@@ -30,8 +30,8 @@ class character extends Component {
                         <Select placeholder='Characteristic #5' options={options} labelKey="label" valueKey="value" />
                     </div>
                     <div className='mt-3 mb-5 text-right'>
-                        <NavLink to='/build/introduction/elevator' className='float-left primary'> <FaAngleLeft /> Back</NavLink>
-                        <NavLink to='/build/foundation/mission' className='btn_green m-0'>NEXT</NavLink>
+                        <NavLink to='/build/personality' className='float-left primary back_btn'> <FaAngleLeft /> Back</NavLink>
+                        <NavLink to='/build/voice' className='btn_green m-0'>NEXT</NavLink>
                     </div>
                 </form>
             </div>

@@ -33,7 +33,7 @@ class foundation extends Component {
                         <input type="text" className='form-control' placeholder='Number of Employees' />
                     </div>
                     <div className='mt-3 mb-5 text-right'>
-                        <NavLink to='/build/introduction' className='float-left primary'> <FaAngleLeft /> Back</NavLink>
+                        <NavLink to='/build/introduction' className='float-left primary back_btn'> <FaAngleLeft /> Back</NavLink>
                         <NavLink to='/build/foundation/mission' className='btn_green m-0'>NEXT</NavLink>
                     </div>
                 </form>

@@ -12,6 +12,10 @@ import origin from './foundation/origin/origin';
 import elevator from './foundation/elevator/elevator';
 import organizational from './organizational/organizational';
 import character from './personality/character/character';
+import look from './look/look';
+import palette from './look/palette/palette';
+import visual from './look/visual/visual';
+import complete from './complete/complete';
 
 class Build extends Component {
 
@@ -52,7 +56,12 @@ class Build extends Component {
                 <Route path='/build/personality/character' component={character} />
 
                 <Route path='/build/voice' component={voice} />
-                <Route path='/build/look' component={voice} />
+
+                <Route exact path='/build/look' component={look} />
+                <Route path='/build/look/palette' component={palette} />
+                <Route path='/build/look/visual' component={visual} />
+
+                <Route path='/build/complete' component={complete} />
                 <Route path='/build'>
                   <Redirect to='/build/introduction' />
                 </Route>

@@ -47,7 +47,7 @@ class personality extends Component {
                         <input type="range" className='slider' />
                     </div>
                     <div className='mt-3 mb-5 text-right'>
-                        <NavLink to='/build/personality' className='float-left primary'> <FaAngleLeft /> Back</NavLink>
+                        <NavLink to='/build/foundation/organizational' className='float-left primary back_btn'> <FaAngleLeft /> Back</NavLink>
                         <NavLink to='/build/personality/character' className='btn_green m-0'>NEXT</NavLink>
                     </div>
                 </form>

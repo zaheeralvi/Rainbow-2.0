@@ -17,7 +17,7 @@ class origin extends Component {
                         <OverlayTrigger overlay={<Tooltip>Tooltip!</Tooltip>}><span className='textarea_tooltip' variant="primary"><GoLightBulb /></span></OverlayTrigger>
                     </div>
                     <div className='mt-3 mb-5 text-right'>
-                        <NavLink to='/build/foundation/origin' className='float-left primary'> <FaAngleLeft /> Back</NavLink>
+                        <NavLink to='/build/foundation/origin' className='float-left primary back_btn'> <FaAngleLeft /> Back</NavLink>
                         <NavLink to='/build/foundation/elevator' className='btn_green m-0'>Next</NavLink>
                     </div>
                 </form>

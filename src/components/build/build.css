@@ -6,6 +6,7 @@
   color: #b6cfd0 !important;
   position: relative;
   margin-left: 15px;text-decoration: none;
+  pointer-events: none;
 }
 .build ul.navbar .nav-item a:before {
     content: '';
