@@ -2,6 +2,7 @@
     min-height: 150px;
     width: 100%;
     background-color: #b6cfd0;
+    padding: 10px;
 }
 .voice .addPlus{
     position: absolute;

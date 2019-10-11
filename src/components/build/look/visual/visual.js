@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import { FaAngleLeft } from "react-icons/fa";
-import { GoLightBulb } from "react-icons/go";
 
 class visual extends Component {
     render() {

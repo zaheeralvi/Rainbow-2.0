@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { NavLink, Route } from 'react-router-dom';
-import First from './first/first';
-import Second from './second/second';
+import foundation from './foundation/foundation';
 
 import './brand.css'
+import companyInfo from './companyInfo/companyInfo';
+import main from './main/main';
+import personality from './personality/personality';
+import voice from './voice/voice';
+import look from './look/look';
 
-class Brand extends Component {
+class Brand extends Component { 
 
   render() {
     return (
@@ -13,16 +17,20 @@ class Brand extends Component {
         <div className='body_content'>
           <div className='sidebar sidebar_list second'>
             <ul>
-              <li><NavLink to={'/brand/first'}>Company Info</NavLink ></li>
-              <li><NavLink to={'/brand/second'}>Our Foundation</NavLink ></li>
+              <li><NavLink to={'/brand/company-info'}>Company Info</NavLink ></li>
+              <li><NavLink to={'/brand/foundation'}>Our Foundation</NavLink ></li>
               <li><NavLink to={'/brand/personality'}>Our Personality</NavLink ></li>
               <li><NavLink to={'/brand/voice'}>Our Voice</NavLink ></li>
               <li><NavLink to={'/brand/look'}>Our Look</NavLink ></li>
             </ul>
           </div>
           <div className='content'>
-            <Route exact path='/brand/first' component={First} />
-            <Route exact path='/brand/second' component={Second} />
+            <Route exact path='/brand' component={main} />
+            <Route path='/brand/company-info' component={companyInfo} />
+            <Route path='/brand/foundation' component={foundation} />
+            <Route path='/brand/personality' component={personality} />
+            <Route path='/brand/voice' component={voice} />
+            <Route path='/brand/look' component={look} />
           </div>
         </div>
       </div>
