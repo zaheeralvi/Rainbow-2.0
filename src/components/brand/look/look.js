@@ -25,9 +25,7 @@ class look extends Component {
                         <div className='form-group flex'>
                             <input type="text" className='form-control color' placeholder='Color #1' />
                             <input type="text" className='form-control percentage' placeholder='%' />
-                            <span variant="primary">
-                                <OverlayTrigger overlay={<Tooltip>Tooltip!</Tooltip>}><span className='textarea_tooltip' variant="primary"><GoLightBulb /></span></OverlayTrigger>
-                            </span>
+                            <OverlayTrigger overlay={<Tooltip>Tooltip!</Tooltip>}><span className='textarea_tooltip' variant="primary"><GoLightBulb /></span></OverlayTrigger>
                         </div>
                         <div className='form-group flex'>
                             <input type="text" className='form-control color' placeholder='Color #2' />

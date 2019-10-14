@@ -41,7 +41,7 @@ class Build extends Component {
                 <NavLink to="/build/look">Our Look </NavLink>
               </Nav.Item>
             </ul>
-            <div className='col-sm-7 col-xs-12 p-0 my-5'>
+            <div className='build_wrapper col-sm-7 col-xs-12 p-0 my-5'>
               <Switch>
                 <Route path='/build/introduction' component={introduction} />
 

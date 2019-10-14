@@ -1,3 +1,6 @@
+.build_wrapper{
+  max-width: 350px !important;
+}
 .build ul.navbar {
   border: none;
   width: 80%;
