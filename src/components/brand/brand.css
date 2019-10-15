@@ -41,7 +41,9 @@
 .sidebar_list.second li a.active {
   background-color: #b6cfd0;
 }
-
+.brand_wrapper{
+  width: 350px;
+}
 @media all and (max-width: 540px) {
   .body_content .content {
     flex: 0 0 100%;

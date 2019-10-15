@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink, Route, Switch } from 'react-router-dom';
 import foundation from './foundation/foundation';
 
 import './brand.css'
@@ -9,7 +9,7 @@ import personality from './personality/personality';
 import voice from './voice/voice';
 import look from './look/look';
 
-class Brand extends Component { 
+class Brand extends Component {
 
   render() {
     return (
@@ -25,12 +25,16 @@ class Brand extends Component {
             </ul>
           </div>
           <div className='content'>
-            <Route exact path='/brand' component={main} />
-            <Route path='/brand/company-info' component={companyInfo} />
-            <Route path='/brand/foundation' component={foundation} />
-            <Route path='/brand/personality' component={personality} />
-            <Route path='/brand/voice' component={voice} />
-            <Route path='/brand/look' component={look} />
+            <div className='brand_wrapper'>
+              <Switch>
+                <Route exact path='/brand' component={main} />
+                <Route path='/brand/company-info' component={companyInfo} />
+                <Route path='/brand/foundation' component={foundation} />
+                <Route path='/brand/personality' component={personality} />
+                <Route path='/brand/voice' component={voice} />
+                <Route path='/brand/look' component={look} />
+              </Switch>
+            </div>
           </div>
         </div>
       </div>

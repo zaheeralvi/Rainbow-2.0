@@ -38,26 +38,26 @@ render() {
               <textarea className='form-control textarea'>
                 Lorem ipsum dolor sit amet, duo te dicit impedit, pro mutat inermis delicata eu, sit ea esse aliquam suscipiantur. Ut vix libris invidunt.
               </textarea>
-              <span className='textarea_tooltip' onClick={this.handleShow} ><GoLightBulb /></span>
+              <span className='textarea_tooltip mt-4 pt-2' onClick={this.handleShow} ><GoLightBulb /></span>
             </div>
             <div className='form-group'>
               <label className='label'>Origin Story</label>
               <textarea className='form-control textarea'>
                 Lorem ipsum dolor sit amet, duo te dicit impedit, pro mutat inermis delicata eu, sit ea esse aliquam suscipiantur. Ut vix libris invidunt.
               </textarea>
-              <span className='textarea_tooltip' onClick={this.handleShow} ><GoLightBulb /></span>
+              <span className='textarea_tooltip mt-4 pt-2' onClick={this.handleShow} ><GoLightBulb /></span>
             </div>
             <div className='form-group'>
               <label className='label'>Elevator Pitch</label>
               <textarea className='form-control textarea'>
                 Lorem ipsum dolor sit amet, duo te dicit impedit, pro mutat inermis delicata eu, sit ea esse aliquam suscipiantur. Ut vix libris invidunt.
               </textarea>
-              <span className='textarea_tooltip' onClick={this.handleShow} ><GoLightBulb /></span>
+              <span className='textarea_tooltip mt-4 pt-2' onClick={this.handleShow} ><GoLightBulb /></span>
             </div>
             <div className='form-group'>
               <label className='label'>Organizational Values</label>
               <input type="text" className='form-control' placeholder='Humility' />
-              <span className='textarea_tooltip' onClick={this.handleShow} ><GoLightBulb /></span>
+              <span className='textarea_tooltip mt-4 pt-2' onClick={this.handleShow} ><GoLightBulb /></span>
             </div>
             <div className='form-group'>
               <Select placeholder='Empathy' options={options} labelKey="label" valueKey="value" />

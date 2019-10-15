@@ -52,7 +52,7 @@ class look extends Component {
                                 <span className='color_5'></span>
                             </div>
                         </div>
-                        <label className='label primary mb-3'>Style Assessment</label>
+                        <label className='label bold mb-3'>Style Assessment</label>
                         <div className='form-group'>
                             <h4 className='bold m-0'>Subtle <span className='float-right'>Bold</span></h4>
                             <input type="range" className='slider' />
