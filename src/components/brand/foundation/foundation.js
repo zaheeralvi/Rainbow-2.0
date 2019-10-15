@@ -1,13 +1,31 @@
 import React, { Component } from 'react';
 import { Select } from 'dropdown-select';
 import { GoLightBulb } from "react-icons/go";
-import Tooltip from 'react-bootstrap/Tooltip'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Popup from '../../../shared/modal/modal';
 
 
 class foundation extends Component {
 
-  render() {
+  constructor(props) {
+    super(props);
+    this.state={
+        show: false, 
+    }
+}
+
+handleClose = () => {
+    this.setState({
+        show: false, 
+    })
+};
+handleShow = () => {
+    this.setState({
+        show: true, 
+    })
+};
+
+render() {
+    const {show} = this.state;
     let options = [{ label: 'label1', value: 'value1' }, { label: 'label2', value: 'value2' }]
     return (
       <div className='p-3'>
@@ -20,26 +38,26 @@ class foundation extends Component {
               <textarea className='form-control textarea'>
                 Lorem ipsum dolor sit amet, duo te dicit impedit, pro mutat inermis delicata eu, sit ea esse aliquam suscipiantur. Ut vix libris invidunt.
               </textarea>
-              <OverlayTrigger overlay={<Tooltip>Tooltip!</Tooltip>}><span className='textarea_tooltip mt-4 pt-2' variant="primary"><GoLightBulb /></span></OverlayTrigger>
+              <span className='textarea_tooltip' onClick={this.handleShow} ><GoLightBulb /></span>
             </div>
             <div className='form-group'>
               <label className='label'>Origin Story</label>
               <textarea className='form-control textarea'>
                 Lorem ipsum dolor sit amet, duo te dicit impedit, pro mutat inermis delicata eu, sit ea esse aliquam suscipiantur. Ut vix libris invidunt.
               </textarea>
-              <OverlayTrigger overlay={<Tooltip>Tooltip!</Tooltip>}><span className='textarea_tooltip mt-4 pt-2' variant="primary"><GoLightBulb /></span></OverlayTrigger>
+              <span className='textarea_tooltip' onClick={this.handleShow} ><GoLightBulb /></span>
             </div>
             <div className='form-group'>
               <label className='label'>Elevator Pitch</label>
               <textarea className='form-control textarea'>
                 Lorem ipsum dolor sit amet, duo te dicit impedit, pro mutat inermis delicata eu, sit ea esse aliquam suscipiantur. Ut vix libris invidunt.
               </textarea>
-              <OverlayTrigger overlay={<Tooltip>Tooltip!</Tooltip>}><span className='textarea_tooltip mt-4 pt-2' variant="primary"><GoLightBulb /></span></OverlayTrigger>
+              <span className='textarea_tooltip' onClick={this.handleShow} ><GoLightBulb /></span>
             </div>
             <div className='form-group'>
               <label className='label'>Organizational Values</label>
               <input type="text" className='form-control' placeholder='Humility' />
-              <OverlayTrigger overlay={<Tooltip>Tooltip!</Tooltip>}><span className='textarea_tooltip mt-4 pt-2' variant="primary"><GoLightBulb /></span></OverlayTrigger>
+              <span className='textarea_tooltip' onClick={this.handleShow} ><GoLightBulb /></span>
             </div>
             <div className='form-group'>
               <Select placeholder='Empathy' options={options} labelKey="label" valueKey="value" />
@@ -59,6 +77,7 @@ class foundation extends Component {
             </div>
           </form>
         </div>
+        <Popup show={show} hide={this.handleClose}/>
       </div>
     );
   }

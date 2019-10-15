@@ -83,6 +83,7 @@ textarea:hover,textarea:focus,textarea:active{
   position: absolute;
   top: -5px;
   right: -20px;
+  cursor: pointer;
 }
 .textarea_tooltip.input{
   top: 0;
