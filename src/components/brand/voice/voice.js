@@ -2,12 +2,30 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import { FaAngleLeft, FaPlus } from "react-icons/fa";
 import { GoLightBulb } from "react-icons/go";
-import Tooltip from 'react-bootstrap/Tooltip'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import './voice.css'
+import Popup from '../../../shared/modal/modal';
 
 class voice extends Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            show: false, 
+        }
+    }
+    
+    handleClose = () => {
+        this.setState({
+            show: false, 
+        })
+    };
+    handleShow = () => {
+        this.setState({
+            show: true, 
+        })
+    };
+    
     render() {
+        const {show} = this.state;
         return (
             <div className='brand voice p-3'>
                 <div className='container'>
@@ -18,9 +36,7 @@ class voice extends Component {
                             <label className='label'>Keywords</label>
                             <input type="text" className='form-control' placeholder='Enter Keyword' />
                             <FaPlus className='addPlus' />
-                            <span variant="primary">
-                                <OverlayTrigger overlay={<Tooltip>Tooltip!</Tooltip>}><span className='textarea_tooltip' variant="primary"><GoLightBulb /></span></OverlayTrigger>
-                            </span>
+                            <span className='textarea_tooltip' onClick={this.handleShow} ><GoLightBulb /></span>
                         </div>
                         <div className='form-group'>
                             <div className='tag_container'>
@@ -36,9 +52,7 @@ class voice extends Component {
                             <label className='label'>Buzzwords</label>
                             <input type="text" className='form-control' placeholder='Enter Buzzword' />
                             <FaPlus className='addPlus' />
-                            <span variant="primary">
-                                <OverlayTrigger overlay={<Tooltip>Tooltip!</Tooltip>}><span className='textarea_tooltip' variant="primary"><GoLightBulb /></span></OverlayTrigger>
-                            </span>
+                            <span className='textarea_tooltip' onClick={this.handleShow} ><GoLightBulb /></span>
                         </div>
                         <div className='form-group'>
                             <div className='tag_container'>
@@ -56,6 +70,7 @@ class voice extends Component {
                         </div>
                     </form>
                 </div>
+                <Popup show={show} hide={this.handleClose}/>
             </div>
         );
     }

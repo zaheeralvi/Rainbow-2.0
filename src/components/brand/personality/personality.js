@@ -1,11 +1,29 @@
 import React, { Component } from 'react';
 import { Select } from 'dropdown-select';
 import { GoLightBulb } from "react-icons/go";
-import Tooltip from 'react-bootstrap/Tooltip'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Popup from '../../../shared/modal/modal';
 
 class personality extends Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            show: false, 
+        }
+    }
+    
+    handleClose = () => {
+        this.setState({
+            show: false, 
+        })
+    };
+    handleShow = () => {
+        this.setState({
+            show: true, 
+        })
+    };
+    
     render() {
+        const {show} = this.state;
         let options = [{ label: 'label1', value: 'value1' }, { label: 'label2', value: 'value2' }]
         return (
             <div className='p-3'>
@@ -13,7 +31,7 @@ class personality extends Component {
                     <form className='form'>
                         <h2 className='heading bold mb-3'>Our Personality</h2>
                         <h4 className='mb-4'>These are the brand elements in which the entire organization is built upon.</h4>
-                        <h4 className='mb-5 bold'>Personality Assessment <GoLightBulb className='float-right' /></h4>
+                        <h4 className='mb-5 bold'>Personality Assessment <span onClick={this.handleShow} ><GoLightBulb className='float-right' /></span></h4>
                         <div className='form-group'>
                             <h4 className='bold m-0'>Feminine <span className='float-right'>Masculine</span></h4>
                             <input type="range" className='slider' />
@@ -49,7 +67,7 @@ class personality extends Component {
                         <div className='form-group'>
                             <label className='label'>Organizational Values</label>
                             <input type="text" className='form-control' placeholder='Humility' />
-                            <OverlayTrigger overlay={<Tooltip>Tooltip!</Tooltip>}><span className='textarea_tooltip mt-4 pt-2' variant="primary"><GoLightBulb /></span></OverlayTrigger>
+                            <span className='textarea_tooltip mt-4 pt-2' onClick={this.handleShow} ><GoLightBulb /></span>
                         </div>
                         <div className='form-group'>
                             <Select placeholder='Empathy' options={options} labelKey="label" valueKey="value" />
@@ -69,6 +87,7 @@ class personality extends Component {
                         </div>
                     </form>
                 </div>
+                <Popup show={show} hide={this.handleClose}/>
             </div>
         );
     }

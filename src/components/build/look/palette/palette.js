@@ -2,12 +2,30 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import { FaAngleLeft } from "react-icons/fa";
 import { GoLightBulb } from "react-icons/go";
-import Tooltip from 'react-bootstrap/Tooltip'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import './palette.css'
+import Popup from '../../../../shared/modal/modal';
 
 class palette extends Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            show: false, 
+        }
+    }
+    
+    handleClose = () => {
+        this.setState({
+            show: false, 
+        })
+    };
+    handleShow = () => {
+        this.setState({
+            show: true, 
+        })
+    };
+    
     render() {
+        const {show} = this.state;
         return (
             <div className='palette'>
                 <h2 className='heading bold mb-3'>Color Palette</h2>
@@ -17,7 +35,7 @@ class palette extends Component {
                     <div className='form-group'>
                         <input type="text" className='form-control color' placeholder='Color #1' />
                         <input type="text" className='form-control percentage' placeholder='%' />
-                        <OverlayTrigger overlay={<Tooltip>Tooltip!</Tooltip>}><span className='textarea_tooltip' variant="primary"><GoLightBulb /></span></OverlayTrigger>
+                        <span className='textarea_tooltip' onClick={this.handleShow} ><GoLightBulb /></span>
                     </div>
                     <div className='form-group'>
                         <input type="text" className='form-control color' placeholder='Color #2' />
@@ -43,6 +61,7 @@ class palette extends Component {
                         <NavLink to='/build/complete' className='btn_green m-0'>NEXT</NavLink>
                     </div>
                 </form>
+                <Popup show={show} hide={this.handleClose}/>
             </div>
         );
     }

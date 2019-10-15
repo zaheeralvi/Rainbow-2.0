@@ -25,9 +25,9 @@ class Brand extends Component {
             </ul>
           </div>
           <div className='content'>
+            <Route exact path='/brand' component={main} />
             <div className='brand_wrapper'>
               <Switch>
-                <Route exact path='/brand' component={main} />
                 <Route path='/brand/company-info' component={companyInfo} />
                 <Route path='/brand/foundation' component={foundation} />
                 <Route path='/brand/personality' component={personality} />

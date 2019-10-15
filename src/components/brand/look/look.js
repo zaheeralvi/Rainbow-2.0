@@ -2,12 +2,30 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import { FaAngleLeft } from "react-icons/fa";
 import { GoLightBulb } from "react-icons/go";
-import Tooltip from 'react-bootstrap/Tooltip'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import './look.css'
+import Popup from '../../../shared/modal/modal';
 
 class look extends Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            show: false, 
+        }
+    }
+    
+    handleClose = () => {
+        this.setState({
+            show: false, 
+        })
+    };
+    handleShow = () => {
+        this.setState({
+            show: true, 
+        })
+    };
+    
     render() {
+        const {show} = this.state;
         let style = { background: 'url(/images/brand-logo.png) no-repeat', backgroundSize: 'cover' }
         return (
             <div className='look p-3'>
@@ -25,7 +43,7 @@ class look extends Component {
                         <div className='form-group flex'>
                             <input type="text" className='form-control color' placeholder='Color #1' />
                             <input type="text" className='form-control percentage' placeholder='%' />
-                            <OverlayTrigger overlay={<Tooltip>Tooltip!</Tooltip>}><span className='textarea_tooltip' variant="primary"><GoLightBulb /></span></OverlayTrigger>
+                            <span className='textarea_tooltip' onClick={this.handleShow} ><GoLightBulb /></span>
                         </div>
                         <div className='form-group flex'>
                             <input type="text" className='form-control color' placeholder='Color #2' />
@@ -84,6 +102,7 @@ class look extends Component {
                         </div>
                     </form>
                 </div>
+                <Popup show={show} hide={this.handleClose}/>
             </div>
         );
     }
