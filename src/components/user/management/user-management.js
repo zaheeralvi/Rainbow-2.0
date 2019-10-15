@@ -19,7 +19,7 @@ class UserManagement extends React.Component {
                             </tr>
                             <tr>
                                 <td><input type="email" className='form-control' placeholder='Aaron@patter.com' /></td>
-                                <td><Select placeholder='Full Access' options={options} labelKey="label" valueKey="value" /></td>
+                                <td className='no-border-left'><Select placeholder='Full Access' options={options} labelKey="label" valueKey="value" /></td>
                             </tr>
                         </table>
                         <button className='btn_green'>Send</button>

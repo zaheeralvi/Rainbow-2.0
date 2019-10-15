@@ -56,7 +56,7 @@ render() {
             </div>
             <div className='form-group'>
               <label className='label'>Organizational Values</label>
-              <input type="text" className='form-control' placeholder='Humility' />
+              <Select placeholder='Humility' options={options} labelKey="label" valueKey="value" />
               <span className='textarea_tooltip mt-4 pt-2' onClick={this.handleShow} ><GoLightBulb /></span>
             </div>
             <div className='form-group'>

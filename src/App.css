@@ -205,8 +205,14 @@ a.btn_green:active,.btn_green:active {
   background: #5f989f;
   cursor: pointer;
 }
-
-
+.custom-control-input:focus:not(:checked)~.custom-control-label::before,
+.custom-control-input:focus~.custom-control-label::before{
+  border-color: #adb5bd !important;
+  box-shadow: none !important;
+}
+td.no-border-left *{
+  border-left: none
+}
 /* ------------------------------------------------------------------------ */
 .body_content {
   display: flex;
