@@ -30,7 +30,7 @@ class foundation extends Component {
                         <input type="text" className='form-control' placeholder='Location (City, State)' />
                     </div>
                     <div className='form-group'>
-                        <input type="text" className='form-control' placeholder='Number of Employees' />
+                    <Select placeholder='5-10' options={options} labelKey="label" valueKey="value" />
                     </div>
                     <div className='mt-3 mb-5 text-right'>
                         <NavLink to='/build/introduction' className='float-left primary back_btn'> <FaAngleLeft /> Back</NavLink>

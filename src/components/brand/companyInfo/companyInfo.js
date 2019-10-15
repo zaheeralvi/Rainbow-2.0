@@ -37,7 +37,7 @@ class companyInfo extends Component {
             </div>
             <div className='form-group'>
               <label className='label'>Number of Employees</label>
-              <input type="text" className='form-control' placeholder='Number of Employees' />
+              <Select placeholder='5-10' options={options} labelKey="label" valueKey="value" />
             </div>
             <div className='mt-3 mb-5'>
               <button className='btn_green'>Save</button>
