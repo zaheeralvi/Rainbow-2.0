@@ -31,7 +31,7 @@ class personality extends Component {
                     <form className='form'>
                         <h2 className='heading bold mb-3'>Our Personality</h2>
                         <h4 className='mb-4'>These are the brand elements in which the entire organization is built upon.</h4>
-                        <h4 className='mb-5 bold'>Personality Assessment <span onClick={this.handleShow} ><GoLightBulb className='float-right' /></span></h4>
+                        <h4 className='mb-5 bold label'>Personality Assessment <span onClick={this.handleShow} ><GoLightBulb className='float-right' /></span></h4>
                         <div className='form-group'>
                             <h4 className='bold m-0'>Feminine <span className='float-right'>Masculine</span></h4>
                             <input type="range" className='slider' />

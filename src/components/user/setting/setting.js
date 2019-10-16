@@ -23,7 +23,10 @@ class Setting extends React.Component {
                             <Select placeholder='Aaron Gopp' options={options} labelKey="label" valueKey="value" />
                         </div>
                         <div className='form-group'>
-                            <Form.Check type="checkbox" label="Deactivate Your Account" />
+                            <Form.Group className='mb-0' controlId="formBasicCheckbox0">
+                                <Form.Check type="checkbox" custom label="Deactivate Your Account" />
+                            </Form.Group>
+                            {/* <Form.Check type="checkbox" label="Deactivate Your Account" /> */}
                         </div>
                         <p className='primary'>(By deactivating your account, your site will no longer be accessible. Your account can always be restored with no information loss by contact our Customer Success team at 1-800-800-8000 or via email at support@patter.com)</p>
                         <div className='form-group'>

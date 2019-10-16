@@ -33,13 +33,13 @@ class look extends Component {
                     <form className='form pt-3'>
                         <h2 className='heading bold mb-3'>Our Look</h2>
                         <h4 className='mb-4'>These are the brand elements in which the entire organization is built upon.</h4>
-                        <h4 className='heading bold mb-3'>Logo</h4>
+                        <h4 className='bold mb-3 px-3'>Logo</h4>
                         <h4 className='mb-5'>Your logo is very often the first interaction a customer or stakeholder will have with your brand. It should be representative of every other aspect of your brand.</h4>
                         <button className='btn_green btn_upload mb-3'>UPLOAD LOGO</button>
                         <div className='form-group mb-5'>
                             <div className='tag_container' style={style}></div>
                         </div>
-                        <label className='label primary mb-3'>Color Palette</label>
+                        <label className='label mb-3'>Color Palette</label>
                         <div className='form-group flex'>
                             <input type="text" className='form-control color' placeholder='Color #1' />
                             <input type="text" className='form-control percentage' placeholder='%' />

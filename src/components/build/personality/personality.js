@@ -30,7 +30,7 @@ class personality extends Component {
                 <h2 className='heading bold mb-3'>Part 2: Our Personality</h2>
                 <h4 className='mb-3'>Congratulations! You’ve completed the first section of the Brand Assessment. Hopefully it wasn’t too diffcult.</h4>
                 <h4 className='mb-5'>This next section will focus on the actions that your organization will take on a day to day basis. This is essentially the personality of your company. In good times and bad, how will you interact with your customers and stakeholders.</h4>
-                <h4 className='heading bold mb-3'>Personality Assessment <GoLightBulb onClick={this.handleShow} className='float-right pointer' /></h4>
+                <h4 className='bold mb-3 px-3'>Personality Assessment <GoLightBulb onClick={this.handleShow} className='float-right pointer' /></h4>
                 <h4 className='mb-3'>This exercise is to help you think through how your company is represented. Remember that there are no wrong answers. </h4>
                 <h4 className='mb-5'>(Slide the marker to the appropriate location on the spectrum)</h4>
                 <form className='form'>
