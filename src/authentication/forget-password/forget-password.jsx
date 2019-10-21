@@ -1,7 +1,24 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom'
+import withFirebaseAuth from 'react-with-firebase-auth'
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 
 class ForgetPassword extends React.Component{
+    constructor(props){
+        super(props)
+        this.state={
+            email: 'zaheermalik284@gmail.com',
+        }
+    }
+    HandleResetpassword=()=> {
+        var auth = firebase.auth();
+        auth.sendPasswordResetEmail(this.state.email).then(function() {
+            console.log('Reset link is sent on you email address')
+          }).catch(function(error) {
+            // An error happened.
+          });
+    }
     render(){
         return(
             <section className='setting_block pt-5 pl-5'>
@@ -14,7 +31,7 @@ class ForgetPassword extends React.Component{
                             <input type="email" className='form-control' name='company' />
                         </div>
                         <div className='form-group'>
-                            <button className='btn_green'>SUBMIT</button>
+                            <button className='btn_green' onClick={this.HandleResetpassword}>SUBMIT</button>
                         </div>
                         <p className='primary'>Do not have an account yet? <NavLink className='primary' to=''><strong><u>Sign Up </u></strong></NavLink></p>
                     </div>

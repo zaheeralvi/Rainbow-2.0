@@ -14,7 +14,10 @@ import UserManagement from './components/user/management/user-management';
 import Profile from './components/user/profile/profile';
 import Signin from './authentication/signin/signin';
 import ForgetPassword from './authentication/forget-password/forget-password';
+import * as firebase from 'firebase/app';
+import firebaseConfig from './firebaseConfig';
 
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 class App extends Component {
 
   render() {
