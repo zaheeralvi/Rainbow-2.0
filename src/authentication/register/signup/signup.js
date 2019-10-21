@@ -1,60 +1,79 @@
 import React from 'react';
 import './signup.css'
-import {NavLink} from 'react-router-dom'
-import withFirebaseAuth from 'react-with-firebase-auth'
+import { NavLink } from 'react-router-dom'
+// import withFirebaseAuth from 'react-with-firebase-auth'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import SimpleReactValidator from 'simple-react-validator';
 
 class Signup extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state={
-            email: 'zaheermalik284@gmail.com',
-            password: 'pass123'
+        this.state = {
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: ''
         }
+        this.validator = new SimpleReactValidator({
+            messages: {
+                email: 'Please Enter Valid Email',
+                default: 'This field is Required.'
+            },
+        });
+
     }
-    signUpHandler = e => {
+    signUpHandler = (e) => {
         e.preventDefault();
-        firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.state.email, this.state.password)
-          .then(res => {
-              console.log(res)
-            // if (res.user) Auth.setLoggedIn(true);
-          })
-          .catch(e => {
-           console.log(e)
-          });
-      };
+        if (this.validator.allValid) {
+            firebase
+                .auth()
+                .createUserWithEmailAndPassword(this.state.email, this.state.password)
+                .then(res => {
+                    console.log(res)
+                    // if (res.user) Auth.setLoggedIn(true);
+                })
+                .catch(e => {
+                    console.log(e)
+                });
+        }else{
+            this.validator.showMessages();
+            this.forceUpdate();
+        }
+    };
     render() {
         return (
             <section className='setting_block pt-5 pl-5'>
                 <div className='container'>
                     <h2 className='heading'>Create Your Account</h2>
                     <h4>Get started building your best brand</h4>
-                    <div className='form'>
+                    <form className='form' noValidate onSubmit={this.signUpHandler.bind(this)}>
                         <div className='form-group'>
                             <label className='label'>First Name</label>
-                            <input type="text" className='form-control' name='company' />
+                            <input type="text" className='form-control' name='firstName' required onChange={(e) => { this.setState({ firstName: e.target.value }) }} />
+                            <label className='error'>{this.validator.message('firstName', this.state.firstName, 'required')}</label>
                         </div>
                         <div className='form-group'>
                             <label className='label'>Last Name</label>
-                            <input type="text" className='form-control' name='company' />
+                            <input type="text" className='form-control' name='lastName' required onChange={(e) => { this.setState({ lastName: e.target.value }) }} />
+                            <label className='error'>{this.validator.message('lastName', this.state.lastName, 'required')}</label>
                         </div>
                         <div className='form-group'>
                             <label className='label'>Email Address</label>
-                            <input type="email" className='form-control' name='company' />
+                            <input type="email" className='form-control' name='email' required onChange={(e) => { this.setState({ email: e.target.value }) }} />
+                            <label className='error'>{this.validator.message('email', this.state.email, 'required|email')}</label>
                         </div>
                         <div className='form-group'>
                             <label className='label'>Password</label>
-                            <input type="password" className='form-control' name='company' />
+                            <input type="password" className='form-control' name='password' required onChange={(e) => { this.setState({ password: e.target.value }) }} />
+                            <label className='error'>{this.validator.message('password', this.state.password, 'required')}</label>
                         </div>
                         <div className='form-group'>
-                            <button className='btn_green' onClick={this.signUpHandler}>Next</button>
+                            <button type='submit' className='btn_green' >Next</button>
                         </div>
                         <p className='primary'>By siging up, you agree to Patter’s <NavLink className='primary' to=''><u>Terms of Service and Privacy Policy.</u></NavLink></p>
                         <p className='primary'>Already have an account? <NavLink className='primary' to='/login'><strong><u>Log In </u></strong></NavLink></p>
-                    </div>
+                    </form>
                 </div>
             </section>
         );

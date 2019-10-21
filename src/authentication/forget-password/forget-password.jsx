@@ -1,40 +1,55 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import withFirebaseAuth from 'react-with-firebase-auth'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import SimpleReactValidator from 'simple-react-validator';
 
-class ForgetPassword extends React.Component{
-    constructor(props){
+class ForgetPassword extends React.Component {
+    constructor(props) {
         super(props)
-        this.state={
-            email: 'zaheermalik284@gmail.com',
+        this.state = {
+            email: '',
+        }
+        this.validator = new SimpleReactValidator({
+            messages: {
+                email: 'Please Enter Valid Email',
+                default: 'This field is Required.'
+            },
+        });
+    }
+    HandleResetpassword = (e) => {
+        e.preventDefault();
+        if (this.validator.fields.email && this.validator.fields.password) {
+            var auth = firebase.auth();
+            auth.sendPasswordResetEmail(this.state.email).then(function () {
+                console.log('Reset link is sent on you email address')
+            }).catch(function (error) {
+                // An error happened.
+                console.log(error)
+            });
+        }else{
+            this.validator.showMessages();
+            this.forceUpdate();
         }
     }
-    HandleResetpassword=()=> {
-        var auth = firebase.auth();
-        auth.sendPasswordResetEmail(this.state.email).then(function() {
-            console.log('Reset link is sent on you email address')
-          }).catch(function(error) {
-            // An error happened.
-          });
-    }
-    render(){
-        return(
+    render() {
+        return (
             <section className='setting_block pt-5 pl-5'>
                 <div className='container'>
                     <h2 className='heading'>Recover Your Password</h2>
-                    <h4 className='text-body mb-4'>Enter your email address below and we will send you <br/>instructions to reset your password.</h4>
-                    <div className='form'>
+                    <h4 className='text-body mb-4'>Enter your email address below and we will send you <br />instructions to reset your password.</h4>
+                    <form className='form' noValidate onSubmit={this.HandleResetpassword.bind(this)}>
                         <div className='form-group'>
-                            <label className='label'>Email</label>
-                            <input type="email" className='form-control' name='company' />
+                            <label className='label'>Email Address</label>
+                            <input type="email" className='form-control' value={this.state.email} name='email' required onChange={(e) => { this.setState({ email: e.target.value }) }} />
+                            <label className='error'>{this.validator.message('email', this.state.email, 'required|email')}</label>
                         </div>
                         <div className='form-group'>
-                            <button className='btn_green' onClick={this.HandleResetpassword}>SUBMIT</button>
+                            <button className='btn_green'>SUBMIT</button>
                         </div>
                         <p className='primary'>Do not have an account yet? <NavLink className='primary' to=''><strong><u>Sign Up </u></strong></NavLink></p>
-                    </div>
+                    </form>
                 </div>
             </section>
         )
