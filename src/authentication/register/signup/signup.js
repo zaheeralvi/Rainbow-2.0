@@ -5,6 +5,9 @@ import { NavLink } from 'react-router-dom'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import SimpleReactValidator from 'simple-react-validator';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 class Signup extends React.Component {
     constructor(props) {
@@ -25,16 +28,18 @@ class Signup extends React.Component {
     }
     signUpHandler = (e) => {
         e.preventDefault();
-        if (this.validator.allValid) {
+        if (this.validator.allValid()) {
             firebase
                 .auth()
                 .createUserWithEmailAndPassword(this.state.email, this.state.password)
                 .then(res => {
                     console.log(res)
+                    toast.success('Registered Successfully')
                     // if (res.user) Auth.setLoggedIn(true);
                 })
                 .catch(e => {
                     console.log(e)
+                    toast.error(e.message)
                 });
         }else{
             this.validator.showMessages();
@@ -44,6 +49,7 @@ class Signup extends React.Component {
     render() {
         return (
             <section className='setting_block pt-5 pl-5'>
+                <ToastContainer />
                 <div className='container'>
                     <h2 className='heading'>Create Your Account</h2>
                     <h4>Get started building your best brand</h4>

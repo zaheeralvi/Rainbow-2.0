@@ -4,6 +4,8 @@ import withFirebaseAuth from 'react-with-firebase-auth'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import SimpleReactValidator from 'simple-react-validator';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class ForgetPassword extends React.Component {
     constructor(props) {
@@ -18,17 +20,17 @@ class ForgetPassword extends React.Component {
             },
         });
     }
+
     HandleResetpassword = (e) => {
         e.preventDefault();
-        if (this.validator.fields.email && this.validator.fields.password) {
+        if (this.validator.allValid()) {
             var auth = firebase.auth();
             auth.sendPasswordResetEmail(this.state.email).then(function () {
-                console.log('Reset link is sent on you email address')
+                toast.success('Reset link is sent on you email address')
             }).catch(function (error) {
-                // An error happened.
-                console.log(error)
+                toast.error(error.message)
             });
-        }else{
+        } else {
             this.validator.showMessages();
             this.forceUpdate();
         }
@@ -36,6 +38,7 @@ class ForgetPassword extends React.Component {
     render() {
         return (
             <section className='setting_block pt-5 pl-5'>
+                <ToastContainer />
                 <div className='container'>
                     <h2 className='heading'>Recover Your Password</h2>
                     <h4 className='text-body mb-4'>Enter your email address below and we will send you <br />instructions to reset your password.</h4>

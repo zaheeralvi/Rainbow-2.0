@@ -5,6 +5,8 @@ import { NavLink } from 'react-router-dom'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import SimpleReactValidator from 'simple-react-validator';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class Signin extends React.Component {
     constructor(props) {
@@ -22,20 +24,22 @@ class Signin extends React.Component {
     }
     signInHandler = (e) => {
         e.preventDefault();
-        if (this.validator.fields.email && this.validator.fields.password) {
+        if (this.validator.allValid()) {
             firebase
                 .auth()
                 .signInWithEmailAndPassword(this.state.email, this.state.password)
                 .then((res) => {
                     console.log(res)
-                    if(!res.user.emailVerified){
-                        console.log('Please Conform Your Email to Login')
-                    }else{
+                    if (!res.user.emailVerified) {
+                        // console.log('Please Conform Your Email to Login')
+                        toast.warn('Please Conform Your Email to Login');
+                    } else {
                     }
                     // if (res.user) Auth.setLoggedIn(true);
                 })
                 .catch(e => {
-                    console.log(e.message)
+                    toast.error(e.message)
+                    console.log(e)
                 });
         } else {
             this.validator.showMessages();
@@ -45,6 +49,7 @@ class Signin extends React.Component {
     render() {
         return (
             <section className='setting_block pt-5 pl-5'>
+                <ToastContainer />
                 <div className='container'>
                     <h2 className='heading'>Log In To Your Account</h2>
                     <form className='form' noValidate onSubmit={this.signInHandler.bind(this)}>
