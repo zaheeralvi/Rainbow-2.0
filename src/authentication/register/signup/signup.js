@@ -34,7 +34,12 @@ class Signup extends React.Component {
                 .createUserWithEmailAndPassword(this.state.email, this.state.password)
                 .then(res => {
                     console.log(res)
-                    toast.success('Registered Successfully')
+                    // toast.success('Registered Successfully')
+                    res.user.sendEmailVerification().then(function() {
+                        toast.success('Registered Successfully')
+                      }).catch(function(error) {
+                        toast.error(error.message)
+                      });
                     // if (res.user) Auth.setLoggedIn(true);
                 })
                 .catch(e => {
