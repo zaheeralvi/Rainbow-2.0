@@ -7,7 +7,8 @@ import 'firebase/auth';
 import SimpleReactValidator from 'simple-react-validator';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import axios from 'axios';
+import { async } from 'q';
 
 class Signup extends React.Component {
     constructor(props) {
@@ -16,7 +17,8 @@ class Signup extends React.Component {
             email: '',
             password: '',
             firstName: '',
-            lastName: ''
+            lastName: '',
+            url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/insertUser'
         }
         this.validator = new SimpleReactValidator({
             messages: {
@@ -32,21 +34,25 @@ class Signup extends React.Component {
             firebase
                 .auth()
                 .createUserWithEmailAndPassword(this.state.email, this.state.password)
-                .then(res => {
+                .then( res => {
                     console.log(res)
+                    let data ={Email:this.state.email,FirstName:this.state.firstName,LastName:this.state.lastName}
                     // toast.success('Registered Successfully')
-                    res.user.sendEmailVerification().then(function() {
+                    axios.post(this.state.url, data).then(res => {
+                        console.log(res)
+                    })
+                    res.user.sendEmailVerification().then(function () {
                         toast.success('Registered Successfully')
-                      }).catch(function(error) {
+                    }).catch(function (error) {
                         toast.error(error.message)
-                      });
+                    });
                     // if (res.user) Auth.setLoggedIn(true);
                 })
                 .catch(e => {
                     console.log(e)
                     toast.error(e.message)
                 });
-        }else{
+        } else {
             this.validator.showMessages();
             this.forceUpdate();
         }
