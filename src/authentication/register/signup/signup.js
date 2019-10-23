@@ -23,11 +23,14 @@ class Signup extends React.Component {
         this.validator = new SimpleReactValidator({
             messages: {
                 email: 'Please Enter Valid Email',
-                default: 'This field is Required.'
+                default: 'This field is Required.',
+                min:'Password Must be Greater then 8'
             },
         });
-
     }
+
+
+
     signUpHandler = (e) => {
         e.preventDefault();
         if (this.validator.allValid()) {
@@ -83,7 +86,7 @@ class Signup extends React.Component {
                         <div className='form-group'>
                             <label className='label'>Password</label>
                             <input type="password" className='form-control' name='password' required onChange={(e) => { this.setState({ password: e.target.value }) }} />
-                            <label className='error'>{this.validator.message('password', this.state.password, 'required')}</label>
+                            <label className='error'>{this.validator.message('password', this.state.password, 'required|min:8')}</label>
                         </div>
                         <div className='form-group'>
                             <button type='submit' className='btn_green' >Next</button>
