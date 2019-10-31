@@ -6,9 +6,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import SimpleReactValidator from 'simple-react-validator';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import { async } from 'q';
 
 class Signup extends React.Component {
     constructor(props) {
@@ -23,13 +21,15 @@ class Signup extends React.Component {
         this.validator = new SimpleReactValidator({
             messages: {
                 email: 'Please Enter Valid Email',
-                default: 'This field is Required.'
+                default: 'This field is Required.',
+                min:    'Password Must be 8 Charactor long'
             },
         });
-
     }
+
     signUpHandler = (e) => {
         e.preventDefault();
+        let props=this.props
         if (this.validator.allValid()) {
             firebase
                 .auth()
@@ -43,6 +43,7 @@ class Signup extends React.Component {
                     })
                     res.user.sendEmailVerification().then(function () {
                         toast.success('Registered Successfully')
+                        props.history.push('login')
                     }).catch(function (error) {
                         toast.error(error.message)
                     });
@@ -83,7 +84,7 @@ class Signup extends React.Component {
                         <div className='form-group'>
                             <label className='label'>Password</label>
                             <input type="password" className='form-control' name='password' required onChange={(e) => { this.setState({ password: e.target.value }) }} />
-                            <label className='error'>{this.validator.message('password', this.state.password, 'required')}</label>
+                            <label className='error'>{this.validator.message('password', this.state.password, 'required|min:8')}</label>
                         </div>
                         <div className='form-group'>
                             <button type='submit' className='btn_green' >Next</button>

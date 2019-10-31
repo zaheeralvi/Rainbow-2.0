@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './shared/header/header';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import './App.css'
 import Home from './components/home/home';
 import Brand from './components/brand/brand';
@@ -16,6 +16,7 @@ import Signin from './authentication/signin/signin';
 import ForgetPassword from './authentication/forget-password/forget-password';
 import * as firebase from 'firebase/app';
 import firebaseConfig from './firebaseConfig';
+import 'react-toastify/dist/ReactToastify.css';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 class App extends Component {
@@ -36,23 +37,25 @@ class App extends Component {
           {/* mention the route where you want sidebar */}
 
           <div className='content'>
-            <Switch>
-              <Route exact path='/' component={Home} />
-              <Route path='/build' component={Build} />
-              <Route path='/brand' component={Brand} />
-              <Route exact path='/setting' component={Setting} />
-              <Route exact path='/user' component={UserManagement} />
-              <Route exact path='/profile' component={Profile} />
+            <Router>
+              <Switch>
+                <Route exact path='/' component={Home} />
+                <Route path='/build' component={Build} />
+                <Route path='/brand' component={Brand} />
+                <Route exact path='/setting' component={Setting} />
+                <Route exact path='/user' component={UserManagement} />
+                <Route exact path='/profile' component={Profile} />
 
-              <Route exact path='/login' component={Signin} />
-              <Route exact path='/signup' component={Signup} />
-              <Route exact path='/signup/a' component={Signup2a} />
-              <Route exact path='/signup/b' component={Signup2b} />
-              <Route exact path='/forget-password' component={ForgetPassword} />
-              <Route path=''>
-                <Redirect to='/' />
-              </Route>
-            </Switch>
+                <Route exact path='/login' component={Signin} />
+                <Route exact path='/signup' component={Signup} />
+                <Route exact path='/signup/a' component={Signup2a} />
+                <Route exact path='/signup/b' component={Signup2b} />
+                <Route exact path='/forget-password' component={ForgetPassword} />
+                <Route path=''>
+                  <Redirect to='/' />
+                </Route>
+              </Switch>
+            </Router>
           </div>
         </div>
       </div>

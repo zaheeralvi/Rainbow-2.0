@@ -34,6 +34,8 @@ class Signin extends React.Component {
                         // console.log('Please Conform Your Email to Login')
                         toast.warn('Please Conform Your Email to Login');
                     } else {
+                        toast.success('Login Successfully');
+                        // this.props.history.push('/signup/a');
                     }
                     // if (res.user) Auth.setLoggedIn(true);
                 })
