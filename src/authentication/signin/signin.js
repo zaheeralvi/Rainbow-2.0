@@ -7,13 +7,15 @@ import 'firebase/auth';
 import SimpleReactValidator from 'simple-react-validator';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Axios from 'axios';
 
 class Signin extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/getUser?Email='
         }
         this.validator = new SimpleReactValidator({
             messages: {
@@ -34,8 +36,7 @@ class Signin extends React.Component {
                         // console.log('Please Conform Your Email to Login')
                         toast.warn('Please Conform Your Email to Login');
                     } else {
-                        toast.success('Login Successfully');
-                        // this.props.history.push('/signup/a');
+                        this.getUserData(res.user.email)
                     }
                     // if (res.user) Auth.setLoggedIn(true);
                 })
@@ -48,6 +49,18 @@ class Signin extends React.Component {
             this.forceUpdate();
         }
     };
+
+    getUserData = async (email) => {
+        try {
+            await Axios.get(this.state.url + email).then(res => {
+                console.log(res)
+                toast.success('Login Successfully')
+                // this.props.history.push('/signup/a');
+            })
+        } catch (err) {
+            toast.error(err.message)
+        }
+    }
     render() {
         return (
             <section className='setting_block pt-5 pl-5'>
