@@ -39,7 +39,8 @@ class Signup extends React.Component {
                     let data ={Email:this.state.email,FirstName:this.state.firstName,LastName:this.state.lastName}
                     // toast.success('Registered Successfully')
                     axios.post(this.state.url, data).then(res => {
-                        console.log(res)
+                        console.log(res.data);
+                        localStorage.setItem('newRegister',JSON.stringify(res.data))
                     })
                     res.user.sendEmailVerification().then(function () {
                         toast.success('Registered Successfully')

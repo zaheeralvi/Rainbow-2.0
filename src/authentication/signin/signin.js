@@ -44,7 +44,12 @@ class Signin extends React.Component {
                                 localStorage.setItem('logged','true')
                                 localStorage.setItem('user',JSON.stringify(res.data))
                                 toast.success('Login Successfully')
-                                prop.history.push('/signup/a');
+                                let regisetred= JSON.parse(localStorage.getItem('newRegister'))
+                                if(regisetred.Company!=undefined){
+                                    prop.history.push('/signup/b');
+                                }else{
+                                    prop.history.push('/signup/a');
+                                }
                             })
                         }
                         // if (res.user) Auth.setLoggedIn(true);

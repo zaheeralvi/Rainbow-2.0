@@ -75,7 +75,7 @@ class Header extends Component {
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu>
                                                 <Dropdown.Item><NavLink to='/profile'>Profile</NavLink></Dropdown.Item>
-                                                <Dropdown.Item><NavLink to='/signout'>Sign Out</NavLink></Dropdown.Item>
+                                                <Dropdown.Item><NavLink to='/login'>Sign Out</NavLink></Dropdown.Item>
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     </li>
