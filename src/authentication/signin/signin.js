@@ -15,7 +15,7 @@ class Signin extends React.Component {
         this.state = {
             email: '',
             password: '',
-            url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/getUser?Email='
+            url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/getUser?email='
         }
         this.validator = new SimpleReactValidator({
             messages: {
@@ -25,42 +25,43 @@ class Signin extends React.Component {
         });
     }
     signInHandler = (e) => {
+        var prop = this.props
         e.preventDefault();
-        if (this.validator.allValid()) {
-            firebase
-                .auth()
-                .signInWithEmailAndPassword(this.state.email, this.state.password)
-                .then((res) => {
-                    console.log(res)
-                    if (!res.user.emailVerified) {
-                        // console.log('Please Conform Your Email to Login')
-                        toast.warn('Please Conform Your Email to Login');
-                    } else {
-                        this.getUserData(res.user.email)
-                    }
-                    // if (res.user) Auth.setLoggedIn(true);
-                })
-                .catch(e => {
-                    toast.error(e.message)
-                    console.log(e)
-                });
-        } else {
-            this.validator.showMessages();
-            this.forceUpdate();
+        try {
+            if (this.validator.allValid()) {
+                firebase
+                    .auth()
+                    .signInWithEmailAndPassword(this.state.email, this.state.password)
+                    .then((res) => {
+                        console.log(res)
+                        if (!res.user.emailVerified) {
+                            // console.log('Please Conform Your Email to Login')
+                            toast.warn('Please Conform Your Email to Login');
+                        } else {
+                            Axios.get(this.state.url + res.user.email).then(res => {
+                                console.log(res)
+                                prop.user(res.data)
+                                localStorage.setItem('logged','true')
+                                localStorage.setItem('user',JSON.stringify(res.data))
+                                toast.success('Login Successfully')
+                                prop.history.push('/signup/a');
+                            })
+                        }
+                        // if (res.user) Auth.setLoggedIn(true);
+                    })
+                    .catch(e => {
+                        toast.error(e.message)
+                        console.log(e)
+                    });
+            } else {
+                this.validator.showMessages();
+                this.forceUpdate();
+            }
+        }catch(err){
+            toast.error(err.message)
         }
     };
 
-    getUserData = async (email) => {
-        try {
-            await Axios.get(this.state.url + email).then(res => {
-                console.log(res)
-                toast.success('Login Successfully')
-                // this.props.history.push('/signup/a');
-            })
-        } catch (err) {
-            toast.error(err.message)
-        }
-    }
     render() {
         return (
             <section className='setting_block pt-5 pl-5'>

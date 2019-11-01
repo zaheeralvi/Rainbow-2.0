@@ -20,11 +20,27 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      user: null,
+      logged: false,
+      url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/getUser?email='
+    }
+  }
+
+  loginHandler = (user) => {
+    console.log(user)
+    this.setState({
+      user: user,
+      logged: true
+    })
+  }
 
   render() {
     return (
       <div>
-        <Header />
+        <Header user={this.state.user} logged={this.state.logged} />
         <div className='body_content'>
 
           {/* mention the route where you want sidebar */}
@@ -46,7 +62,8 @@ class App extends Component {
                 <Route exact path='/user' component={UserManagement} />
                 <Route exact path='/profile' component={Profile} />
 
-                <Route exact path='/login' component={Signin} />
+                <Route exact path="/login" render={(routeProps) => <Signin user={this.loginHandler} {...routeProps} />} />
+                {/* <Route exact path='/login' component={Signin} /> */}
                 <Route exact path='/signup' component={Signup} />
                 <Route exact path='/signup/a' component={Signup2a} />
                 <Route exact path='/signup/b' component={Signup2b} />

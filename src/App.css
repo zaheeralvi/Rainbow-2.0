@@ -181,7 +181,12 @@ label.error{
   font-size: 14px;
   padding-left: 15px;
 }
-
+.right_nav .dropdown-item span{
+  padding: 0.25rem 1.5rem;
+    display: inline-block;
+    width: 100%;
+    color: #333;
+}
 .slider {
   -webkit-appearance: none;
   width: 100%;
