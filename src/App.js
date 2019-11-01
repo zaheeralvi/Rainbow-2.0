@@ -40,20 +40,20 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header user={this.state.user} logged={this.state.logged} />
-        <div className='body_content'>
+        <Router>
+          <Header user={this.state.user} logged={this.state.logged} />
+          <div className='body_content'>
 
-          {/* mention the route where you want sidebar */}
-          <Route exact path='/' component={Sidebar} />
-          <Route path='/build' component={Sidebar} />
-          <Route path='/brand' component={Sidebar} />
-          <Route path='/setting' component={Sidebar} />
-          <Route path='/user' component={Sidebar} />
-          <Route path='/profile' component={Sidebar} />
-          {/* mention the route where you want sidebar */}
+            {/* mention the route where you want sidebar */}
+            <Route exact path='/' component={Sidebar} />
+            <Route path='/build' component={Sidebar} />
+            <Route path='/brand' component={Sidebar} />
+            <Route path='/setting' component={Sidebar} />
+            <Route path='/user' component={Sidebar} />
+            <Route path='/profile' component={Sidebar} />
+            {/* mention the route where you want sidebar */}
 
-          <div className='content'>
-            <Router>
+            <div className='content'>
               <Switch>
                 <Route exact path='/' component={Home} />
                 <Route path='/build' component={Build} />
@@ -72,9 +72,9 @@ class App extends Component {
                   <Redirect to='/' />
                 </Route>
               </Switch>
-            </Router>
+            </div>
           </div>
-        </div>
+        </Router>
       </div>
     );
   }
