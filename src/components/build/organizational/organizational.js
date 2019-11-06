@@ -11,76 +11,89 @@ import Axios from 'axios';
 class organizational extends Component {
     constructor(props) {
         super(props);
-        this.state={
-            show: false, 
+        this.state = {
+            show: false,
             brandData: '',
-            options:[],
-            url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/getCompanyBrandElement?'
+            options: [],
+            url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/'
         }
     }
 
     componentDidMount = async () => {
         try {
-            await Axios.get(this.state.url+`companyID=${1}&BrandElementID=3`).then(res => {
+            await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${1}&BrandElementID=3`).then(res => {
                 console.log(res)
-                let vals=[]
-                let opt=[]
-                res.data.CompanyBrandElementValues.forEach((v,i)=> { 
-                    opt.push(v.Value)
+                let vals = []
+                res.data.CompanyBrandElementValues.forEach((v, i) => {
                     vals.push(v.Value.ValuesID)
-                 }) 
-                this.setState({ 
-                    brandData: res.data, 
+                })
+                this.setState({
+                    brandData: res.data,
                     vals: vals,
-                    options: opt,
                 })
             })
         } catch (err) {
             toast.error(err.message)
         }
-        console.log(this.state.vals)
+
+        await Axios.get(this.state.url + `getValues`).then(res => {
+            console.log(res)
+            this.setState({
+                options: res.data,
+            })
+        })
+        try {
+
+        } catch (error) {
+            toast.error(error.message)
+        }
+
     }
-    
+
     handleClose = () => {
         this.setState({
-            show: false, 
+            show: false,
         })
     };
     handleShow = () => {
         this.setState({
-            show: true, 
+            show: true,
         })
     };
-    
+
+    showValue=(v)=>{
+        console.log(v)
+    }
+
     render() {
-        const {show} = this.state;
+        const { show } = this.state;
         return (
             <div className=''>
                 <h2 className='heading bold mb-3'>Organizational Values</h2>
                 <h4 className='mb-5'>Possibly one of the most important aspects of your brand are your values. These are the select group of concepts that drive the way your company will operate in good times and especiall in tough times.</h4>
                 <form className='form'>
                     <div className='form-group'>
-                        <Select placeholder='Value #1' options={this.state.options[0]} Value='6' labelKey="ValuesName" valueKey="ValuesID" />
+                        <Select placeholder='Value #1' onChange={(val)=>this.showValue(val)} options={this.state.options} value={1} labelKey="ValuesName" valueKey="ValuesID" />
                         <span className='textarea_tooltip' onClick={this.handleShow} ><GoLightBulb /></span>
                     </div>
                     <div className='form-group'>
-                        <Select placeholder='Value #2' options={this.state.options[1]} labelKey="ValuesName" valueKey="ValuesID" />
+                        <Select placeholder='Value #2' options={this.state.options} labelKey="ValuesName" valueKey="ValuesID" />
                     </div>
                     <div className='form-group'>
-                        <Select placeholder='Value #3' options={this.state.options[2]} labelKey="ValuesName" valueKey="ValuesID" />
+                        <Select placeholder='Value #3' options={this.state.options} labelKey="ValuesName" valueKey="ValuesID" />
                     </div>
                     <div className='form-group'>
-                        <Select placeholder='Value #4' options={this.state.options[3]} labelKey="ValuesName" valueKey="ValuesID" />
+                        <Select placeholder='Value #4' options={this.state.options} labelKey="ValuesName" valueKey="ValuesID" />
                     </div>
                     <div className='form-group'>
-                        <Select placeholder='Value #5' options={this.state.options[4]} labelKey="ValuesName" valueKey="ValuesID" />
+                        <Select placeholder='Value #5' options={this.state.options} labelKey="ValuesName" valueKey="ValuesID" />
                     </div>
                     <div className='mt-3 mb-5 text-right'>
                         <NavLink to='/build/foundation/organizational' className='float-left primary back_btn'> <FaAngleLeft /> Back</NavLink>
                         <NavLink to='/build/personality' className='btn_green m-0'>NEXT</NavLink>
                     </div>
                 </form>
-                <Popup show={show} hide={this.handleClose}/>
+                <Popup show={show} hide={this.handleClose} />
             </div>
         );
     }
