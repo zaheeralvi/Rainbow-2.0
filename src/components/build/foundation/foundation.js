@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { FaAngleLeft } from "react-icons/fa";
 import { Select } from 'dropdown-select';
 import SimpleReactValidator from 'simple-react-validator';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from 'axios';
 

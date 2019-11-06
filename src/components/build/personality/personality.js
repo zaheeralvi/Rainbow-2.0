@@ -3,28 +3,52 @@ import { NavLink } from 'react-router-dom'
 import { FaAngleLeft } from "react-icons/fa";
 import { GoLightBulb } from "react-icons/go";
 import Popup from '../../../shared/modal/modal';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Axios from 'axios';
 
 class personality extends Component {
     constructor(props) {
         super(props);
-        this.state={
-            show: false, 
+        this.state = {
+            show: false,
+            brandData: '',
+            scores:[],
+            url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/getCompanyBrandElement?'
         }
     }
-    
+
+    componentDidMount = async () => {
+        try {
+            await Axios.get(this.state.url + `companyID=${1}&BrandElementID=9`).then(res => {
+                console.log(res)
+                let vals=[]
+                res.data.CompanyBrandElementPersonalityAssessments.forEach((v,i)=> { 
+                    vals.push(v.PersonalityAssessment.Score)
+                 }) 
+                this.setState({ 
+                    brandData: res.data, 
+                    scores: vals
+                })
+            })
+        } catch (err) {
+            toast.error(err.message)
+        }
+    }
+
     handleClose = () => {
         this.setState({
-            show: false, 
+            show: false,
         })
     };
     handleShow = () => {
         this.setState({
-            show: true, 
+            show: true,
         })
     };
-    
+
     render() {
-        const {show} = this.state;
+        const { show } = this.state;
         return (
             <div className=''>
                 <h2 className='heading bold mb-3'>Part 2: Our Personality</h2>
@@ -36,42 +60,42 @@ class personality extends Component {
                 <form className='form'>
                     <div className='form-group'>
                         <h4 className='bold m-0'>Feminine <span className='float-right'>Masculine</span></h4>
-                        <input type="range" className='slider' />
+                        <input type="range"  className='slider' value={this.state.scores[0]}/>
                     </div>
                     <div className='form-group'>
                         <h4 className='bold m-0'>Yourthful <span className='float-right'>Mature</span></h4>
-                        <input type="range" className='slider' />
+                        <input type="range" className='slider' value={this.state.scores[1]} />
                     </div>
                     <div className='form-group'>
                         <h4 className='bold m-0'>Casual <span className='float-right'>Formal</span></h4>
-                        <input type="range" className='slider' />
+                        <input type="range" className='slider' value={this.state.scores[2]} />
                     </div>
                     <div className='form-group'>
                         <h4 className='bold m-0'>Charming <span className='float-right'>Rugged</span></h4>
-                        <input type="range" className='slider' />
+                        <input type="range" className='slider' value={this.state.scores[3]} />
                     </div>
                     <div className='form-group'>
                         <h4 className='bold m-0'>Extroverted <span className='float-right'>Introverted</span></h4>
-                        <input type="range" className='slider' />
+                        <input type="range" className='slider' value={this.state.scores[4]} />
                     </div>
                     <div className='form-group'>
                         <h4 className='bold m-0'>Risk-Averse <span className='float-right'>Risk-Taking</span></h4>
-                        <input type="range" className='slider' />
+                        <input type="range" className='slider' value={this.state.scores[5]} />
                     </div>
                     <div className='form-group'>
                         <h4 className='bold m-0'>Chill <span className='float-right'>Energetic</span></h4>
-                        <input type="range" className='slider' />
+                        <input type="range" className='slider' value={this.state.scores[6]} />
                     </div>
                     <div className='form-group'>
                         <h4 className='bold m-0'>Serious <span className='float-right'>Funny</span></h4>
-                        <input type="range" className='slider' />
+                        <input type="range" className='slider' value={this.state.scores[7]} />
                     </div>
                     <div className='mt-3 mb-5 text-right'>
                         <NavLink to='/build/foundation/organizational' className='float-left primary back_btn'> <FaAngleLeft /> Back</NavLink>
                         <NavLink to='/build/personality/character' className='btn_green m-0'>NEXT</NavLink>
                     </div>
                 </form>
-                <Popup show={show} hide={this.handleClose}/>
+                <Popup show={show} hide={this.handleClose} />
             </div>
         );
     }

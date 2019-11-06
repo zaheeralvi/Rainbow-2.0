@@ -18,7 +18,7 @@ class Header extends Component {
     componentDidMount() {
         let userData = JSON.parse(localStorage.getItem('user'))
         console.log(userData)
-        if (localStorage.getItem('logged') == 'true') {
+        if (localStorage.getItem('logged') === 'true') {
             this.setState({ name: userData.FirstName })
         } else {
             this.setState({ name: 'Login' })
