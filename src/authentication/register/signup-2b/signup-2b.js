@@ -11,7 +11,7 @@ class Signup2b extends React.Component {
         this.state = {
             company: '',
             domain: '',
-            url:'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/updateCompany'
+            url:'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/insertCompany'
         }
         this.validator = new SimpleReactValidator({
             messages: {
@@ -24,13 +24,13 @@ class Signup2b extends React.Component {
         e.preventDefault();
         if (this.validator.allValid()) {
             let data={
-                CompanyName: this.state.company,
-                Website: this.state.domain
+                "SiteName": this.state.domain,
+                "CompanyName": this.state.company
             }
             await axios.post(this.state.url, data).then(res => {
                 console.log(res)
                 toast.success('Company Added Successfully')
-                this.props.history.push('/')
+                // this.props.history.push('/')
             })
         } else {
             this.validator.showMessages();
