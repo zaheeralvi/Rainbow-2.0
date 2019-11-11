@@ -96,8 +96,9 @@ class foundation extends Component {
         if (this.validator.allValid()) {
             let user=JSON.parse(localStorage.getItem('user'))
             let data = {
-                "CompanyID": 58,
+                "CompanyID": user.Company.CompanyID,
                 "CompanyName": this.state.comapanyName,
+                "Sitename":"dsafsdgsdgsdfdsfsgsfdg",
                 "ProductName": this.state.product,
                 "Website": "",
                 "NumberOfOffices": '',
