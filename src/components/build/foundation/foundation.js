@@ -85,23 +85,51 @@ class foundation extends Component {
     }
 
 
-    chnageHandler = (stVar, val) => {
+    changeHandler = (stVar, val) => {
         this.setState({
             [stVar]: val
         })
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
         if (this.validator.allValid()) {
-            let data={
-                comapanyName:this.state.comapanyName,
-                product:this.state.product,
-                country:this.state.country,
-                city:this.state.city,
-
+            let user=JSON.parse(localStorage.getItem('user'))
+            let data = {
+                "CompanyID": 58,
+                "CompanyName": this.state.comapanyName,
+                "ProductName": this.state.product,
+                "Website": "",
+                "NumberOfOffices": '',
+                "Address1": "",
+                "Address2": "",
+                "City": this.state.city,
+                "State": this.state.country,
+                "Zip": "",
+                "Phone": "",
+                "Facebook": "",
+                "Instagram": "",
+                "LinkedIn": "",
+                "Tumblr": "",
+                "Twitter": "",
+                "Pinterest": "",
+                "CompanyType": { "CompanyTypeID": this.state.selectedCompanyTypes.CompanyTypeID },
+                "Vertical": { "VerticalID": this.state.selectedVerticals.VerticalID },
+                "Stage": { "StageID": this.state.selectedGetStages.StageID },
+                "EmployeeRange": { "EmployeeRangeID": this.state.selectedGetEmployeeRanges.EmployeeRangeID },
+                "RevenueRange": { "RevenueRangeID": '' }
             }
+
             console.log(data)
+
+            try {
+                await Axios.post(this.state.url + 'updateCompany').then(res => {
+                    console.log(res)
+                })
+            } catch (err) {
+                toast.error(err.message)
+            }
+            
             toast.success('Great, Integrate Api')
         } else {
             toast.error('All fields are Required')
@@ -126,15 +154,15 @@ class foundation extends Component {
                         <label className='error'>{this.validator.message('product', this.state.product, 'required')}</label>
                     </div>
                     <div className='form-group'>
-                        <Select placeholder='Vertical (Industry)' name='selectedVerticals' value={this.state.selectedVerticals} autoComplete='true' options={this.state.verticals} labelKey="VerticalDescription" valueKey="VerticalID" onChange={(val) => this.chnageHandler('selectedVerticals', val)} />
+                        <Select placeholder='Vertical (Industry)' name='selectedVerticals' value={this.state.selectedVerticals} autoComplete='true' options={this.state.verticals} labelKey="VerticalDescription" valueKey="VerticalID" onChange={(val) => this.changeHandler('selectedVerticals', val)} />
                         <label className='error'>{this.validator.message('selectedVerticals', this.state.selectedVerticals.VerticalID, 'required')}</label>
                     </div>
                     <div className='form-group'>
-                        <Select placeholder='Company Type' value={this.state.selectedCompanyTypes} autoComplete='true' options={this.state.CompanyTypes} labelKey="CompanyTypeDescription" valueKey="CompanyTypeID" onChange={(val) => this.chnageHandler('selectedCompanyTypes', val)} />
+                        <Select placeholder='Company Type' value={this.state.selectedCompanyTypes} autoComplete='true' options={this.state.CompanyTypes} labelKey="CompanyTypeDescription" valueKey="CompanyTypeID" onChange={(val) => this.changeHandler('selectedCompanyTypes', val)} />
                         <label className='error'>{this.validator.message('selectedCompanyTypes', this.state.selectedCompanyTypes.CompanyTypeID, 'required')}</label>
                     </div>
                     <div className='form-group'>
-                        <Select placeholder='Stage' value={this.state.selectedGetStages} autoComplete='true' options={this.state.getStages} labelKey="StageDescription" valueKey="StageID" onChange={(val) => this.chnageHandler('selectedGetStages', val)} />
+                        <Select placeholder='Stage' value={this.state.selectedGetStages} autoComplete='true' options={this.state.getStages} labelKey="StageDescription" valueKey="StageID" onChange={(val) => this.changeHandler('selectedGetStages', val)} />
                         <label className='error'>{this.validator.message('selectedGetStages', this.state.selectedGetStages.StageID, 'required')}</label>
                     </div>
                     <div className='form-group'>
@@ -146,7 +174,7 @@ class foundation extends Component {
                         <label className='error'>{this.validator.message('city', this.state.city, 'required')}</label>
                     </div>
                     <div className='form-group'>
-                        <Select placeholder='5-10' value={this.state.selectedGetEmployeeRanges} autoComplete='true' options={this.state.getEmployeeRanges} labelKey="EmployeeRangeDescription" valueKey="EmployeeRangeID" onChange={(val) => this.chnageHandler('selectedGetEmployeeRanges', val)} />
+                        <Select placeholder='5-10' value={this.state.selectedGetEmployeeRanges} autoComplete='true' options={this.state.getEmployeeRanges} labelKey="EmployeeRangeDescription" valueKey="EmployeeRangeID" onChange={(val) => this.changeHandler('selectedGetEmployeeRanges', val)} />
                         <label className='error'>{this.validator.message('selectedGetEmployeeRanges', this.state.selectedGetEmployeeRanges.EmployeeRangeID, 'required')}</label>
                     </div>
                     <div className='mt-3 mb-5 text-right'>
