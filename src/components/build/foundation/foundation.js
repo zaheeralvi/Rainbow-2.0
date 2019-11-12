@@ -114,7 +114,7 @@ class foundation extends Component {
             let data = {
                 "CompanyID": user.Company.CompanyID,
                 "CompanyName": this.state.comapanyName,
-                "SiteName": user.Company.SiteName,
+                "Sitename": user.Company.SiteName,
                 "ProductName": this.state.product,
                 "Website": "",
                 "NumberOfOffices": '',
@@ -140,7 +140,7 @@ class foundation extends Component {
             console.log(data)
 
             try {
-                await Axios.post(this.state.url + 'updateCompany').then(res => {
+                await Axios.post(this.state.url + 'updateCompany', data).then(res => {
                     console.log(res)
                 })
             } catch (err) {
