@@ -24,41 +24,48 @@ class Signup2b extends React.Component {
         e.preventDefault();
         if (this.validator.allValid()) {
 
-                try{
+            try {
 
                 let data = {
                     "SiteName": this.state.domain,
                     "CompanyName": this.state.company
                 }
                 let companyData = await axios.post(this.state.url + 'insertCompany', data).then(res => {
-                    return res.data.CompanyID
+                    if (res.data.Result === -1) {
+                        toast.error('This Site Name is already taken')
+                        return null;
+                    }else{
+                        return res.data.CompanyID
+                    }
                 })
                 console.log(companyData)
-                let loggedUser = JSON.parse(localStorage.getItem('user'))
-                let postData = {
-                    "UserID": loggedUser.UserID,
-                    "Email": loggedUser.Email,
-                    "FirstName": loggedUser.FirstName,
-                    "LastName": loggedUser.LastName,
-                    "Title": "",
-                    "Company": { "CompanyID": companyData },
-                    "Department": { "DepartmentID": 0 },
-                    "Role": { "RoleID": 0 },
-                    "AccessType": { "AccessTypeID": 0 }
+                if(companyData!==null){
+                    let loggedUser = JSON.parse(localStorage.getItem('user'))
+                    let postData = {
+                        "UserID": loggedUser.UserID,
+                        "Email": loggedUser.Email,
+                        "FirstName": loggedUser.FirstName,
+                        "LastName": loggedUser.LastName,
+                        "Title": "",
+                        "Company": { "CompanyID": companyData },
+                        "Department": { "DepartmentID": 0 },
+                        "Role": { "RoleID": 0 },
+                        "AccessType": { "AccessTypeID": 0 }
+                    }
+
+                    await axios.post(this.state.url + 'updateUser', postData).then(rest => {
+                        console.log(rest)
+                        if (rest.data.Result == 1) {
+                            toast.success('Company Added Successfully')
+                            localStorage.setItem('user', JSON.stringify(postData))
+                            this.props.history.push('/')
+                        }
+                        if (rest.data.Result === -1) {
+                            toast.error(rest.data.ErrorMessage)
+                        }
+                    })
                 }
-                localStorage.setItem('user',JSON.stringify(postData))
-                await axios.post(this.state.url + 'updateUser', postData).then(res => {
-                    console.log(res)
-                    if(res.data.Result==1){
-                        localStorage.setItem('user',JSON.stringify(postData))
-                        toast.success('Company Added Successfully')
-                        this.props.history.push('/')
-                    }
-                    if(res.data.Result==-1){
-                        toast.error(res.data.ErrorMessage)
-                    }
-                })
-            }catch(err){
+            } catch (err) {
                 toast.error(err.message)
             }
         } else {

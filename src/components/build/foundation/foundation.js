@@ -20,6 +20,7 @@ class foundation extends Component {
             product: '',
             country: '',
             city: '',
+            user: '',
             selectedVerticals: { VerticalDescription: '' },
             selectedCompanyTypes: { CompanyTypeDescription: '' },
             selectedGetStages: { StageDescription: '' },
@@ -38,6 +39,7 @@ class foundation extends Component {
         this.getCompanyTypes();
         this.getStages();
         this.getEmployeeRanges();
+        this.getUserByCompanyID();
     }
 
     getVerticals = async () => {
@@ -84,6 +86,19 @@ class foundation extends Component {
         }
     }
 
+    getUserByCompanyID = async () => {
+        try {
+            let email = JSON.parse(localStorage.user).Email
+            if (email != null) {
+                await Axios.get(this.state.url + `getUser?email=${email}`).then(res => {
+                    console.log(res)
+                    // this.setState({ user: res.data })
+                })
+            }
+        } catch (err) {
+            toast.error(err.message)
+        }
+    }
 
     changeHandler = (stVar, val) => {
         this.setState({
@@ -94,11 +109,11 @@ class foundation extends Component {
     handleSubmit = async (e) => {
         e.preventDefault();
         if (this.validator.allValid()) {
-            let user=JSON.parse(localStorage.getItem('user'))
+            let user = JSON.parse(localStorage.getItem('user'))
             let data = {
                 "CompanyID": user.Company.CompanyID,
                 "CompanyName": this.state.comapanyName,
-                "Sitename":"dsafsdgsdgsdfdsfsgsfdg",
+                "Sitename": "dsafsdgsdgsdfdsfsgsfdg",
                 "ProductName": this.state.product,
                 "Website": "",
                 "NumberOfOffices": '',
@@ -130,7 +145,7 @@ class foundation extends Component {
             } catch (err) {
                 toast.error(err.message)
             }
-            
+
             toast.success('Great, Integrate Api')
         } else {
             toast.error('All fields are Required')
