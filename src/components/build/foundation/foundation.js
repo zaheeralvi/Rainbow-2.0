@@ -142,12 +142,17 @@ class foundation extends Component {
             try {
                 await Axios.post(this.state.url + 'updateCompany', data).then(res => {
                     console.log(res)
+                    if (res.data !== '') {
+                        toast.success('Company Updated Successfully')
+                        this.props.history.push('/build/foundation/origin')
+                    } else {
+                        toast.error('Something went Wrong, Please try Later')
+                    }
                 })
             } catch (err) {
                 toast.error(err.message)
             }
 
-            toast.success('Great, Integrate Api')
         } else {
             toast.error('All fields are Required')
             this.validator.showMessages();
@@ -183,7 +188,7 @@ class foundation extends Component {
                         <label className='error'>{this.validator.message('selectedGetStages', this.state.selectedGetStages.StageID, 'required')}</label>
                     </div>
                     <div className='form-group'>
-                        <input type="text" className='form-control' name='country' placeholder='Country' onChange={(e) => this.setState({ country: e.target.value })} />
+                        <input type="text" className='form-control' name='country' placeholder='State' onChange={(e) => this.setState({ country: e.target.value })} />
                         <label className='error'>{this.validator.message('country', this.state.country, 'required')}</label>
                     </div>
                     <div className='form-group'>

@@ -88,10 +88,15 @@ class organizational extends Component {
         e.preventDefault();
         if (this.validator.allValid()) {
             // to='/build/personality'
-
-            toast.success('Great, Integrate Api')
+            let data={
+                val1: this.state.val1,
+                val2: this.state.val2,
+                val3: this.state.val3,
+                val4: this.state.val4,
+                val5: this.state.val5,
+            }
+            console.log(data)
         } else {
-            toast.error('All fields are Required')
             this.validator.showMessages();
             this.forceUpdate();
         }
