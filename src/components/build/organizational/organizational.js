@@ -36,10 +36,10 @@ class organizational extends Component {
         try {
             await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=3`).then(res => {
                 console.log(res)
-                let ids=[]
+                let ids = []
                 res.data.CompanyBrandElementValues.forEach((v, i) => {
-                    let vars=`val${i+1}`
-                    this.setState({[vars]:v.Value})
+                    let vars = `val${i + 1}`
+                    this.setState({ [vars]: v.Value })
                     ids.push(v.CompanyBrandElementValuesID)
                 })
                 this.setState({
@@ -98,16 +98,14 @@ class organizational extends Component {
             ]
 
             try {
-                await Axios.post(this.state.url + `updateOrganizationalValues`,data).then(res => {
+                await Axios.post(this.state.url + `updateOrganizationalValues`, data).then(res => {
                     console.log(res)
+                    toast.success('Updated Successfully')
+                    this.props.history.push('/build/personality');
                 })
             } catch (err) {
                 toast.error(err.message)
             }
-
-            console.log(data)
-            toast.success('successful')
-            // on success '/build/personality'
         } else {
             this.validator.showMessages();
             this.forceUpdate();
