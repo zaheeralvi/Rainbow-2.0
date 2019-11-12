@@ -21,6 +21,7 @@ class organizational extends Component {
             val4: '',
             val5: '',
             options: [],
+            CompanyOrganizationalValueIDs: [],
             url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/'
         }
         this.validator = new SimpleReactValidator({
@@ -28,20 +29,22 @@ class organizational extends Component {
                 default: 'This field is Required.'
             },
         });
-        
+
     }
 
     componentDidMount = async () => {
         try {
             await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=3`).then(res => {
                 console.log(res)
-                let vals = []
+                let ids=[]
                 res.data.CompanyBrandElementValues.forEach((v, i) => {
-                    vals.push(v.Value.ValuesID)
+                    let vars=`val${i+1}`
+                    this.setState({[vars]:v.Value})
+                    ids.push(v.CompanyBrandElementValuesID)
                 })
                 this.setState({
                     brandData: res.data,
-                    vals: vals,
+                    CompanyOrganizationalValueIDs: ids,
                 })
             })
         } catch (err) {
@@ -73,7 +76,7 @@ class organizational extends Component {
         })
     };
 
-    showValue=(v)=>{
+    showValue = (v) => {
         console.log(v)
     }
 
@@ -83,19 +86,28 @@ class organizational extends Component {
         })
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
         if (this.validator.allValid()) {
-            let data={
-                val1: this.state.val1,
-                val2: this.state.val2,
-                val3: this.state.val3,
-                val4: this.state.val4,
-                val5: this.state.val5,
+            let data = [
+                { "CompanyOrganizationalValueID": this.state.CompanyOrganizationalValueIDs[0], "ValuesID": this.state.val1.ValuesID },
+                { "CompanyOrganizationalValueID": this.state.CompanyOrganizationalValueIDs[1], "ValuesID": this.state.val2.ValuesID },
+                { "CompanyOrganizationalValueID": this.state.CompanyOrganizationalValueIDs[2], "ValuesID": this.state.val3.ValuesID },
+                { "CompanyOrganizationalValueID": this.state.CompanyOrganizationalValueIDs[3], "ValuesID": this.state.val4.ValuesID },
+                { "CompanyOrganizationalValueID": this.state.CompanyOrganizationalValueIDs[4], "ValuesID": this.state.val5.ValuesID }
+            ]
+
+            try {
+                await Axios.post(this.state.url + `updateOrganizationalValues`,data).then(res => {
+                    console.log(res)
+                })
+            } catch (err) {
+                toast.error(err.message)
             }
+
             console.log(data)
             toast.success('successful')
-             // on success '/build/personality'
+            // on success '/build/personality'
         } else {
             this.validator.showMessages();
             this.forceUpdate();
@@ -111,7 +123,7 @@ class organizational extends Component {
                 <h4 className='mb-5'>Possibly one of the most important aspects of your brand are your values. These are the select group of concepts that drive the way your company will operate in good times and especiall in tough times.</h4>
                 <form className='form' onSubmit={($event) => this.handleSubmit($event)} noValidate>
                     <div className='form-group'>
-                        <Select placeholder='Value #1' name='val1' onChange={(val)=>this.showValue(val)} options={this.state.options} value={this.state.val1} labelKey="ValuesName" valueKey="ValuesID" onChange={(val) => this.changeHandler('val1', val)} />
+                        <Select placeholder='Value #1' name='val1' onChange={(val) => this.showValue(val)} options={this.state.options} value={this.state.val1} labelKey="ValuesName" valueKey="ValuesID" onChange={(val) => this.changeHandler('val1', val)} />
                         <span className='textarea_tooltip' onClick={this.handleShow} ><GoLightBulb /></span>
                         <label className='error'>{this.validator.message('val1', this.state.val1, 'required')}</label>
                     </div>
