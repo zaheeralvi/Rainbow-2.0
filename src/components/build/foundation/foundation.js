@@ -20,7 +20,7 @@ class foundation extends Component {
             product: '',
             country: '',
             city: '',
-            user: '',
+            user: null,
             selectedVerticals: { VerticalDescription: '' },
             selectedCompanyTypes: { CompanyTypeDescription: '' },
             selectedGetStages: { StageDescription: '' },
@@ -92,7 +92,8 @@ class foundation extends Component {
             if (email != null) {
                 await Axios.get(this.state.url + `getUser?email=${email}`).then(res => {
                     console.log(res)
-                    // this.setState({ user: res.data })
+                    this.setState({ user: res.data })
+                    localStorage.setItem('user', JSON.stringify(res.data))
                 })
             }
         } catch (err) {
@@ -113,7 +114,7 @@ class foundation extends Component {
             let data = {
                 "CompanyID": user.Company.CompanyID,
                 "CompanyName": this.state.comapanyName,
-                "Sitename": "dsafsdgsdgsdfdsfsgsfdg",
+                "SiteName": user.Company.SiteName,
                 "ProductName": this.state.product,
                 "Website": "",
                 "NumberOfOffices": '',
