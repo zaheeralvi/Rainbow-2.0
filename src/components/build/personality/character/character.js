@@ -24,7 +24,7 @@ class character extends Component {
 
     componentDidMount = async () => {
         try {
-            await Axios.get(this.state.url+`companyID=${1}&BrandElementID=8`).then(res => {
+            await Axios.get(this.state.url+`companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=8`).then(res => {
                 console.log(res)
                 let vals=[]
                 let opt=[]

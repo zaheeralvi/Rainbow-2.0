@@ -17,7 +17,7 @@ class look extends Component {
 
     componentDidMount = async () => {
         try {
-            await Axios.get(this.state.url+`companyID=${1}&BrandElementID=6`).then(res => {
+            await Axios.get(this.state.url+`companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=6`).then(res => {
                 console.log(res)
             })
         } catch (err) {

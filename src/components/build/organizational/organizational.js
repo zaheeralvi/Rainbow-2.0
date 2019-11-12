@@ -4,7 +4,7 @@ import { FaAngleLeft } from "react-icons/fa";
 import { Select } from 'dropdown-select';
 import { GoLightBulb } from "react-icons/go";
 import Popup from '../../../shared/modal/modal';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from 'axios';
 import SimpleReactValidator from 'simple-react-validator';
@@ -33,7 +33,7 @@ class organizational extends Component {
 
     componentDidMount = async () => {
         try {
-            await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${1}&BrandElementID=3`).then(res => {
+            await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=3`).then(res => {
                 console.log(res)
                 let vals = []
                 res.data.CompanyBrandElementValues.forEach((v, i) => {
@@ -94,6 +94,7 @@ class organizational extends Component {
                 val5: this.state.val5,
             }
             console.log(data)
+            toast.success('successful')
              // on success '/build/personality'
         } else {
             this.validator.showMessages();
@@ -105,6 +106,7 @@ class organizational extends Component {
         const { show } = this.state;
         return (
             <div className=''>
+                <ToastContainer />
                 <h2 className='heading bold mb-3'>Organizational Values</h2>
                 <h4 className='mb-5'>Possibly one of the most important aspects of your brand are your values. These are the select group of concepts that drive the way your company will operate in good times and especiall in tough times.</h4>
                 <form className='form' onSubmit={($event) => this.handleSubmit($event)} noValidate>

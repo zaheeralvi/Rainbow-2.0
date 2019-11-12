@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { FaAngleLeft } from "react-icons/fa";
 import { GoLightBulb } from "react-icons/go";
 import Popup from '../../../shared/modal/modal';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from 'axios';
 
@@ -27,7 +27,7 @@ class personality extends Component {
 
     componentDidMount = async () => {
         try {
-            await Axios.get(this.state.url + `companyID=${1}&BrandElementID=9`).then(res => {
+            await Axios.get(this.state.url + `companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=9`).then(res => {
                 console.log(res)
                 // let vals=[]
                 res.data.CompanyBrandElementPersonalityAssessments.forEach((v, i) => {
@@ -73,7 +73,7 @@ class personality extends Component {
             score7:this.state.score7,
         }
         console.log(data)
-
+        toast.success('successful')
         //on success '/build/personality/character'
     }
 
@@ -82,6 +82,7 @@ class personality extends Component {
         const { show, scores } = this.state;
         return (
             <div className=''>
+                <ToastContainer />
                 <h2 className='heading bold mb-3'>Part 2: Our Personality</h2>
                 <h4 className='mb-3'>Congratulations! You’ve completed the first section of the Brand Assessment. Hopefully it wasn’t too diffcult.</h4>
                 <h4 className='mb-5'>This next section will focus on the actions that your organization will take on a day to day basis. This is essentially the personality of your company. In good times and bad, how will you interact with your customers and stakeholders.</h4>
