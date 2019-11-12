@@ -78,7 +78,6 @@ class organizational extends Component {
     }
 
     changeHandler = (stVar, val) => {
-        console.log(val)
         this.setState({
             [stVar]: val
         })
@@ -87,7 +86,6 @@ class organizational extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         if (this.validator.allValid()) {
-            // to='/build/personality'
             let data={
                 val1: this.state.val1,
                 val2: this.state.val2,
@@ -96,6 +94,7 @@ class organizational extends Component {
                 val5: this.state.val5,
             }
             console.log(data)
+             // on success '/build/personality'
         } else {
             this.validator.showMessages();
             this.forceUpdate();
