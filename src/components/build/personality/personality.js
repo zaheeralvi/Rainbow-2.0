@@ -21,6 +21,7 @@ class personality extends Component {
             score5: 0,
             score6: 0,
             score7: 0,
+            CompanyPersonalityAssessmentID:[],
             url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/'
         }
     }
@@ -29,15 +30,17 @@ class personality extends Component {
         try {
             await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=9`).then(res => {
                 console.log(res)
-                // let vals=[]
+                let ids=[]
                 res.data.CompanyBrandElementPersonalityAssessments.forEach((v, i) => {
                     let vars = `score${i}`
+                    ids.push(v.CompanyBrandElementPersonalityAssessmentsID);
                     this.setState({
-                        [vars]: v.PersonalityAssessment.Score
+                        [vars]: v.PersonalityAssessment.Score,
                     })
                 })
                 this.setState({
                     brandData: res.data,
+                    CompanyPersonalityAssessmentID:ids
                 })
             })
         } catch (err) {
@@ -63,14 +66,14 @@ class personality extends Component {
     handleSubmit = async (e) => {
         e.preventDefault();
         let data = [
-            { "CompanyPersonalityAssessmentID": 1, "Score": Number(this.state.score0) },
-            { "CompanyPersonalityAssessmentID": 2, "Score": Number(this.state.score1) },
-            { "CompanyPersonalityAssessmentID": 3, "Score": Number(this.state.score2) },
-            { "CompanyPersonalityAssessmentID": 4, "Score": Number(this.state.score3) },
-            { "CompanyPersonalityAssessmentID": 5, "Score": Number(this.state.score4) },
-            { "CompanyPersonalityAssessmentID": 6, "Score": Number(this.state.score5) },
-            { "CompanyPersonalityAssessmentID": 7, "Score": Number(this.state.score6) },
-            { "CompanyPersonalityAssessmentID": 8, "Score": Number(this.state.score7) }
+            { "CompanyPersonalityAssessmentID": this.state.CompanyPersonalityAssessmentID[0], "Score": Number(this.state.score0) },
+            { "CompanyPersonalityAssessmentID": this.state.CompanyPersonalityAssessmentID[1], "Score": Number(this.state.score1) },
+            { "CompanyPersonalityAssessmentID": this.state.CompanyPersonalityAssessmentID[2], "Score": Number(this.state.score2) },
+            { "CompanyPersonalityAssessmentID": this.state.CompanyPersonalityAssessmentID[3], "Score": Number(this.state.score3) },
+            { "CompanyPersonalityAssessmentID": this.state.CompanyPersonalityAssessmentID[4], "Score": Number(this.state.score4) },
+            { "CompanyPersonalityAssessmentID": this.state.CompanyPersonalityAssessmentID[5], "Score": Number(this.state.score5) },
+            { "CompanyPersonalityAssessmentID": this.state.CompanyPersonalityAssessmentID[6], "Score": Number(this.state.score6) },
+            { "CompanyPersonalityAssessmentID": this.state.CompanyPersonalityAssessmentID[7], "Score": Number(this.state.score7) }
         ]
 
         try {

@@ -51,13 +51,13 @@ class organizational extends Component {
             toast.error(err.message)
         }
 
-        await Axios.get(this.state.url + `getValues`).then(res => {
-            console.log(res)
-            this.setState({
-                options: res.data,
-            })
-        })
         try {
+            await Axios.get(this.state.url + `getValues`).then(res => {
+                console.log(res)
+                this.setState({
+                    options: res.data,
+                })
+            })
 
         } catch (error) {
             toast.error(error.message)
