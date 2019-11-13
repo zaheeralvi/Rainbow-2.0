@@ -78,7 +78,7 @@ class personality extends Component {
                 console.log(res)
                 if(res.data.Result===1){
                     toast.success('Updated Successfully')
-                    // this.props.history.push('/build/personality/character')
+                    this.props.history.push('/build/personality/character')
                 }
             })
         } catch (err) {

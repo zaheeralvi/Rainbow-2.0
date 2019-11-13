@@ -10,15 +10,21 @@ import Axios from 'axios';
 class look extends Component {
     constructor(props) {
         super(props);
-        this.state={
-            url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/getCompanyBrandElement?'
+        this.state = {
+            logo: null,
+            logoValue: '',
+            url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/'
         }
     }
 
     componentDidMount = async () => {
         try {
-            await Axios.get(this.state.url+`companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=6`).then(res => {
-                console.log(res)
+            await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=6`).then(res => {
+                this.setState({
+                    logo: res.data,
+                    logoValue: res.data.Value,
+                })
+                console.log(this.state.logo)
             })
         } catch (err) {
             toast.error(err.message)

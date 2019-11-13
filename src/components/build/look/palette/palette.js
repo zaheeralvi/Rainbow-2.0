@@ -14,15 +14,18 @@ class palette extends Component {
     constructor(props) {
         super(props);
         this.state={
-            show: false, 
-            url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/getCompanyBrandElement?'
+            show: false,
+            palette:null,
+            CompanyBrandElementColorPalette:[],
+            url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/'
         }
     }
 
     componentDidMount = async () => {
         try {
-            await Axios.get(this.state.url+`companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=5`).then(res => {
-                console.log(res)
+            await Axios.get(this.state.url+`getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=5`).then(res => {
+                this.setState({palette:res.data,CompanyBrandElementColorPalette:res.data.CompanyBrandElementColorPalette})
+                console.log(this.state.CompanyBrandElementColorPalette)
             })
         } catch (err) {
             toast.error(err.message)

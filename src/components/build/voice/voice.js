@@ -14,22 +14,28 @@ class voice extends Component {
         super(props);
         this.state = {
             show: false,
-            url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/getCompanyBrandElement?'
+            Keywords:null,
+            KeywordsValue:'',
+            Buzzwords: null,
+            BuzzwordsValue: null,
+            url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/'
         }
     }
 
     componentDidMount = async () => {
         try {
-            await Axios.get(this.state.url+`companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=10`).then(res => {
-                console.log(res)
+            await Axios.get(this.state.url+`getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=10`).then(res => {
+                this.setState({Keywords:res.data,KeywordsValue:res.data.Value})
+                console.log(this.state.Keywords)
             })
         } catch (err) {
             toast.error(err.message)
         }
         
         try {
-            await Axios.get(this.state.url+`companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=11`).then(res => {
-                console.log(res)
+            await Axios.get(this.state.url+`getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=11`).then(res => {
+                this.setState({Buzzwords:res.data,BuzzwordsValue:res.data.Value})
+                console.log(this.state.Buzzwords)
             })
         } catch (err) {
             toast.error(err.message)
