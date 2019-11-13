@@ -21,13 +21,13 @@ class personality extends Component {
             score5: 0,
             score6: 0,
             score7: 0,
-            url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/getCompanyBrandElement?'
+            url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/'
         }
     }
 
     componentDidMount = async () => {
         try {
-            await Axios.get(this.state.url + `companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=9`).then(res => {
+            await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=9`).then(res => {
                 console.log(res)
                 // let vals=[]
                 res.data.CompanyBrandElementPersonalityAssessments.forEach((v, i) => {
@@ -60,26 +60,35 @@ class personality extends Component {
         console.log(event.target.value);
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
-        let data={
-            score0:this.state.score0,
-            score1:this.state.score1,
-            score2:this.state.score2,
-            score3:this.state.score3,
-            score4:this.state.score4,
-            score5:this.state.score5,
-            score6:this.state.score6,
-            score7:this.state.score7,
+        let data = [
+            { "CompanyPersonalityAssessmentID": 1, "Score": Number(this.state.score0) },
+            { "CompanyPersonalityAssessmentID": 2, "Score": Number(this.state.score1) },
+            { "CompanyPersonalityAssessmentID": 3, "Score": Number(this.state.score2) },
+            { "CompanyPersonalityAssessmentID": 4, "Score": Number(this.state.score3) },
+            { "CompanyPersonalityAssessmentID": 5, "Score": Number(this.state.score4) },
+            { "CompanyPersonalityAssessmentID": 6, "Score": Number(this.state.score5) },
+            { "CompanyPersonalityAssessmentID": 7, "Score": Number(this.state.score6) },
+            { "CompanyPersonalityAssessmentID": 8, "Score": Number(this.state.score7) }
+        ]
+
+        try {
+            await Axios.post(this.state.url + `updatePersonalityAssessments`,data).then(res => {
+                console.log(res)
+                if(res.data.Result===1){
+                    toast.success('Updated Successfully')
+                    // this.props.history.push('/build/personality/character')
+                }
+            })
+        } catch (err) {
+            toast.error(err.message)
         }
-        console.log(data)
-        toast.success('successful')
-        //on success '/build/personality/character'
     }
 
 
     render() {
-        const { show, scores } = this.state;
+        const { show } = this.state;
         return (
             <div className=''>
                 <ToastContainer />

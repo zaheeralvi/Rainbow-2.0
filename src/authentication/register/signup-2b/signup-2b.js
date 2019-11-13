@@ -55,7 +55,7 @@ class Signup2b extends React.Component {
 
                     await axios.post(this.state.url + 'updateUser', postData).then(rest => {
                         console.log(rest)
-                        if (rest.data.Result == 1) {
+                        if (rest.data.Result === 1) {
                             toast.success('Company Added Successfully')
                             localStorage.setItem('user', JSON.stringify(postData))
                             this.props.history.push('/')

@@ -44,8 +44,7 @@ class Signin extends React.Component {
                                 localStorage.setItem('logged', 'true')
                                 localStorage.setItem('user', JSON.stringify(res.data))
                                 toast.success('Login Successfully')
-                                let regisetred = JSON.parse(localStorage.getItem('newRegister'))
-                                if (regisetred.Company !== undefined) {
+                                if (res.data.Company !== undefined) {
                                     prop.history.push('/signup/a');
                                 } else {
                                     prop.history.push('/signup/b');
