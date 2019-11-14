@@ -68,7 +68,6 @@ class palette extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        // /build/complete
         let data = [
             {
                 "CompanyColorPaletteID": this.state.CompanyBrandElementColorPaletteID[0],
@@ -97,11 +96,13 @@ class palette extends Component {
             }
         ]
 
-        console.log(data)
-
         try {
             await Axios.post(this.state.url + `updateColorPalettes`, data).then(res => {
                 console.log(res.data)
+                if(res.data.Result===1){
+                    toast.success('Updated Successfully')
+                    this.props.history.push('/build/complete')
+                }
             })
 
         } catch (error) {
