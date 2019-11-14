@@ -5,6 +5,7 @@
 .palette .form .form-group .color {
   flex: 0 0 75%;
   width: 75%;
+  padding: 0 !important;
 }
 .palette .form .form-group .percentage {
   flex: 0 0 20%;

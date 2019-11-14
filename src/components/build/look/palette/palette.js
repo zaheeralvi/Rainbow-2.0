@@ -16,11 +16,11 @@ class palette extends Component {
         this.state = {
             show: false,
             palette: null,
-            color0: '',
-            color1: '',
-            color2: '',
-            color3: '',
-            color4: '',
+            color0: '#ffffff',
+            color1: '#ffffff',
+            color2: '#ffffff',
+            color3: '#ffffff',
+            color4: '#ffffff',
             percentage0: '',
             percentage1: '',
             percentage2: '',
@@ -39,8 +39,12 @@ class palette extends Component {
                 res.data.CompanyBrandElementColorPalette.forEach((v, i) => {
                     let color = `color${i}`
                     let percentage = `percentage${i}`
+                    let colVal = '#ffffff'
+                    if (v.ColorValue !== '') {
+                        colVal = v.ColorValue
+                    }
                     this.setState({
-                        [color]: v.ColorValue,
+                        [color]: colVal,
                         [percentage]: v.Percentage,
                         CompanyBrandElementColorPaletteID: [...this.state.CompanyBrandElementColorPaletteID, v.CompanyBrandElementColorPaletteID]
                     })
@@ -105,8 +109,49 @@ class palette extends Component {
         }
     }
 
+
+    changeColorHandler = (col, val) => {
+        this.setState({
+            [col]: val
+        })
+    }
+
+    changePercentageHandler = (col, old, val) => {
+        let sum = Number(this.state.percentage0) + Number(this.state.percentage1) + Number(this.state.percentage2) + Number(this.state.percentage3) + Number(this.state.percentage4);
+        let total = Number(sum) - Number(old) + Number(val);
+        console.log(Number(sum) +' '+ Number(old) +' '+ Number(val))
+        if (total <= 100) {
+            this.setState({
+                [col]: val
+            })
+        }else{
+            toast.warn('Percentage Limit Exceeded')
+        }
+    }
+
+
     render() {
         const { show } = this.state;
+        let color_1 = {
+            backgroundColor: this.state.color0,
+            width: this.state.percentage0 + '%'
+        }
+        let color_2 = {
+            backgroundColor: this.state.color1,
+            width: this.state.percentage1 + '%'
+        }
+        let color_3 = {
+            backgroundColor: this.state.color2,
+            width: this.state.percentage2 + '%'
+        }
+        let color_4 = {
+            backgroundColor: this.state.color3,
+            width: this.state.percentage3 + '%'
+        }
+        let color_5 = {
+            backgroundColor: this.state.color4,
+            width: this.state.percentage4 + '%'
+        }
         return (
             <div className='palette'>
                 <ToastContainer />
@@ -115,33 +160,33 @@ class palette extends Component {
                 <h4 className='mb-5'>All entries should be in HEX value.</h4>
                 <form className='form' onSubmit={($event) => this.handleSubmit($event)} noValidate>
                     <div className='form-group'>
-                        <input type="text" className='form-control color' value={this.state.color0} placeholder='Color #1' onChange={(e) => this.setState({ color0: e.target.value })} />
-                        <input type="number" className='form-control percentage' value={this.state.percentage0} placeholder='%' onChange={(e) => this.setState({ percentage0: e.target.value })} />
+                        <input type="color" className='form-control color' placeholder='Color #1' onChange={(e) => this.changeColorHandler('color0', e.target.value)} />
+                        <input type="number" className='form-control percentage' value={this.state.percentage0} placeholder='%' onChange={(e) => this.changePercentageHandler('percentage0', this.state.percentage0, e.target.value)} />
                         <span className='textarea_tooltip' onClick={this.handleShow} ><GoLightBulb /></span>
                     </div>
                     <div className='form-group'>
-                        <input type="text" className='form-control color' value={this.state.color1} placeholder='Color #2' onChange={(e) => this.setState({ color1: e.target.value })} />
-                        <input type="number" className='form-control percentage' value={this.state.percentage1} placeholder='%' onChange={(e) => this.setState({ percentage1: e.target.value })} />
+                        <input type="color" className='form-control color' value={this.state.color1} placeholder='Color #2' onChange={(e) => this.changeColorHandler('color1', e.target.value)} />
+                        <input type="number" className='form-control percentage' value={this.state.percentage1} placeholder='%' onChange={(e) => this.changePercentageHandler('percentage1', this.state.percentage1, e.target.value)} />
                     </div>
                     <div className='form-group'>
-                        <input type="text" className='form-control color' value={this.state.color2} placeholder='Color #3' onChange={(e) => this.setState({ color2: e.target.value })} />
-                        <input type="number" className='form-control percentage' value={this.state.percentage2} placeholder='%' onChange={(e) => this.setState({ percentage2: e.target.value })} />
+                        <input type="color" className='form-control color' value={this.state.color2} placeholder='Color #3' onChange={(e) => this.changeColorHandler('color2', e.target.value)} />
+                        <input type="number" className='form-control percentage' value={this.state.percentage2} placeholder='%' onChange={(e) => this.changePercentageHandler('percentage2', this.state.percentage2, e.target.value)} />
                     </div>
                     <div className='form-group'>
-                        <input type="text" className='form-control color' value={this.state.color3} placeholder='Color #4' onChange={(e) => this.setState({ color3: e.target.value })} />
-                        <input type="number" className='form-control percentage' value={this.state.percentage3} placeholder='%' onChange={(e) => this.setState({ percentage3: e.target.value })} />
+                        <input type="color" className='form-control color' value={this.state.color3} placeholder='Color #4' onChange={(e) => this.changeColorHandler('color3', e.target.value)} />
+                        <input type="number" className='form-control percentage' value={this.state.percentage3} placeholder='%' onChange={(e) => this.changePercentageHandler('percentage3', this.state.percentage3, e.target.value)} />
                     </div>
                     <div className='form-group'>
-                        <input type="text" className='form-control color' value={this.state.color4} placeholder='Color #5' onChange={(e) => this.setState({ color4: e.target.value })} />
-                        <input type="number" className='form-control percentage' value={this.state.percentage4} placeholder='%' onChange={(e) => this.setState({ percentage4: e.target.value })} />
+                        <input type="color" className='form-control color' value={this.state.color4} placeholder='Color #5' onChange={(e) => this.changeColorHandler('color4', e.target.value)} />
+                        <input type="number" className='form-control percentage' value={this.state.percentage4} placeholder='%' onChange={(e) => this.changePercentageHandler('percentage4', this.state.percentage4, e.target.value)} />
                     </div>
                     <div className='form-group flex mb-5'>
                         <div className='color_palette'>
-                            <span className='color_1'></span>
-                            <span className='color_2'></span>
-                            <span className='color_3'></span>
-                            <span className='color_4'></span>
-                            <span className='color_5'></span>
+                            <span className='color_1' style={color_1}></span>
+                            <span className='color_2' style={color_2}></span>
+                            <span className='color_3' style={color_3}></span>
+                            <span className='color_4' style={color_4}></span>
+                            <span className='color_5' style={color_5}></span>
                         </div>
                     </div>
                     <div className='mt-3 mb-5 text-right'>
