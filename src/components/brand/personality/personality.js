@@ -99,13 +99,64 @@ class personality extends Component {
         })
     }
 
+    handleSubmit = async (e) => {
+        e.preventDefault();
+        let PersonalityData = [
+            { "CompanyPersonalityAssessmentID": this.state.CompanyPersonalityAssessmentID[0], "Score": Number(this.state.score0) },
+            { "CompanyPersonalityAssessmentID": this.state.CompanyPersonalityAssessmentID[1], "Score": Number(this.state.score1) },
+            { "CompanyPersonalityAssessmentID": this.state.CompanyPersonalityAssessmentID[2], "Score": Number(this.state.score2) },
+            { "CompanyPersonalityAssessmentID": this.state.CompanyPersonalityAssessmentID[3], "Score": Number(this.state.score3) },
+            { "CompanyPersonalityAssessmentID": this.state.CompanyPersonalityAssessmentID[4], "Score": Number(this.state.score4) },
+            { "CompanyPersonalityAssessmentID": this.state.CompanyPersonalityAssessmentID[5], "Score": Number(this.state.score5) },
+            { "CompanyPersonalityAssessmentID": this.state.CompanyPersonalityAssessmentID[6], "Score": Number(this.state.score6) },
+            { "CompanyPersonalityAssessmentID": this.state.CompanyPersonalityAssessmentID[7], "Score": Number(this.state.score7) }
+        ]
+
+        let OrganizationalData = [
+            { "CompanyOrganizationalValueID": this.state.CompanyOrganizationalValueIDs[0], "ValuesID": this.state.val1.ValuesID },
+            { "CompanyOrganizationalValueID": this.state.CompanyOrganizationalValueIDs[1], "ValuesID": this.state.val2.ValuesID },
+            { "CompanyOrganizationalValueID": this.state.CompanyOrganizationalValueIDs[2], "ValuesID": this.state.val3.ValuesID },
+            { "CompanyOrganizationalValueID": this.state.CompanyOrganizationalValueIDs[3], "ValuesID": this.state.val4.ValuesID },
+            { "CompanyOrganizationalValueID": this.state.CompanyOrganizationalValueIDs[4], "ValuesID": this.state.val5.ValuesID }
+        ]
+
+        try {
+            let personalityRes = await Axios.post(this.state.url + `updatePersonalityAssessments`, PersonalityData).then(res => {
+                console.log(res)
+                if (res.data.Result === 1) {
+                    return true
+                } else {
+                    return false
+                }
+            })
+
+            let OrganizationalRes = await Axios.post(this.state.url + `updateOrganizationalValues`, OrganizationalData).then(res => {
+                console.log(res)
+                if (res.data.Result === 1) {
+                    return true
+                } else {
+                    return false
+                }
+            })
+
+            if (personalityRes && OrganizationalRes) {
+                toast.success('Updated Successfully')
+            } else {
+                toast.error('Something went Wrong!')
+            }
+
+        } catch (err) {
+            toast.error(err.message)
+        }
+    }
 
     render() {
         const { show } = this.state;
         return (
             <div className='p-3'>
+                <ToastContainer />
                 <div className='container'>
-                    <form className='form'>
+                    <form className='form' onSubmit={($event) => this.handleSubmit($event)} noValidate>
                         <h2 className='heading bold mb-3'>Our Personality</h2>
                         <h4 className='mb-4'>These are the brand elements in which the entire organization is built upon.</h4>
                         <h4 className='mb-5 bold label'>Personality Assessment <span onClick={this.handleShow} ><GoLightBulb className='float-right' /></span></h4>
