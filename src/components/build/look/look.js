@@ -5,6 +5,10 @@ import './look.css'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from 'axios';
+import S3FileUpload from 'react-s3';
+
+//Optional Import
+import { uploadFile } from 'react-s3';
 
 
 class look extends Component {
@@ -13,7 +17,14 @@ class look extends Component {
         this.state = {
             logo: null,
             logoValue: '',
-            url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/'
+            url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/',
+            config: {
+                bucketName: 'bucketbrandasset-dev',
+                dirName: 'logo',
+                region: 'us-east-1',
+                accessKeyId: 'AKIAQ6OABELEHDPP63ES',
+                secretAccessKey: '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',
+            }
         }
     }
 
@@ -30,6 +41,17 @@ class look extends Component {
             toast.error(err.message)
         }
     }
+
+    changeImg = (e) => {
+        try {
+            console.log(e.target.files[0])
+            uploadFile(e.target.files[0], this.state.config)
+                .then(data => console.log(data))
+                .catch(err => console.log(err))
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
     render() {
         return (
             <div className='look'>
@@ -37,8 +59,11 @@ class look extends Component {
                 <h4 className='mb-4'>The final section is where we maintain your outward appearance. This is what your customers and stakeholders see (visually) when they interact with your brand.</h4>
                 <h4 className='bold mb-3 px-3'>Logo</h4>
                 <h4 className='mb-5'>Your logo is very often the first interaction a customer or stakeholder will have with your brand. It should be representative of every other aspect of your brand.</h4>
-                <button className='btn_green btn_upload'>UPLOAD LOGO</button>
                 <form className='form pt-3'>
+                    <div className='form-group'>
+                        <input type="file" id="file" accept="image/*" onChange={(e) => this.changeImg(e)} />
+                        <label htmlFor="file" className="btn-1">UPLOAD LOGO</label>
+                    </div>
                     <div className='form-group'>
                         <div className='tag_container'></div>
                     </div>
