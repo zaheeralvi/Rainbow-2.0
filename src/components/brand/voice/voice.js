@@ -85,12 +85,67 @@ class voice extends Component {
         })
     }
 
+    handleSubmit = async (e) => {
+        e.preventDefault();
+        let user = JSON.parse(localStorage.user)
+        let departmentID = 0;
+        if (user.Department !== undefined) {
+            departmentID = user.Department.DepartmentID
+        }
+        let keywordData = {
+            'CompanyBrandElementID': this.state.Keywords.CompanyBrandElementID,
+            'BrandElement': {
+                'BrandElementID': 10
+            },
+            'Department': {
+                'DepartmentID': departmentID
+            },
+            'User': {
+                'UserID': user.UserID
+            },
+            'Value': this.state.KeywordsValue.join(',')
+        }
+        let buzzwordData = {
+            'CompanyBrandElementID': this.state.Buzzwords.CompanyBrandElementID,
+            'BrandElement': {
+                'BrandElementID': 11
+            },
+            'Department': {
+                'DepartmentID': departmentID
+            },
+            'User': {
+                'UserID': user.UserID
+            },
+            'Value': this.state.BuzzwordsValue.join(',')
+        }
+
+        try {
+
+            let keywd = await Axios.post(this.state.url + `updateCompanyBrandElement`, keywordData).then(res => {
+                console.log(res.data)
+                if (res.data.Result === 1) { return true }
+            })
+            let buzwd = await Axios.post(this.state.url + `updateCompanyBrandElement`, buzzwordData).then(res => {
+                console.log(res.data)
+                if (res.data.Result === 1) { return true }
+            })
+            if (keywd && buzwd) {
+                toast.success('Updated Successfully')
+            }
+
+        } catch (error) {
+            toast.error(error.message)
+        }
+
+    }
+
     render() {
         const { show } = this.state;
         return (
             <div className='brand voice p-3'>
+                <ToastContainer />
                 <div className='container'>
-                    <form className='form'>
+                    <form className='form' onSubmit={($event) => this.handleSubmit($event)} noValidate>
                         <h2 className='heading bold mb-3'>Our Voice</h2>
                         <h4 className='mb-4'>These are the brand elements in which the entire organization is built upon.</h4>
                         <div className='form-group mb-3'>
@@ -120,7 +175,7 @@ class voice extends Component {
                             </div>
                         </div>
                         <div className='mt-3 mb-5'>
-                            <button className='btn_green'>Save</button>
+                            <button className='btn_green' type='submit'>Save</button>
                             <button className='btn_white'>Cancel</button>
                         </div>
                     </form>
