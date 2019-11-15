@@ -19,8 +19,8 @@ class foundation extends Component {
       val4: '',
       val5: '',
 
-      organizationalData:null,
-      CompanyOrganizationalValueIDs:[],
+      organizationalData: null,
+      CompanyOrganizationalValueIDs: [],
 
       elevatorData: null,
       elevatorDescDepartmentID: 0,
@@ -50,7 +50,7 @@ class foundation extends Component {
       })
 
       // Origin
-      await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=2`).then(res => {
+      await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=4`).then(res => {
         console.log(res)
         this.setState({ originData: res.data, originDesc: res.data.Value })
         if (res.data.Department != undefined) {
@@ -59,7 +59,7 @@ class foundation extends Component {
       })
 
       // Mission
-      await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=4`).then(res => {
+      await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=2`).then(res => {
         console.log(res)
         this.setState({ missionData: res.data, missionDesc: res.data.Value })
         if (res.data.Department != undefined) {
@@ -79,13 +79,13 @@ class foundation extends Component {
       await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=3`).then(res => {
         console.log(res)
         res.data.CompanyBrandElementValues.forEach((v, i) => {
-            let vars = `val${i + 1}`
-            this.setState({ [vars]: v.Value,CompanyOrganizationalValueIDs:[...this.state.CompanyOrganizationalValueIDs,v.CompanyBrandElementValuesID] })
+          let vars = `val${i + 1}`
+          this.setState({ [vars]: v.Value, CompanyOrganizationalValueIDs: [...this.state.CompanyOrganizationalValueIDs, v.CompanyBrandElementValuesID] })
         })
         this.setState({
-            organizationalData: res.data,
+          organizationalData: res.data,
         })
-    })
+      })
 
 
 
@@ -111,14 +111,114 @@ class foundation extends Component {
     })
   }
 
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    let elevatorData = {
+      "CompanyBrandElementID": this.state.elevatorData.CompanyBrandElementID,
+      "BrandElement": {
+        "BrandElementID": this.state.elevatorData.BrandElement.BrandElementID
+      },
+      "Department": { "DepartmentID": this.state.elevatorDescDepartmentID },
+      "User": { "UserID": JSON.parse(localStorage.user).UserID },
+      "Value": this.state.elevatorDesc
+    }
+    console.log(elevatorData)
+
+    let originData = {
+      "CompanyBrandElementID": this.state.originData.CompanyBrandElementID,
+      "BrandElement": {
+        "BrandElementID": this.state.originData.BrandElement.BrandElementID
+      },
+      "Department": { "DepartmentID": this.state.originDescDepartmentID },
+      "User": { "UserID": JSON.parse(localStorage.user).UserID },
+      "Value": this.state.originDesc
+    }
+    console.log(originData)
+
+    let missionData = {
+      "CompanyBrandElementID": this.state.missionData.CompanyBrandElementID,
+      "BrandElement": {
+        "BrandElementID": this.state.missionData.BrandElement.BrandElementID
+      },
+      "Department": { "DepartmentID": this.state.missionDescDepartmentID },
+      "User": { "UserID": JSON.parse(localStorage.user).UserID },
+      "Value": this.state.missionDesc
+    }
+    console.log(missionData)
+
+    let origanizationalData = [
+      { "CompanyOrganizationalValueID": this.state.CompanyOrganizationalValueIDs[0], "ValuesID": this.state.val1.ValuesID },
+      { "CompanyOrganizationalValueID": this.state.CompanyOrganizationalValueIDs[1], "ValuesID": this.state.val2.ValuesID },
+      { "CompanyOrganizationalValueID": this.state.CompanyOrganizationalValueIDs[2], "ValuesID": this.state.val3.ValuesID },
+      { "CompanyOrganizationalValueID": this.state.CompanyOrganizationalValueIDs[3], "ValuesID": this.state.val4.ValuesID },
+      { "CompanyOrganizationalValueID": this.state.CompanyOrganizationalValueIDs[4], "ValuesID": this.state.val5.ValuesID }
+    ]
+
+    console.log(origanizationalData)
+
+    try {
+
+      // Elevator
+      let ElevatorRes = await Axios.post(this.state.url + `updateCompanyBrandElement`, elevatorData).then(res => {
+        console.log(res)
+        if (res.data.Result == 1) {
+          return true
+        } else {
+          return false
+        }
+      })
+      
+      // Origin
+      let OriginRes = await Axios.post(this.state.url + `updateCompanyBrandElement`, originData).then(res => {
+        console.log(res)
+        if (res.data.Result == 1) {
+          return true
+        } else {
+          return false
+        }
+      })
+      
+      // Mission
+      let MissionRes = await Axios.post(this.state.url + `updateCompanyBrandElement`, missionData).then(res => {
+        console.log(res)
+        if (res.data.Result == 1) {
+          return true
+        } else {
+          return false
+        }
+      })
+      
+      // Origanizational
+      let OriganizationalRes = await Axios.post(this.state.url + `updateOrganizationalValues`, origanizationalData).then(res => {
+        console.log(res)
+        if (res.data.Result == 1) {
+          return true
+        } else {
+          return false
+        }
+      })
+
+      if(ElevatorRes && OriginRes && MissionRes && OriganizationalRes){
+        toast.success('Updated Successfully')
+      }else{
+        toast.error('Something went Wrong!')
+      }
+
+
+    } catch (err) {
+      toast.error(err.message)
+    }
+  }
+
   render() {
     const { show } = this.state;
     return (
       <div className='p-3'>
+        <ToastContainer />
         <div className='container'>
           <h2 className='heading bold mb-3'>Our Foundation</h2>
           <h4 className='mb-5'>These are the brand elements in which the entire organization is built upon.</h4>
-          <form className='form'>
+          <form className='form' onSubmit={($event) => this.handleSubmit($event)} noValidate>
             <div className='form-group'>
               <label className='label'>Mission/ Purpose</label>
               <textarea className='form-control textarea' value={this.state.missionDesc} onChange={($event) => this.setState({ missionDesc: $event.target.value })} ></textarea>
@@ -152,7 +252,7 @@ class foundation extends Component {
               <Select placeholder='Speed' labelKey="ValuesName" valueKey="ValuesID" options={this.state.options} value={this.state.val5} onChange={(val) => this.changeHandler('val5', val)} />
             </div>
             <div className='mt-3 mb-5'>
-              <button className='btn_green'>Save</button>
+              <button className='btn_green' type='submit'>Save</button>
               <button className='btn_white'>Cancel</button>
             </div>
           </form>

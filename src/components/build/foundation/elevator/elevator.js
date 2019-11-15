@@ -69,7 +69,6 @@ class elevator extends Component {
         }
     }
 
-
     render() {
         const { show } = this.state;
         return (
