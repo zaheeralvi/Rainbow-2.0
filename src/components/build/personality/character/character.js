@@ -7,6 +7,7 @@ import Popup from '../../../../shared/modal/modal';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from 'axios';
+import API from "../../../../shared/utils/API";
 
 
 class character extends Component {
@@ -29,7 +30,7 @@ class character extends Component {
 
     componentDidMount = async () => {
         try {
-            await Axios.get(this.state.url + `getCharacteristics`).then(res => {
+            await API.get( `getCharacteristics`).then(res => {
                 console.log(res)
                 this.setState({
                     options: res.data,
@@ -41,7 +42,7 @@ class character extends Component {
         }
 
         try {
-            await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=8`).then(res => {
+            await API.get( `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=8`).then(res => {
                 console.log(res)
                 let vals = []
                 res.data.CompanyBrandElementPersonalityCharacteristics.forEach((v, i) => {
@@ -88,7 +89,7 @@ class character extends Component {
         ]
         console.log(data)
         try {
-            await Axios.post(this.state.url + `updatePersonalityCharacteristics`, data).then(res => {
+            await API.post( `updatePersonalityCharacteristics`, data).then(res => {
                 console.log(res)
                 toast.success('Updated Successfully')
                 if(res.data.Result===1){

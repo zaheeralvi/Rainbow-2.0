@@ -4,7 +4,8 @@ import { GoLightBulb } from "react-icons/go";
 import Popup from '../../../shared/modal/modal';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Axios from 'axios';
+// import Axios from 'axios';
+import API from "../../../shared/utils/API";
 
 class personality extends Component {
     constructor(props) {
@@ -40,7 +41,7 @@ class personality extends Component {
         try {
 
             // getPersonalityAssessment
-            await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=9`).then(res => {
+            await API.get(`/getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=9`).then(res => {
                 console.log(res)
                 let ids = []
                 res.data.CompanyBrandElementPersonalityAssessments.forEach((v, i) => {
@@ -57,7 +58,7 @@ class personality extends Component {
             })
 
             // getValues
-            await Axios.get(this.state.url + `getValues`).then(res => {
+            await API.get(`/getValues`).then(res => {
                 console.log(res)
                 this.setState({
                     options: res.data,
@@ -65,7 +66,7 @@ class personality extends Component {
             })
 
             // Organizational
-            await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=3`).then(res => {
+            await API.get(`/getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=3`).then(res => {
                 console.log(res)
                 res.data.CompanyBrandElementValues.forEach((v, i) => {
                     let vars = `val${i + 1}`
@@ -121,7 +122,7 @@ class personality extends Component {
         ]
 
         try {
-            let personalityRes = await Axios.post(this.state.url + `updatePersonalityAssessments`, PersonalityData).then(res => {
+            let personalityRes = await API.post(`/updatePersonalityAssessments`, PersonalityData).then(res => {
                 console.log(res)
                 if (res.data.Result === 1) {
                     return true
@@ -130,7 +131,7 @@ class personality extends Component {
                 }
             })
 
-            let OrganizationalRes = await Axios.post(this.state.url + `updateOrganizationalValues`, OrganizationalData).then(res => {
+            let OrganizationalRes = await API.post(`/updateOrganizationalValues`, OrganizationalData).then(res => {
                 console.log(res)
                 if (res.data.Result === 1) {
                     return true

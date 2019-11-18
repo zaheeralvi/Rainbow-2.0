@@ -5,6 +5,7 @@ import './look.css'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from 'axios';
+import API from "../../../shared/utils/API";
 import S3FileUpload from 'react-s3';
 
 //Optional Import
@@ -30,7 +31,7 @@ class look extends Component {
 
     componentDidMount = async () => {
         try {
-            await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=6`).then(res => {
+            await API.get( `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=6`).then(res => {
                 this.setState({
                     logo: res.data,
                     logoValue: res.data.Value,

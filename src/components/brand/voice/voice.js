@@ -6,6 +6,7 @@ import Popup from '../../../shared/modal/modal';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from 'axios';
+import API from "../../../shared/utils/API";
 
 class voice extends Component {
     constructor(props) {
@@ -26,7 +27,7 @@ class voice extends Component {
         try {
 
             // getKeyWords Data
-            await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=10`).then(res => {
+            await API.get( `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=10`).then(res => {
                 console.log(res.data)
                 if (res.data.Value !== '') {
                     this.setState({ KeywordsValue: res.data.Value.split(',') })
@@ -35,7 +36,7 @@ class voice extends Component {
             })
 
             // getbuzzwords Data
-            await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=11`).then(res => {
+            await API.get( `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=11`).then(res => {
                 console.log(res.data)
                 if (res.data.Value !== '') {
                     this.setState({ BuzzwordsValue: res.data.Value.split(',') })
@@ -121,11 +122,11 @@ class voice extends Component {
 
         try {
 
-            let keywd = await Axios.post(this.state.url + `updateCompanyBrandElement`, keywordData).then(res => {
+            let keywd = await API.post( `updateCompanyBrandElement`, keywordData).then(res => {
                 console.log(res.data)
                 if (res.data.Result === 1) { return true }
             })
-            let buzwd = await Axios.post(this.state.url + `updateCompanyBrandElement`, buzzwordData).then(res => {
+            let buzwd = await API.post( `updateCompanyBrandElement`, buzzwordData).then(res => {
                 console.log(res.data)
                 if (res.data.Result === 1) { return true }
             })

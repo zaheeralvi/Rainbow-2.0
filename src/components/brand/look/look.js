@@ -5,6 +5,7 @@ import Popup from '../../../shared/modal/modal';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from 'axios';
+import API from "../../../shared/utils/API";
 
 class look extends Component {
     constructor(props) {
@@ -31,7 +32,7 @@ class look extends Component {
         try {
 
             // get Color Palette
-            await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=5`).then(res => {
+            await API.get( `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=5`).then(res => {
                 this.setState({ palette: res.data })
 
                 res.data.CompanyBrandElementColorPalette.forEach((v, i) => {

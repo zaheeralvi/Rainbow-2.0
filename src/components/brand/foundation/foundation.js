@@ -5,6 +5,7 @@ import Popup from '../../../shared/modal/modal';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from 'axios';
+import API from "../../../shared/utils/API";
 
 class foundation extends Component {
 
@@ -41,7 +42,7 @@ class foundation extends Component {
   componentDidMount = async () => {
     try {
       // Elevator
-      await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=1`).then(res => {
+      await API.get( `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=1`).then(res => {
         console.log(res)
         this.setState({ elevatorData: res.data, elevatorDesc: res.data.Value })
         if (res.data.Department != undefined) {
@@ -50,7 +51,7 @@ class foundation extends Component {
       })
 
       // Origin
-      await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=4`).then(res => {
+      await API.get( `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=4`).then(res => {
         console.log(res)
         this.setState({ originData: res.data, originDesc: res.data.Value })
         if (res.data.Department != undefined) {
@@ -59,7 +60,7 @@ class foundation extends Component {
       })
 
       // Mission
-      await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=2`).then(res => {
+      await API.get( `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=2`).then(res => {
         console.log(res)
         this.setState({ missionData: res.data, missionDesc: res.data.Value })
         if (res.data.Department != undefined) {
@@ -68,7 +69,7 @@ class foundation extends Component {
       })
 
       // getValues
-      await Axios.get(this.state.url + `getValues`).then(res => {
+      await API.get( `getValues`).then(res => {
         console.log(res)
         this.setState({
           options: res.data,
@@ -76,7 +77,7 @@ class foundation extends Component {
       })
 
       // Organizational
-      await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=3`).then(res => {
+      await API.get( `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=3`).then(res => {
         console.log(res)
         res.data.CompanyBrandElementValues.forEach((v, i) => {
           let vars = `val${i + 1}`
@@ -159,7 +160,7 @@ class foundation extends Component {
     try {
 
       // Elevator
-      let ElevatorRes = await Axios.post(this.state.url + `updateCompanyBrandElement`, elevatorData).then(res => {
+      let ElevatorRes = await API.post( `updateCompanyBrandElement`, elevatorData).then(res => {
         console.log(res)
         if (res.data.Result == 1) {
           return true
@@ -169,7 +170,7 @@ class foundation extends Component {
       })
       
       // Origin
-      let OriginRes = await Axios.post(this.state.url + `updateCompanyBrandElement`, originData).then(res => {
+      let OriginRes = await API.post( `updateCompanyBrandElement`, originData).then(res => {
         console.log(res)
         if (res.data.Result == 1) {
           return true
@@ -179,7 +180,7 @@ class foundation extends Component {
       })
       
       // Mission
-      let MissionRes = await Axios.post(this.state.url + `updateCompanyBrandElement`, missionData).then(res => {
+      let MissionRes = await API.post( `updateCompanyBrandElement`, missionData).then(res => {
         console.log(res)
         if (res.data.Result == 1) {
           return true
@@ -189,7 +190,7 @@ class foundation extends Component {
       })
       
       // Origanizational
-      let OriganizationalRes = await Axios.post(this.state.url + `updateOrganizationalValues`, origanizationalData).then(res => {
+      let OriganizationalRes = await API.post( `updateOrganizationalValues`, origanizationalData).then(res => {
         console.log(res)
         if (res.data.Result == 1) {
           return true

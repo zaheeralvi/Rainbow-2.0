@@ -6,6 +6,7 @@ import Popup from '../../../shared/modal/modal';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from 'axios';
+import API from "../../../shared/utils/API";
 
 class personality extends Component {
     constructor(props) {
@@ -28,7 +29,7 @@ class personality extends Component {
 
     componentDidMount = async () => {
         try {
-            await Axios.get(this.state.url + `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=9`).then(res => {
+            await API.get( `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=9`).then(res => {
                 console.log(res)
                 let ids=[]
                 res.data.CompanyBrandElementPersonalityAssessments.forEach((v, i) => {
@@ -77,7 +78,7 @@ class personality extends Component {
         ]
 
         try {
-            await Axios.post(this.state.url + `updatePersonalityAssessments`,data).then(res => {
+            await API.post( `updatePersonalityAssessments`,data).then(res => {
                 console.log(res)
                 if(res.data.Result===1){
                     toast.success('Updated Successfully')
