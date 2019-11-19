@@ -7,9 +7,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import Axios from 'axios';
 import API from "../../../shared/utils/API";
 import S3FileUpload from 'react-s3';
-
 //Optional Import
 import { uploadFile } from 'react-s3';
+
+const config = {
+    bucketName: 'bucketbrandasset-dev',
+    dirName: 'logo',
+    region: 'us-east-1',
+    accessKeyId: 'AKIAQ6OABELEHDPP63ES',
+    secretAccessKey: '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',
+}
 
 
 class look extends Component {
@@ -17,21 +24,15 @@ class look extends Component {
         super(props);
         this.state = {
             logo: null,
+            file: null,
             logoValue: '',
             url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/',
-            config: {
-                bucketName: 'bucketbrandasset-dev',
-                dirName: 'logo',
-                region: 'us-east-1',
-                accessKeyId: 'AKIAQ6OABELEHDPP63ES',
-                secretAccessKey: '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',
-            }
         }
     }
 
     componentDidMount = async () => {
         try {
-            await API.get( `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=6`).then(res => {
+            await API.get(`getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=6`).then(res => {
                 this.setState({
                     logo: res.data,
                     logoValue: res.data.Value,
@@ -46,13 +47,35 @@ class look extends Component {
     changeImg = (e) => {
         try {
             console.log(e.target.files[0])
-            uploadFile(e.target.files[0], this.state.config)
+            this.setState({
+                file: e.target.files[0]
+            })
+
+            // Axios.post('https://aws.amazon.com/premiumsupport/knowledge-center/s3-private-connection-no-authentication/',{file:this.state.file}).then(res=>{console.log(res)}).catch(err=>{console.log(err)})
+            // S3FileUpload
+            //     .uploadFile(e.target.files[0], config)
+            //     .then(data => console.log(data))
+            //     .catch(err => console.error(err))
+
+            uploadFile(e.target.files[0], config)
                 .then(data => console.log(data))
-                .catch(err => console.log(err))
+                .catch(err => console.error(err))
+
         } catch (err) {
             console.log(err.message)
         }
     }
+
+    handleSubmit = async (e) => {
+        e.preventDefault();
+
+        S3FileUpload
+                .uploadFile(this.state.file, config)
+                .then(data => console.log(data))
+                .catch(err => console.error(err))
+
+    }
+
     render() {
         return (
             <div className='look'>
@@ -60,7 +83,7 @@ class look extends Component {
                 <h4 className='mb-4'>The final section is where we maintain your outward appearance. This is what your customers and stakeholders see (visually) when they interact with your brand.</h4>
                 <h4 className='bold mb-3 px-3'>Logo</h4>
                 <h4 className='mb-5'>Your logo is very often the first interaction a customer or stakeholder will have with your brand. It should be representative of every other aspect of your brand.</h4>
-                <form className='form pt-3'>
+                <form className='form pt-3' onSubmit={($event) => this.handleSubmit($event)} noValidate encType='multipart'>
                     <div className='form-group'>
                         <input type="file" id="file" accept="image/*" onChange={(e) => this.changeImg(e)} />
                         <label htmlFor="file" className="btn-1">UPLOAD LOGO</label>
@@ -70,7 +93,8 @@ class look extends Component {
                     </div>
                     <div className='mt-3 mb-5 text-right'>
                         <NavLink to='/build/voice' className='float-left primary back_btn'> <FaAngleLeft /> Back</NavLink>
-                        <NavLink to='/build/look/palette' className='btn_green m-0'>NEXT</NavLink>
+                        {/* <NavLink to='/build/look/palette' className='btn_green m-0'>NEXT</NavLink> */}
+                        <button className='btn_green' type='submit'>Next</button>
                     </div>
                 </form>
             </div>
