@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Select } from 'dropdown-select';
 import SimpleReactValidator from 'simple-react-validator';
-import { toast } from 'react-toastify';
+import { toast,ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from 'axios';
 import API from "../../../shared/utils/API";
@@ -23,7 +23,7 @@ class companyInfo extends Component {
       selectedCompanyTypes: { CompanyTypeDescription: '' },
       selectedGetStages: { StageDescription: '' },
       selectedGetEmployeeRanges: { EmployeeRangeDescription: '' },
-      url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/'
+      loader:false,
     }
     this.validator = new SimpleReactValidator({
       messages: {
@@ -32,17 +32,19 @@ class companyInfo extends Component {
     });
   }
   componentDidMount = () => {
-    this.setState({comapanyName:JSON.parse(localStorage.user).Company.CompanyName})
+    this.setState({loader:true})
+    this.setState({ comapanyName: JSON.parse(localStorage.user).Company.CompanyName })
     console.log(this.state.CompanyName)
     this.getVerticals();
     this.getCompanyTypes();
     this.getStages();
     this.getEmployeeRanges();
+    this.setState({loader:false})
   }
 
   getVerticals = async () => {
     try {
-      await API.get( 'getVerticals').then(res => {
+      await API.get('getVerticals').then(res => {
         console.log(res)
         this.setState({ verticals: res.data })
       })
@@ -53,7 +55,7 @@ class companyInfo extends Component {
 
   getCompanyTypes = async () => {
     try {
-      await API.get( 'getCompanyTypes').then(res => {
+      await API.get('getCompanyTypes').then(res => {
         console.log(res)
         this.setState({ CompanyTypes: res.data })
       })
@@ -64,7 +66,7 @@ class companyInfo extends Component {
 
   getEmployeeRanges = async () => {
     try {
-      await API.get( 'getEmployeeRanges').then(res => {
+      await API.get('getEmployeeRanges').then(res => {
         console.log(res)
         this.setState({ getEmployeeRanges: res.data })
       })
@@ -75,7 +77,7 @@ class companyInfo extends Component {
 
   getStages = async () => {
     try {
-      await API.get( 'getStages').then(res => {
+      await API.get('getStages').then(res => {
         console.log(res)
         this.setState({ getStages: res.data })
       })
@@ -92,6 +94,7 @@ class companyInfo extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
+    this.setState({loader:true})
     if (this.validator.allValid()) {
       let user = JSON.parse(localStorage.getItem('user'))
       let data = {
@@ -123,7 +126,7 @@ class companyInfo extends Component {
       console.log(data)
 
       try {
-        await API.post( 'updateCompany', data).then(res => {
+        await API.post('updateCompany', data).then(res => {
           console.log(res)
           if (res.data !== '') {
             toast.success('Company Updated Successfully')
@@ -140,12 +143,19 @@ class companyInfo extends Component {
       this.validator.showMessages();
       this.forceUpdate();
     }
+    this.setState({loader:false})
   }
 
 
   render() {
     return (
       <div className='p-3'>
+        {
+          this.state.loader ? <div className='loader_overlay'>
+            <div className="custom_loader">Loading...</div>
+          </div> : null
+        }
+        <ToastContainer />
         <div className='container'>
           <h2 className='heading bold mb-3'>Company Info</h2>
           <h4 className='mb-5'>General information an details about the company.</h4>

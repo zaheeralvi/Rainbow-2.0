@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import { FaAngleLeft } from "react-icons/fa";
 import './look.css'
-import { toast } from 'react-toastify';
+import { toast,ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from 'axios';
 import API from "../../../shared/utils/API";
@@ -26,7 +26,6 @@ class look extends Component {
             logo: null,
             file: null,
             logoValue: '',
-            url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/',
         }
     }
 
@@ -79,6 +78,7 @@ class look extends Component {
     render() {
         return (
             <div className='look'>
+                <ToastContainer />
                 <h2 className='heading bold mb-3'>Part 4: Our Look</h2>
                 <h4 className='mb-4'>The final section is where we maintain your outward appearance. This is what your customers and stakeholders see (visually) when they interact with your brand.</h4>
                 <h4 className='bold mb-3 px-3'>Logo</h4>

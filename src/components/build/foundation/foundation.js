@@ -26,7 +26,7 @@ class foundation extends Component {
             selectedCompanyTypes: { CompanyTypeDescription: '' },
             selectedGetStages: { StageDescription: '' },
             selectedGetEmployeeRanges: { EmployeeRangeDescription: '' },
-            url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/'
+            
         }
         this.validator = new SimpleReactValidator({
             messages: {
