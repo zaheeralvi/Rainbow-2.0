@@ -93,7 +93,7 @@ class foundation extends Component {
             if (email != null) {
                 await API.get( `getUser?email=${email}`).then(res => {
                     console.log(res)
-                    this.setState({ user: res.data,CompanyName:res.data.Company.CompanyName })
+                    this.setState({ user: res.data,comapanyName:res.data.Company.CompanyName })
                     localStorage.setItem('user', JSON.stringify(res.data))
                 })
             }
@@ -169,7 +169,7 @@ class foundation extends Component {
                 <h4 className='mb-5'>Every great brand is build on top of a strong foundation. These are the big picture elements that help guide the company from the top down.</h4>
                 <form className='form' onSubmit={($event) => this.handleSubmit($event)} noValidate>
                     <div className='form-group'>
-                        <input type="text" name='comapanyName' value={this.state.CompanyName} className='form-control' placeholder='Company Name (or DBA Name)' onChange={(e) => this.setState({ comapanyName: e.target.value })} />
+                        <input type="text" name='comapanyName' value={this.state.comapanyName} className='form-control' placeholder='Company Name (or DBA Name)' onChange={(e) => this.setState({ comapanyName: e.target.value })} />
                         <label className='error'>{this.validator.message('comapanyName', this.state.comapanyName, 'required')}</label>
                     </div>
                     <div className='form-group'>

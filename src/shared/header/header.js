@@ -3,6 +3,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Dropdown from 'react-bootstrap/Dropdown'
 import './header.css'
 import { NavLink } from 'react-router-dom';
+import { app } from 'firebase';
 
 class Header extends Component {
     constructor(props) {
@@ -43,6 +44,11 @@ class Header extends Component {
         }
     }
 
+    logoutHandler=()=>{
+        localStorage.removeItem('logged')
+        localStorage.removeItem('user')
+        window.location.pathname='/login'
+    }
 
     render() {
         return (
@@ -75,7 +81,7 @@ class Header extends Component {
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu>
                                                 <Dropdown.Item  as="span"><NavLink to='/profile'>Profile</NavLink></Dropdown.Item>
-                                                <Dropdown.Item  as="span"><NavLink to='/login'>Sign Out</NavLink></Dropdown.Item>
+                                                <Dropdown.Item  as="span"><span className='pointer' onClick={()=> this.logoutHandler()}>Sign Out</span></Dropdown.Item>
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     </li>

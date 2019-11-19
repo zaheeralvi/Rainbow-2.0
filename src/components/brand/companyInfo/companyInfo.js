@@ -32,8 +32,8 @@ class companyInfo extends Component {
     });
   }
   componentDidMount = () => {
-    console.log(JSON.parse(localStorage.user).Company.CompanyName)
-    this.setState({CompanyName:JSON.parse(localStorage.user).Company.CompanyName})
+    this.setState({comapanyName:JSON.parse(localStorage.user).Company.CompanyName})
+    console.log(this.state.CompanyName)
     this.getVerticals();
     this.getCompanyTypes();
     this.getStages();
@@ -151,7 +151,7 @@ class companyInfo extends Component {
           <h4 className='mb-5'>General information an details about the company.</h4>
           <form className='form' onSubmit={($event) => this.handleSubmit($event)} noValidate>
             <div className='form-group'>
-              <input type="text" name='comapanyName' value={this.state.CompanyName} className='form-control' placeholder='Company Name (or DBA Name)' onChange={(e) => this.setState({ comapanyName: e.target.value })} />
+              <input type="text" name='comapanyName' value={this.state.comapanyName} className='form-control' placeholder='Company Name (or DBA Name)' onChange={(e) => this.setState({ comapanyName: e.target.value })} />
               <label className='error'>{this.validator.message('comapanyName', this.state.comapanyName, 'required')}</label>
             </div>
             <div className='form-group'>
