@@ -26,20 +26,22 @@ class App extends Component {
     super(props)
     this.state = {
       user: null,
-      logged: 'false',
-      url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/getUser?email='
+      logged: localStorage.logged,
     }
 
     this.setState({
       logged: localStorage.logged
     })
+    console.log(localStorage.logged)
   }
 
   loginHandler = (user) => {
+    console.log('user')
     console.log(user)
+    console.log('user')
     this.setState({
       user: user,
-      logged: true
+      logged: 'true'
     })
   }
 
@@ -49,7 +51,7 @@ class App extends Component {
         <Router>
           <Header user={this.state.user} logged={this.state.logged} />
           {
-            this.state.logged==true ?
+            this.state.logged === 'true' ?
               <div className='body_content'>
                 {/* mention the route where you want sidebar */}
                 <Route exact path='/' component={Sidebar} />
@@ -68,22 +70,24 @@ class App extends Component {
                     <Route exact path='/setting' component={Setting} />
                     <Route exact path='/user' component={UserManagement} />
                     <Route exact path='/profile' component={Profile} />
+                    <Route exact path='/signup/a' component={Signup2a} />
+                    <Route exact path='/signup/b' component={Signup2b} />
                     <Route path=''>
                       <Redirect to='/' />
                     </Route>
                   </Switch>
                 </div>
-              </div> : <div className='body_content'>
+              </div>
+              : <div className='body_content'>
                 <div className='content'>
                   <Switch>
                     <Route exact path="/login" render={(routeProps) => <Signin user={this.loginHandler} {...routeProps} />} />
-                    {/* <Route exact path='/login' component={Signin} /> */}
                     <Route exact path='/signup' component={Signup} />
+                    <Route exact path='/forget-password' component={ForgetPassword} />
                     <Route exact path='/signup/a' component={Signup2a} />
                     <Route exact path='/signup/b' component={Signup2b} />
-                    <Route exact path='/forget-password' component={ForgetPassword} />
                     <Route path=''>
-                      <Redirect to='/login' />
+                      <Redirect to='/signup' />
                     </Route>
                   </Switch>
                 </div>
