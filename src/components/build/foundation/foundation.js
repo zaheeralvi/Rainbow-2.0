@@ -145,7 +145,9 @@ class foundation extends Component {
                     console.log(res)
                     if (res.data !== '') {
                         toast.success('Company Updated Successfully')
-                        this.props.history.push('/build/foundation/mission')
+                        setTimeout(() => {
+                            this.props.history.push('/build/foundation/mission')
+                        }, 1000);
                     } else {
                         toast.error('Something went Wrong, Please try Later')
                     }

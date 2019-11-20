@@ -64,7 +64,9 @@ class mission extends Component {
                 console.log(res)
                 if (res.data.Result === 1) {
                     toast.success('Updated Successfuly')
-                    this.props.history.push('/build/foundation/origin')
+                    setTimeout(() => {
+                        this.props.history.push('/build/foundation/origin')
+                    }, 1000);
                 }
             })
         } catch (err) {

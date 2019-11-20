@@ -102,7 +102,9 @@ class organizational extends Component {
                 await API.post( `updateOrganizationalValues`, data).then(res => {
                     console.log(res)
                     toast.success('Updated Successfully')
-                    this.props.history.push('/build/personality');
+                    setTimeout(() => {
+                        this.props.history.push('/build/personality');
+                    }, 1000);
                 })
             } catch (err) {
                 toast.error(err.message)

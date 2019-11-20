@@ -63,7 +63,9 @@ class origin extends Component {
                 console.log(res)
                 if (res.data.Result === 1) {
                     toast.success('Updated Successfuly')
-                    this.props.history.push('/build/foundation/elevator')
+                    setTimeout(() => {
+                        this.props.history.push('/build/foundation/elevator')
+                    }, 1000);
                 }
             })
         } catch (err) {

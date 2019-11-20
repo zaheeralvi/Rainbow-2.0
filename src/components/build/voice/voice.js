@@ -124,7 +124,9 @@ class voice extends Component {
             })
             if (keywd && buzwd) {
                 toast.success('Updated Successfully')
-                this.props.history.push('/build/look')
+                setTimeout(() => {
+                    this.props.history.push('/build/look')
+                }, 1000);
             }
 
         } catch (error) {

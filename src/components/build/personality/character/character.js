@@ -93,7 +93,9 @@ class character extends Component {
                 console.log(res)
                 toast.success('Updated Successfully')
                 if(res.data.Result===1){
-                    this.props.history.push('/build/voice');
+                    setTimeout(() => {
+                        this.props.history.push('/build/voice');
+                    }, 1000);
                 }
             })
         } catch (err) {
