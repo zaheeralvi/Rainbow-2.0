@@ -83,7 +83,7 @@ class origin extends Component {
                         <textarea placeholder='Your Origin Story' className='form-control' rows='5' value={this.state.BrandElementDescription} onChange={($event) => this.setState({ BrandElementDescription: $event.target.value })} ></textarea>
                         <span className='textarea_tooltip' onClick={this.handleShow} ><GoLightBulb /></span>                    </div>
                     <div className='mt-3 mb-5 text-right'>
-                        <NavLink to='/build/foundation/origin' className='float-left primary back_btn'> <FaAngleLeft /> Back</NavLink>
+                        <NavLink to='/build/foundation/mission' className='float-left primary back_btn'> <FaAngleLeft /> Back</NavLink>
                         <button type='submit' className='btn_green m-0'>Next</button>
                     </div>
                 </form>

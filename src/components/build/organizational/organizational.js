@@ -143,7 +143,7 @@ class organizational extends Component {
                         <label className='error'>{this.validator.message('val5', this.state.val5, 'required')}</label>
                     </div>
                     <div className='mt-3 mb-5 text-right'>
-                        <NavLink to='/build/foundation/organizational' className='float-left primary back_btn'> <FaAngleLeft /> Back</NavLink>
+                        <NavLink to='/build/foundation/elevator' className='float-left primary back_btn'> <FaAngleLeft /> Back</NavLink>
                         <button type='submit' className='btn_green m-0'>NEXT</button>
                     </div>
                 </form>
