@@ -23,7 +23,7 @@ class organizational extends Component {
             val5: '',
             options: [],
             CompanyOrganizationalValueIDs: [],
-            
+            loader: false
         }
         this.validator = new SimpleReactValidator({
             messages: {
@@ -34,8 +34,9 @@ class organizational extends Component {
     }
 
     componentDidMount = async () => {
+        this.setState({ loader: true })
         try {
-            await API.get( `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=3`).then(res => {
+            await API.get(`getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=3`).then(res => {
                 console.log(res)
                 let ids = []
                 res.data.CompanyBrandElementValues.forEach((v, i) => {
@@ -53,7 +54,7 @@ class organizational extends Component {
         }
 
         try {
-            await API.get( `getValues`).then(res => {
+            await API.get(`getValues`).then(res => {
                 console.log(res)
                 this.setState({
                     options: res.data,
@@ -63,6 +64,7 @@ class organizational extends Component {
         } catch (error) {
             toast.error(error.message)
         }
+        this.setState({ loader: false })
 
     }
 
@@ -88,6 +90,7 @@ class organizational extends Component {
     }
 
     handleSubmit = async (e) => {
+        this.setState({ loader: true })
         e.preventDefault();
         if (this.validator.allValid()) {
             let data = [
@@ -99,7 +102,7 @@ class organizational extends Component {
             ]
 
             try {
-                await API.post( `updateOrganizationalValues`, data).then(res => {
+                await API.post(`updateOrganizationalValues`, data).then(res => {
                     console.log(res)
                     toast.success('Updated Successfully')
                     setTimeout(() => {
@@ -113,12 +116,18 @@ class organizational extends Component {
             this.validator.showMessages();
             this.forceUpdate();
         }
+        this.setState({ loader: false })
     }
 
     render() {
         const { show } = this.state;
         return (
             <div className=''>
+                {
+                    this.state.loader ? <div className='loader_overlay'>
+                        <div className="custom_loader">Loading...</div>
+                    </div> : null
+                }
                 <ToastContainer />
                 <h2 className='heading bold mb-3'>Organizational Values</h2>
                 <h4 className='mb-5'>Possibly one of the most important aspects of your brand are your values. These are the select group of concepts that drive the way your company will operate in good times and especiall in tough times.</h4>

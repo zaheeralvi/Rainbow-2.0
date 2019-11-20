@@ -16,14 +16,16 @@ class origin extends Component {
             brandData: '',
             BrandElementDescription: '',
             departmentID: 0,
-            
+            loader:false
+
         }
 
     }
 
     componentDidMount = async () => {
+        this.setState({loader:true})
         try {
-            await API.get( `getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=4`).then(res => {
+            await API.get(`getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=4`).then(res => {
                 console.log(res)
                 this.setState({ brandData: res.data, BrandElementDescription: res.data.Value })
                 if (res.data.Department != undefined) {
@@ -33,6 +35,7 @@ class origin extends Component {
         } catch (err) {
             toast.error(err.message)
         }
+        this.setState({loader:false})
     }
     handleClose = () => {
         this.setState({
@@ -46,6 +49,7 @@ class origin extends Component {
     };
 
     handleSubmit = async (e) => {
+        this.setState({loader:true})
         e.preventDefault();
         let data = {
             "CompanyBrandElementID": this.state.brandData.CompanyBrandElementID,
@@ -59,7 +63,7 @@ class origin extends Component {
         console.log(data)
 
         try {
-            await API.post( `updateCompanyBrandElement`, data).then(res => {
+            await API.post(`updateCompanyBrandElement`, data).then(res => {
                 console.log(res)
                 if (res.data.Result === 1) {
                     toast.success('Updated Successfuly')
@@ -71,12 +75,18 @@ class origin extends Component {
         } catch (err) {
             toast.error(err.message)
         }
+        this.setState({loader:false})
     }
 
     render() {
         const { show } = this.state;
         return (
             <div className=''>
+                {
+                    this.state.loader ? <div className='loader_overlay'>
+                        <div className="custom_loader">Loading...</div>
+                    </div> : null
+                }
                 <ToastContainer />
                 <h2 className='heading bold mb-3'>Origin Story</h2>
                 <h4>Your Origin Story lets your customers and your stakeholders know where the company came from. This helps make a personal connection and builds affinity.</h4>
