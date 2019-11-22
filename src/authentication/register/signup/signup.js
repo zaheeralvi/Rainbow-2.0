@@ -30,6 +30,7 @@ class Signup extends React.Component {
 
     signUpHandler = (e) => {
         e.preventDefault();
+        this.setState({ errors: '' })
         let props = this.props
         if (this.validator.allValid()) {
             firebase
