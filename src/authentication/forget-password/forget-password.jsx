@@ -54,7 +54,7 @@ class ForgetPassword extends React.Component {
                         <div className='form-group'>
                             <button className='btn_green'>SUBMIT</button>
                         </div>
-                        <p className='primary'>Do not have an account yet? <NavLink className='primary' to=''><strong><u>Sign Up </u></strong></NavLink></p>
+                        <p className='primary'>Do not have an account yet? <NavLink className='primary' to='/signup'><strong><u>Sign Up </u></strong></NavLink></p>
                     </form>
                 </div>
             </section>
