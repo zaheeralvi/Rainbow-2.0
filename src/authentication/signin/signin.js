@@ -15,6 +15,7 @@ class Signin extends React.Component {
         this.state = {
             email: '',
             password: '',
+            errors: '',
             url: 'http://ec2-34-198-96-172.compute-1.amazonaws.com//PatterService1/getUser?email='
         }
         this.validator = new SimpleReactValidator({
@@ -25,6 +26,7 @@ class Signin extends React.Component {
         });
     }
     signInHandler = (e) => {
+        this.setState({ errors: '' })
         var prop = this.props
         e.preventDefault();
         try {
@@ -54,15 +56,17 @@ class Signin extends React.Component {
                         // if (res.user) Auth.setLoggedIn(true);
                     })
                     .catch(e => {
-                        toast.error(e.message)
-                        console.log(e)
+                        // toast.error(e.message)
+                        this.setState({ errors: e.message })
+                        // console.log(e)
                     });
             } else {
                 this.validator.showMessages();
                 this.forceUpdate();
             }
         } catch (err) {
-            toast.error(err.message)
+            // toast.error(err.message)
+            this.setState({ errors: err.message })
         }
     };
 
@@ -84,6 +88,9 @@ class Signin extends React.Component {
                             <label className='error'>{this.validator.message('password', this.state.password, 'required')}</label>
                         </div>
                         <div className='form-group'>
+                            {
+                                this.state.errors !== '' ? <p className='alert alert-danger'>{this.state.errors}</p> : null
+                            }
                             <button className='btn_green' type='submit'>Log in</button>
                         </div>
                         <p className='primary'>Do not have an account yet? <NavLink className='primary' to='/signup'><strong><u>Sign Up </u></strong></NavLink></p>

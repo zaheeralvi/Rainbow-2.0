@@ -51,14 +51,14 @@ class Signup extends React.Component {
                         }, 1000);
                     }).catch(function (error) {
                         this.setState({ errors: error.message })
-                        toast.error(error.message)
+                        // toast.error(error.message)
                     });
                     // if (res.user) Auth.setLoggedIn(true);
                 })
                 .catch(e => {
                     console.log(e)
                     this.setState({ errors: e.message })
-                    toast.error(e.message)
+                    // toast.error(e.message)
                 });
         } else {
             this.validator.showMessages();
