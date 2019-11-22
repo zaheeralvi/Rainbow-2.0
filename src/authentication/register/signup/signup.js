@@ -93,7 +93,9 @@ class Signup extends React.Component {
                             <label className='error'>{this.validator.message('password', this.state.password, 'required|min:6')}</label>
                         </div>
                         <div className='form-group'>
-                            <p className='text-danger'>{this.state.errors}</p>
+                            {
+                                this.state.errors !== '' ? <p className='alert alert-danger'>{this.state.errors}</p> : null
+                            }
                             <button type='submit' className='btn_green' >Next</button>
                         </div>
                         <p className='primary'>By siging up, you agree to Patter’s <NavLink className='primary' to=''><u>Terms of Service and Privacy Policy.</u></NavLink></p>
