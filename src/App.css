@@ -180,6 +180,7 @@ label.error{
   color: #ff0000;
   font-size: 14px;
   padding-left: 15px;
+  bottom: -30px !important;
 }
 .right_nav .dropdown-item span{
   padding: 0.25rem 1.5rem;
