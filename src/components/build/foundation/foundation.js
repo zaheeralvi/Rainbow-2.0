@@ -95,28 +95,28 @@ class foundation extends Component {
             if (id != null) {
                 await API.get(`getCompany?companyID=${id}`).then(res => {
                     console.log(res)
-                    let VerticalDescription = ''
-                    let CompanyTypeDescription = ''
-                    let StageDescription = ''
-                    let EmployeeRangeDescription = ''
+                    let VerticalDescription = { VerticalDescription: '' }
+                    let CompanyTypeDescription = { CompanyTypeDescription: '' }
+                    let StageDescription = { StageDescription: '' }
+                    let EmployeeRangeDescription = { EmployeeRangeDescription: '' }
                     if (res.data.Vertical) {
-                        VerticalDescription = res.data.Vertical.VerticalDescription
+                        VerticalDescription = res.data.Vertical
                     }
                     if (res.data.CompanyType) {
-                        CompanyTypeDescription = res.data.CompanyType.CompanyTypeDescription
+                        CompanyTypeDescription = res.data.CompanyType
                     }
                     if (res.data.Stage) {
-                        StageDescription = res.data.Stage.StageDescription
+                        StageDescription = res.data.Stage
                     }
                     if (res.data.EmployeeRange) {
-                        EmployeeRangeDescription = res.data.EmployeeRange.EmployeeRangeDescription
+                        EmployeeRangeDescription = res.data.EmployeeRange
                     }
                     this.setState({
                         comapanyName: res.data.CompanyName,
-                        selectedVerticals: { VerticalDescription: VerticalDescription },
-                        selectedCompanyTypes: { CompanyTypeDescription: CompanyTypeDescription },
-                        selectedGetStages: { StageDescription: StageDescription },
-                        selectedGetEmployeeRanges: { EmployeeRangeDescription: EmployeeRangeDescription },
+                        selectedVerticals: VerticalDescription,
+                        selectedCompanyTypes: CompanyTypeDescription,
+                        selectedGetStages: StageDescription,
+                        selectedGetEmployeeRanges: EmployeeRangeDescription,
                         country: res.data.State,
                         city: res.data.City,
                         product: res.data.ProductName,
