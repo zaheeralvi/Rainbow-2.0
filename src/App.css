@@ -182,6 +182,9 @@ label.error{
   padding-left: 15px;
   bottom: -30px !important;
 }
+table label.error{
+  bottom: -50px !important;
+}
 .right_nav .dropdown-item span{
   padding: 0.25rem 1.5rem;
     display: inline-block;

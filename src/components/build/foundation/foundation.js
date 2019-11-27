@@ -184,11 +184,15 @@ class foundation extends Component {
             }
 
         } else {
-            toast.error('All fields are Required')
             this.validator.showMessages();
             this.forceUpdate();
         }
         this.setState({ loader: false })
+    }
+
+    handleSubmit=(e)=>{
+        e.preventDefault();
+
     }
 
     render() {
