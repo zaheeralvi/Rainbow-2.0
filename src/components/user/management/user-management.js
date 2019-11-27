@@ -18,7 +18,7 @@ class UserManagement extends React.Component {
                                 <td>Access</td>
                             </tr>
                             <tr>
-                                <td><input type="email" className='form-control' placeholder='Aaron@patter.com' /></td>
+                                <td><input type="email" className='form-control' placeholder='Email' /></td>
                                 <td className='no-border-left'><Select placeholder='Full Access' options={options} labelKey="label" valueKey="value" /></td>
                             </tr>
                         </table>
@@ -92,7 +92,7 @@ class UserManagement extends React.Component {
                                 </tr>
                             </tbody>
                         </table>
-                        <button className='btn_green'>Send</button>
+                        <button className='btn_green'>Save</button>
                         <button className='btn_white'>Cancel</button>
                     </div>
                 </div>

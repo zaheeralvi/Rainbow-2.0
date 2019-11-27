@@ -37,6 +37,7 @@ class companyInfo extends Component {
     this.setState({ comapanyName: JSON.parse(localStorage.user).Company.CompanyName })
     console.log(this.state.CompanyName)
     this.getVerticals();
+    this.getCompanyByID();
     this.getCompanyTypes();
     this.getStages();
     this.getEmployeeRanges();
@@ -87,6 +88,22 @@ class companyInfo extends Component {
     }
   }
 
+  getCompanyByID = async () => {
+    try {
+      let id = JSON.parse(localStorage.user).Company.CompanyID
+      if (id != null) {
+        await API.get(`getCompany?companyID=${id}`).then(res => {
+          console.log(res)
+          this.setState({
+            comapanyName: res.data.CompanyName
+          })
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   changeHandler = (stVar, val) => {
     this.setState({
       [stVar]: val
@@ -130,7 +147,7 @@ class companyInfo extends Component {
         await API.post('updateCompany', data).then(res => {
           console.log(res)
           if (res.data !== '') {
-            toast.success('Company Updated Successfully')
+            //toast.success('Company Updated Successfully')
             setTimeout(() => {
               this.props.history.push('/brand')
             }, 1000);

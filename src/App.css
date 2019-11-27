@@ -293,7 +293,7 @@ td.no-border-left *{
   width: 100%;
   position: absolute;
   z-index: 1;
-  background-color: rgba(0,0,0,.3);
+  /* background-color: rgba(0,0,0,.3); */
 }
 .alert-danger {
   color: #ff0000 !important;
@@ -304,7 +304,7 @@ td.no-border-left *{
 }
 .custom_loader {
   color: rgb(14, 112, 124);
-  font-size: 90px;
+  font-size: 50px;
   text-indent: -9999em;
   z-index: 2;
   overflow: hidden;
@@ -323,6 +323,9 @@ td.no-border-left *{
   bottom:0;
   top: 0;
   margin: auto;
+}
+.form-control:disabled, .form-control[readonly]{
+  background-color: transparent !important;
 }
 @-webkit-keyframes load6 {
   0% {
