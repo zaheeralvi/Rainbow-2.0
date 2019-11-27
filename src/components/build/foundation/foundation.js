@@ -120,8 +120,6 @@ class foundation extends Component {
                         country: res.data.State,
                         city: res.data.City,
                         product: res.data.ProductName,
-                    }, () => {
-                        console.log(this.state)
                     })
                 })
             }

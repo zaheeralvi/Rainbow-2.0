@@ -94,8 +94,31 @@ class companyInfo extends Component {
       if (id != null) {
         await API.get(`getCompany?companyID=${id}`).then(res => {
           console.log(res)
+          let VerticalDescription = ''
+          let CompanyTypeDescription = ''
+          let StageDescription = ''
+          let EmployeeRangeDescription = ''
+          if (res.data.Vertical) {
+              VerticalDescription = res.data.Vertical.VerticalDescription
+          }
+          if (res.data.CompanyType) {
+              CompanyTypeDescription = res.data.CompanyType.CompanyTypeDescription
+          }
+          if (res.data.Stage) {
+              StageDescription = res.data.Stage.StageDescription
+          }
+          if (res.data.EmployeeRange) {
+              EmployeeRangeDescription = res.data.EmployeeRange.EmployeeRangeDescription
+          }
           this.setState({
-            comapanyName: res.data.CompanyName
+              comapanyName: res.data.CompanyName,
+              selectedVerticals: { VerticalDescription: VerticalDescription },
+              selectedCompanyTypes: { CompanyTypeDescription: CompanyTypeDescription },
+              selectedGetStages: { StageDescription: StageDescription },
+              selectedGetEmployeeRanges: { EmployeeRangeDescription: EmployeeRangeDescription },
+              country: res.data.State,
+              city: res.data.City,
+              product: res.data.ProductName,
           })
         })
       }
@@ -121,7 +144,7 @@ class companyInfo extends Component {
         "Sitename": user.Company.SiteName,
         "ProductName": this.state.product,
         "Website": "",
-        "NumberOfOffices": '',
+        "NumberOfOffices": 0,
         "Address1": "",
         "Address2": "",
         "City": this.state.city,
@@ -138,7 +161,7 @@ class companyInfo extends Component {
         "Vertical": { "VerticalID": this.state.selectedVerticals.VerticalID },
         "Stage": { "StageID": this.state.selectedGetStages.StageID },
         "EmployeeRange": { "EmployeeRangeID": this.state.selectedGetEmployeeRanges.EmployeeRangeID },
-        "RevenueRange": { "RevenueRangeID": '' }
+        "RevenueRange": { "RevenueRangeID": 0 }
       }
 
       console.log(data)
@@ -186,7 +209,7 @@ class companyInfo extends Component {
               {/* <label className='error'>{this.validator.message('comapanyName', this.state.comapanyName, 'required')}</label> */}
             </div>
             <div className='form-group'>
-              <input type="text" className='form-control' name='product' placeholder='Product Name (if different)' onChange={(e) => this.setState({ product: e.target.value })} />
+              <input type="text" className='form-control' value={this.state.product} name='product' placeholder='Product Name (if different)' onChange={(e) => this.setState({ product: e.target.value })} />
               {/* <label className='error'>{this.validator.message('product', this.state.product, 'required')}</label> */}
             </div>
             <div className='form-group'>
@@ -202,11 +225,11 @@ class companyInfo extends Component {
               {/* <label className='error'>{this.validator.message('selectedGetStages', this.state.selectedGetStages.StageID, 'required')}</label> */}
             </div>
             <div className='form-group'>
-              <input type="text" className='form-control' name='country' placeholder='State' onChange={(e) => this.setState({ country: e.target.value })} />
+              <input type="text" className='form-control' value={this.state.country} name='country' placeholder='State' onChange={(e) => this.setState({ country: e.target.value })} />
               {/* <label className='error'>{this.validator.message('country', this.state.country, 'required')}</label> */}
             </div>
             <div className='form-group'>
-              <input type="text" className='form-control' name='city' placeholder='City' onChange={(e) => this.setState({ city: e.target.value })} />
+              <input type="text" className='form-control' value={this.state.city} name='city' placeholder='City' onChange={(e) => this.setState({ city: e.target.value })} />
               {/* <label className='error'>{this.validator.message('city', this.state.city, 'required')}</label> */}
             </div>
             <div className='form-group'>
