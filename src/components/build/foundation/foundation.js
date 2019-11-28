@@ -190,11 +190,6 @@ class foundation extends Component {
         this.setState({ loader: false })
     }
 
-    handleSubmit=(e)=>{
-        e.preventDefault();
-
-    }
-
     render() {
         return (
             <div className=''>
