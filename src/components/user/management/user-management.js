@@ -141,7 +141,7 @@ class UserManagement extends React.Component {
                             {this.state.usersList !== null ? <tbody className='table-bordered'>
                                 {
                                     this.state.usersList.map((user, index) => {
-                                        return (<tr key={index}>
+                                        return (<tr key={index} className={user.IsActive ? null : 'Disabled'}>
                                             <td>{user.Email}</td>
                                             <td>
                                                 {user.Title === '' || user.Title === null ? 'Title' : user.Title}
