@@ -33,21 +33,13 @@ class UserManagement extends React.Component {
     getUsers = () => {
         let company = JSON.parse(localStorage.user).Company
         API.get(`getUsersByCompany?companyID=${company.CompanyID}`).then(res => {
-            console.log(res)
-            let data = res.data;
-            for (let i = 0; i < data.length; i++) {
-                data[i] = { ...data[i], selected: false }
-            }
-            this.setState({ usersList: data }, () => {
-                console.log(this.state.usersList)
-            })
+            this.setState({ usersList: res.data })
         })
     }
 
     changeHandler = (e, i) => {
-        console.log(e.target.checked)
         let list = this.state.usersList;
-        list[i].selected = e.target.checked
+        list[i].IsActive = e.target.checked
         this.setState({
             usersList: list
         })
@@ -55,7 +47,6 @@ class UserManagement extends React.Component {
     }
     
     dropChangeHandler = (val, i) => {
-        console.log(val)
         let list = this.state.usersList;
         list[i].AccessType = val
         this.setState({
@@ -80,9 +71,7 @@ class UserManagement extends React.Component {
                     }
                 }
                 API.post('insertUser', data).then(res => {
-                    console.log(res);
                     if (res.data.Result === 1) {
-                        console.log('User Added')
                         this.getUsers();
                         this.setState({
                             email: '',
@@ -102,9 +91,16 @@ class UserManagement extends React.Component {
 
     }
 
-    handleUserSubmit = (e) => {
+    handleUserSubmit = async (e) => {
         e.preventDefault();
-        console.log(this.state.usersList)
+        let users=this.state.usersList
+        for(let i=0;i<users.length;i++){
+            await API.post('updateUser', users[i]).then(rest => {
+                if (rest.data.Result === 1) {
+                    console.log(`User updated`)
+                }
+            })
+        }
     }
 
 
@@ -159,7 +155,7 @@ class UserManagement extends React.Component {
                                             </td>
                                             <td className='text-center'>
                                                 <Form.Group className='mb-0' controlId={`check${index}`}>
-                                                    <Form.Check type="checkbox" checked={user.selected} custom label="" onChange={(e) => this.changeHandler(e, index)} />
+                                                    <Form.Check type="checkbox" checked={user.IsActive} custom label="" onChange={(e) => this.changeHandler(e, index)} />
                                                 </Form.Group>
                                             </td>
                                         </tr>)
