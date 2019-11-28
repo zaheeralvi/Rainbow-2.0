@@ -67,7 +67,7 @@ export default class Profile extends Component {
                         </div>
                         <div className='form-group'>
                             <label className='label'>Title / Role</label>
-                            <input type="text" readOnly className='form-control' value={this.state.Title} placeholder='Title' />
+                            <input type="text" className='form-control' value={this.state.Title} placeholder='Title' />
                         </div>
                         <div className='form-group'>
                             <label className='label'>Email Address</label>
