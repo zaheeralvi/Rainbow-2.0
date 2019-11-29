@@ -55,6 +55,11 @@ class foundation extends Component {
 
   componentDidMount = async () => {
     this.setState({ loader: true })
+    await this.getInitialData()
+    this.setState({ loader: false })
+  }
+
+  getInitialData = async () => {
     try {
       // Elevator
       await API.get(`getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=1`).then(res => {
@@ -125,7 +130,6 @@ class foundation extends Component {
     } catch (err) {
       toast.error(err.message)
     }
-    this.setState({ loader: false })
   }
 
   handleClose = () => {
@@ -146,6 +150,10 @@ class foundation extends Component {
     this.setState({
       [stVar]: val
     })
+  }
+
+  cancleHandler = async () => {
+    await this.getInitialData()
   }
 
   handleSubmit = async (e) => {
@@ -308,7 +316,7 @@ class foundation extends Component {
             </div>
             <div className='mt-3 mb-5'>
               <button className='btn_green' type='submit'>Save</button>
-              <NavLink to='/brand' className='btn_white'>Cancel</NavLink>            </div>
+              <span onClick={this.cancleHandler} className='btn_white pointer'>Cancel</span>            </div>
           </form>
         </div>
         <Popup show={show} title={this.state.title} desc={this.state.desc} hide={this.handleClose} />
