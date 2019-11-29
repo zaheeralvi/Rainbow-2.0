@@ -279,7 +279,7 @@ class foundation extends Component {
               <NavLink to='/brand' className='btn_white'>Cancel</NavLink>            </div>
           </form>
         </div>
-        <Popup show={show} hide={this.handleClose} />
+        {/* {/* <Popup show={show} hide={this.handleClose} /> */} */}
       </div>
     );
   }
