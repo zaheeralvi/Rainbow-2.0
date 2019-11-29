@@ -14,6 +14,9 @@ class foundation extends Component {
     super(props);
     this.state = {
       show: false,
+      show1: false,
+      show2: false,
+      show3: false,
       options: [],
       val1: '',
       val2: '',
@@ -38,6 +41,15 @@ class foundation extends Component {
 
       loader: false,
 
+      title: '',
+      title1: '',
+      title2: '',
+      title3: '',
+      desc: '',
+      desc1: '',
+      desc2: '',
+      desc3: '',
+
     }
   }
 
@@ -47,7 +59,12 @@ class foundation extends Component {
       // Elevator
       await API.get(`getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=1`).then(res => {
         console.log(res)
-        this.setState({ elevatorData: res.data, elevatorDesc: res.data.Value })
+        this.setState({
+          elevatorData: res.data,
+          elevatorDesc: res.data.Value,
+          title2: res.data.BrandElement.BrandElementName,
+          desc2: res.data.BrandElement.BrandElementDescription,
+        })
         if (res.data.Department != undefined) {
           this.setState({ elevatorDescDepartmentID: res.data.Department.DepartmentID })
         }
@@ -56,7 +73,12 @@ class foundation extends Component {
       // Origin
       await API.get(`getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=4`).then(res => {
         console.log(res)
-        this.setState({ originData: res.data, originDesc: res.data.Value })
+        this.setState({
+          originData: res.data,
+          originDesc: res.data.Value,
+          title1: res.data.BrandElement.BrandElementName,
+          desc1: res.data.BrandElement.BrandElementDescription,
+        })
         if (res.data.Department != undefined) {
           this.setState({ originDescDepartmentID: res.data.Department.DepartmentID })
         }
@@ -65,7 +87,12 @@ class foundation extends Component {
       // Mission
       await API.get(`getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=2`).then(res => {
         console.log(res)
-        this.setState({ missionData: res.data, missionDesc: res.data.Value })
+        this.setState({
+          missionData: res.data,
+          missionDesc: res.data.Value,
+          title: res.data.BrandElement.BrandElementName,
+          desc: res.data.BrandElement.BrandElementDescription,
+        })
         if (res.data.Department != undefined) {
           this.setState({ missionDescDepartmentID: res.data.Department.DepartmentID })
         }
@@ -88,6 +115,8 @@ class foundation extends Component {
         })
         this.setState({
           organizationalData: res.data,
+          title3: res.data.BrandElement.BrandElementName,
+          desc3: res.data.BrandElement.BrandElementDescription,
         })
       })
 
@@ -102,11 +131,14 @@ class foundation extends Component {
   handleClose = () => {
     this.setState({
       show: false,
+      show1: false,
+      show2: false,
+      show3: false,
     })
   };
-  handleShow = () => {
+  handleShow = (key) => {
     this.setState({
-      show: true,
+      [key]: true,
     })
   };
 
@@ -229,7 +261,7 @@ class foundation extends Component {
   }
 
   render() {
-    const { show } = this.state;
+    const { show, show1, show2, show3 } = this.state;
     return (
       <div className='p-3'>
         {
@@ -245,22 +277,22 @@ class foundation extends Component {
             <div className='form-group'>
               <label className='label'>Mission/ Purpose</label>
               <textarea className='form-control textarea' placeholder='Your Mission/ Purpose' value={this.state.missionDesc} onChange={($event) => this.setState({ missionDesc: $event.target.value })} ></textarea>
-              <span className='textarea_tooltip mt-4 pt-2' onClick={this.handleShow} ><GoLightBulb /></span>
+              <span className='textarea_tooltip mt-4 pt-2' onClick={() => this.handleShow('show')} ><GoLightBulb /></span>
             </div>
             <div className='form-group'>
               <label className='label'>Origin Story</label>
               <textarea className='form-control textarea' placeholder='Your Origin Story' value={this.state.originDesc} onChange={($event) => this.setState({ originDesc: $event.target.value })} ></textarea>
-              <span className='textarea_tooltip mt-4 pt-2' onClick={this.handleShow} ><GoLightBulb /></span>
+              <span className='textarea_tooltip mt-4 pt-2' onClick={() => this.handleShow('show1')} ><GoLightBulb /></span>
             </div>
             <div className='form-group'>
               <label className='label'>Elevator Pitch</label>
               <textarea className='form-control textarea' placeholder='Your Elevator Pitch' value={this.state.elevatorDesc} onChange={($event) => this.setState({ elevatorDesc: $event.target.value })} ></textarea>
-              <span className='textarea_tooltip mt-4 pt-2' onClick={this.handleShow} ><GoLightBulb /></span>
+              <span className='textarea_tooltip mt-4 pt-2' onClick={() => this.handleShow('show2')} ><GoLightBulb /></span>
             </div>
             <div className='form-group'>
               <label className='label'>Organizational Values</label>
               <Select placeholder='Humility' labelKey="ValuesName" valueKey="ValuesID" options={this.state.options} value={this.state.val1} onChange={(val) => this.changeHandler('val1', val)} />
-              <span className='textarea_tooltip mt-4 pt-2' onClick={this.handleShow} ><GoLightBulb /></span>
+              <span className='textarea_tooltip mt-4 pt-2' onClick={() => this.handleShow('show3')} ><GoLightBulb /></span>
             </div>
             <div className='form-group'>
               <Select placeholder='Empathy' labelKey="ValuesName" valueKey="ValuesID" options={this.state.options} value={this.state.val2} onChange={(val) => this.changeHandler('val2', val)} />
@@ -279,7 +311,10 @@ class foundation extends Component {
               <NavLink to='/brand' className='btn_white'>Cancel</NavLink>            </div>
           </form>
         </div>
-        {/* {/* <Popup show={show} hide={this.handleClose} /> */} */}
+        <Popup show={show} title={this.state.title} desc={this.state.desc} hide={this.handleClose} />
+        <Popup show={show1} title={this.state.title1} desc={this.state.desc1} hide={this.handleClose} />
+        <Popup show={show2} title={this.state.title2} desc={this.state.desc2} hide={this.handleClose} />
+        <Popup show={show3} title={this.state.title3} desc={this.state.desc3} hide={this.handleClose} />
       </div>
     );
   }
