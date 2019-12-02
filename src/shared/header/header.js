@@ -125,7 +125,7 @@ class Header extends Component {
                                     : null
                                 }
                             </Dropdown.Menu>
-                        </Dropdown> :<NavLink className='pointer' to={'/login'}>Log in <img src='/images/user12.png' alt='user' /></NavLink> }
+                        </Dropdown> :<div className='not_logged'><NavLink className='pointer' to={'/login'}>Log in <img src='/images/user12.png' alt='user' /></NavLink></div> }
                     </div>
                 </Navbar>
             </div>
