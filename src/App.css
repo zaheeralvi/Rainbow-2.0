@@ -351,6 +351,12 @@ td.no-border-left *{
 
   }
 
+  .content .home_page h1{
+
+    font-size: 40px !important;
+
+  }
+
 }
 @-webkit-keyframes load6 {
   0% {
