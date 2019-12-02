@@ -53,6 +53,7 @@ class look extends Component {
 
     componentDidMount = async () => {
         this.setState({ loader: true })
+        await this.getImage();
         try {
 
             // get Color Palette
@@ -96,6 +97,15 @@ class look extends Component {
         this.setState({ loader: false })
     }
 
+    getImage=async ()=>{
+        let id=JSON.parse(localStorage.user).Company.CompanyID
+        await API.get(`getImage?fileName=${id}patter.png`).then(res=>{
+            console.log(res)
+            if(res.data.Result===1){
+                this.setState({image: res.data.Data})
+            }
+        })
+    }
 
     handleClose = () => {
         this.setState({
@@ -235,7 +245,7 @@ class look extends Component {
 
     render() {
         const { show } = this.state;
-        let style = { background: 'url(/images/brand-logo.png) no-repeat', backgroundSize: 'cover' }
+        let style = { background: `url(${this.state.image}) no-repeat center center/cover`, backgroundSize: 'cover' }
         let color_1 = {
             backgroundColor: this.state.color0,
             width: this.state.percentage0 + '%'

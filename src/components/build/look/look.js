@@ -21,6 +21,9 @@ class look extends Component {
 
     componentDidMount = async () => {
         try {
+
+            await this.getImage()
+
             await API.get(`getCompanyBrandElement?companyID=${JSON.parse(localStorage.user).Company.CompanyID}&BrandElementID=6`).then(res => {
                 this.setState({
                     logo: res.data,
@@ -33,6 +36,15 @@ class look extends Component {
         }
     }
 
+    getImage=async ()=>{
+        let id=JSON.parse(localStorage.user).Company.CompanyID
+        await API.get(`getImage?fileName=${id}patter.png`).then(res=>{
+            console.log(res)
+            if(res.data.Result===1){
+                this.setState({image: res.data.Data})
+            }
+        })
+    }
     changeImg = (e) => {
         try {
             console.log(e.target.files[0])
