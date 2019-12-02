@@ -44,6 +44,8 @@ class look extends Component {
 
             title: '',
             desc: '',
+            Importance: '',
+            Hint: '',
 
         }
     }
@@ -68,6 +70,8 @@ class look extends Component {
                         [percentage]: v.Percentage,
                         title: res.data.BrandElement.BrandElementName,
                         desc: res.data.BrandElement.BrandElementDescription,
+                        Importance: res.data.BrandElement.Importance,
+                        Hint: res.data.BrandElement.Hint,
                         CompanyBrandElementColorPaletteID: [...this.state.CompanyBrandElementColorPaletteID, v.CompanyBrandElementColorPaletteID]
                     })
                 })
@@ -325,7 +329,7 @@ class look extends Component {
                             <NavLink to='/brand' className='btn_white'>Cancel</NavLink>                        </div>
                     </form>
                 </div>
-                <Popup show={show} title={this.state.title} desc={this.state.desc} hide={this.handleClose} />
+                <Popup show={show} Hint={this.state.Hint} Importance={this.state.Importance} title={this.state.title} desc={this.state.desc} hide={this.handleClose} />
             </div>
         );
     }
