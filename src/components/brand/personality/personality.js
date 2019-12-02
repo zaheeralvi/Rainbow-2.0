@@ -166,9 +166,9 @@ class personality extends Component {
 
             if (personalityRes && OrganizationalRes) {
                 //toast.success('Updated Successfully')
-                setTimeout(() => {
-                    this.props.history.push('/brand')
-                }, 1000);
+                // setTimeout(() => {
+                //     this.props.history.push('/brand')
+                // }, 1000);
             } else {
                 toast.error('Something went Wrong!')
             }
@@ -247,7 +247,7 @@ class personality extends Component {
 
                         <div className='mt-3 mb-5'>
                             <button className='btn_green'>Save</button>
-                            <NavLink to='/brand' className='btn_white'>Cancel</NavLink>                        </div>
+                            <button type="button" className='btn_white'>Cancel</button>                        </div>
                     </form>
                 </div>
                 <Popup show={show} Hint={this.state.Hint} Importance={this.state.Importance} title={this.state.title} desc={this.state.desc} hide={this.handleClose} />

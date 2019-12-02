@@ -171,9 +171,9 @@ class companyInfo extends Component {
           console.log(res)
           if (res.data !== '') {
             //toast.success('Company Updated Successfully')
-            setTimeout(() => {
-              this.props.history.push('/brand')
-            }, 1000);
+            // setTimeout(() => {
+            //   this.props.history.push('/brand')
+            // }, 1000);
           } else {
             toast.error('Something went Wrong, Please try Later')
           }
@@ -202,7 +202,7 @@ class companyInfo extends Component {
         <ToastContainer />
         <div className='container'>
           <h2 className='heading bold mb-3'>Company Info</h2>
-          <h4 className='mb-5'>General information an details about the company.</h4>
+          <h4 className='mb-5'>General information and details about the company.</h4>
           <form className='form' onSubmit={($event) => this.handleSubmit($event)} noValidate>
             <div className='form-group'>
               <input type="text" name='comapanyName' value={this.state.comapanyName} className='form-control' placeholder='Company Name (or DBA Name)' onChange={(e) => this.setState({ comapanyName: e.target.value })} />
@@ -238,7 +238,7 @@ class companyInfo extends Component {
             </div>
             <div className='mt-3 mb-5'>
               <button className='btn_green'>Save</button>
-              <NavLink to='/brand' className='btn_white'>Cancel</NavLink>            </div>
+              <button type="button" className='btn_white'>Cancel</button>            </div>
           </form>
         </div>
       </div>
