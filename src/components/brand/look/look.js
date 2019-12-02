@@ -39,6 +39,7 @@ class look extends Component {
             style4: { Score: 0 },
             style5: { Score: 0 },
 
+            image: '',
             error: '',
             loader: false,
 
@@ -138,6 +139,29 @@ class look extends Component {
         if (!/^#([0-9A-F]{3}){1,2}$/i.test(color4)) { this.setState({ error4: true }) } else { this.setState({ error4: false }) }
 
     }
+
+    changeImg = (e) => {
+        try {
+            console.log(e.target.files[0])
+
+            if (e.target.files[0] != null) {
+                var file = e.target.files[0];
+                var myReader = new FileReader();
+
+                myReader.onloadend = (e) => {
+                    console.log(myReader.result)
+                    this.setState({
+                        image: (myReader.result).toString()
+                    })
+                }
+                myReader.readAsDataURL(file);
+            }
+
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
+
 
     handleSubmit = async (e) => {
         e.preventDefault();
@@ -245,7 +269,11 @@ class look extends Component {
                         <h4 className='mb-4'>These are the brand elements in which the entire organization is built upon.</h4>
                         <h4 className='bold mb-3 px-3'>Logo</h4>
                         <h4 className='mb-5'>Your logo is very often the first interaction a customer or stakeholder will have with your brand. It should be representative of every other aspect of your brand.</h4>
-                        <button className='btn_green btn_upload mb-3'>UPLOAD LOGO</button>
+                        <div className='form-group'>
+                            <input type="file" id="file" accept="image/*" onChange={(e) => this.changeImg(e)} />
+                            <label htmlFor="file" className="btn-1">UPLOAD LOGO</label>
+                        </div>
+                        {/* <button className='btn_green btn_upload mb-3'>UPLOAD LOGO</button> */}
                         <div className='form-group mb-5'>
                             <div className='tag_container' style={style}></div>
                         </div>
